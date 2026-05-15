@@ -1,51 +1,293 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Civil-IoT Store | Smart Drainage Solutions</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Civil-IoT | Smart Drainage Blockage Cleaning System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --navy: #060b13;
+            --card-bg: #111a28;
+            --blue-glow: #1a4fd6;
+            --cyan: #00c8e0;
+            --accent: #00e5c0;
+            --white: #f8faff;
+            --gray: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: var(--navy);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--navy); }
+        ::-webkit-scrollbar-thumb { background: var(--blue-glow); border-radius: 10px; }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 1000;
+            background: rgba(6, 11, 19, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 200, 224, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--cyan);
+            text-transform: uppercase;
+        }
+
+        .logo span { color: var(--white); }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--cyan); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            background: radial-gradient(circle at 80% 20%, rgba(26, 79, 214, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-text { flex: 1; }
+        .hero-image { flex: 1; display: flex; justify-content: center; position: relative; }
+
+        .hero-image img {
+            width: 80%;
+            border-radius: 30px;
+            box-shadow: 0 0 50px rgba(0, 200, 224, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 em {
+            font-style: normal;
+            background: linear-gradient(90deg, var(--cyan), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Store Description --- */
+        .about-store {
+            padding: 100px 5%;
+            text-align: center;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .glass-box {
+            background: rgba(17, 26, 40, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 3rem;
+            border-radius: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+
+        /* --- Product Cards --- */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 50px 5%;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan);
+            box-shadow: 0 15px 30px rgba(0, 200, 224, 0.1);
+        }
+
+        .product-img-wrapper {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img-wrapper img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .product-card:hover .product-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .product-content { padding: 1.5rem; }
+
+        .price {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 1rem 0;
+            display: block;
+        }
+
+        .buy-btn {
+            display: block;
+            text-align: center;
+            padding: 1rem;
+            background: linear-gradient(90deg, var(--blue-glow), var(--cyan));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover { opacity: 0.9; box-shadow: 0 5px 15px rgba(0, 200, 224, 0.4); }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 100px; }
+            .hero-image img { width: 100%; margin-top: 50px; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <div class="top-nav">
-            <div class="container">
-                <span>Seller Centre | Download | Ikuti kami di <i class="fab fa-instagram"></i></span>
-                <span>Bantuan | Bahasa Indonesia | Daftar | Login</span>
+    <nav>
+        <div class="logo">Civil<span>IoT</span></div>
+        <div class="nav-links">
+            <a href="#about">Tentang Kami</a>
+            <a href="#products">Katalog Produk</a>
+            <a href="#contact">Hubungi Ahli</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-text animate__animated animate__fadeInLeft">
+            <h1>Revolusi Drainase dengan <em>Smart AI</em></h1>
+            <p style="color: var(--gray); font-size: 1.1rem; max-width: 500px; margin-bottom: 2rem;">
+                Mencegah banjir sebelum terjadi. Sistem otomasi pembersihan sedimen dan sampah berbasis IoT untuk infrastruktur modern.
+            </p>
+            <a href="#products" class="buy-btn" style="display: inline-block; padding: 1rem 2.5rem;">Eksplorasi Sekarang</a>
+        </div>
+        <div class="hero-image animate__animated animate__zoomIn">
+            <img src="https://share.google/AWAqcza3tOcWrYfru" alt="Smart Drainage Visualization">
+        </div>
+    </section>
+
+    <section class="about-store" id="about">
+        <div class="glass-box animate__animated animate__fadeInUp">
+            <h2 class="section-title">Solusi Masa Depan Teknik Sipil</h2>
+            <p><strong>Civil-IoT Store</strong> adalah pionir penyedia perangkat cerdas untuk manajemen air perkotaan. Kami mengintegrasikan sensor presisi tinggi dengan mekanika pembersihan otomatis untuk memastikan saluran drainase tetap berfungsi optimal tanpa perlu pemantauan manual 24/7.</p>
+        </div>
+    </section>
+
+    <section id="products" style="padding: 100px 0;">
+        <h2 class="section-title">Katalog Alat Cerdas</h2>
+        
+        <div class="products-container">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://share.google/pwaD1sL1YowAmolqY" alt="Smart Blockage System">
+                </div>
+                <div class="product-content">
+                    <h3>Smart Drainage Cleaning System v4</h3>
+                    <p style="color:var(--gray); font-size: 0.85rem;">Sistem robotik pembersih sampah otomatis dengan deteksi sensor berat.</p>
+                    <span class="price">Rp 15.500.000</span>
+                    <a href="#" class="buy-btn">Pesan via WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://share.google/DXXdv1S7Y1ry0tDGc" alt="IoT Sensor Node">
+                </div>
+                <div class="product-content">
+                    <h3>Multi-Sensor IoT Node Node</h3>
+                    <p style="color:var(--gray); font-size: 0.85rem;">Pantau ketinggian air, debit, dan tumpukan sedimen secara real-time dari Cloud.</p>
+                    <span class="price">Rp 4.200.000</span>
+                    <a href="#" class="buy-btn">Pesan via WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="https://via.placeholder.com/400x300/060b13/00c8e0?text=Civil-IoT+Gate" alt="Smart Gate">
+                </div>
+                <div class="product-content">
+                    <h3>Automated Sluice Gate Control</h3>
+                    <p style="color:var(--gray); font-size: 0.85rem;">Pintu air otomatis yang terbuka berdasarkan data curah hujan real-time.</p>
+                    <span class="price">Rp 22.000.000</span>
+                    <a href="#" class="buy-btn">Pesan via WhatsApp</a>
+                </div>
             </div>
         </div>
-        <div class="main-header">
-            <div class="container header-content">
-                <div class="logo">Civil<span>IoT</span></div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Cari alat Smart Drainage...">
-                    <button><i class="fas fa-search"></i></button>
-                </div>
-                <div class="cart-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count">0</span>
-                </div>
-            </div>
-        </div>
-    </header>
+    </section>
 
-    <main class="container">
-        <section class="banner">
-            <img src="https://pin.it/32QqqmxOZ" alt="Banner">
-        </section>
-
-        <h2 class="section-title">REKOMENDASI</h2>
-        <div class="product-grid" id="productContainer">
-            </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Civil-IoT Marketplace. Solusi Drainase Pintar Indonesia.</p>
+    <footer style="text-align: center; padding: 3rem; border-top: 1px solid rgba(255,255,255,0.05); color: var(--gray);">
+        <p>&copy; 2026 Civil-IoT Tech. Designed for Smart Cities Indonesia.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Animasi Sederhana saat Scroll
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if(cardTop < window.innerHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 
