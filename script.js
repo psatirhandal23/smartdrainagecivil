@@ -4,7 +4,7 @@ const products = [
         id: 1,
         name: "Smart Drainage Blockage Cleaning System v2.0 - Auto Sensor",
         price: "12.500.000",
-        image: "https://via.placeholder.com/200?text=Smart+Drainage",
+        image: "https://digiwarestore.com/id/temperature-humidity-sensor/water-level-sensor-296316.html,
         sold: "12 Terjual",
         location: "Semarang"
     },
