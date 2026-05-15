@@ -3,104 +3,47 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Civil-IoT | Smart Drainage Blockage Cleaning System</title>
+    <title>Civil-IoT | Smart Drainage System</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <style>
-        :root {
-            --navy: #060b13;
-            --card-bg: #111a28;
-            --blue-glow: #1a4fd6;
-            --cyan: #00c8e0;
-            --accent: #00e5c0;
-            --white: #f8faff;
-            --gray: #94a3b8;
-        }
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+    <nav>
+        <div class="logo">Civil<span>IoT</span></div>
+        <div class="nav-links">
+            <a href="#about">Tentang Kami</a>
+            <a href="#products">Katalog Produk</a>
+            <a href="#contact">Hubungi Ahli</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-text animate__animated animate__fadeInLeft">
+            <h1>Revolusi Drainase dengan <em>Smart AI</em></h1>
+            <p class="hero-desc">
+                Mencegah banjir sebelum terjadi. Sistem otomasi pembersihan sedimen dan sampah berbasis IoT untuk infrastruktur modern di Indonesia.
+            </p>
+            <a href="#products" class="buy-btn-hero">Eksplorasi Sekarang</a>
+        </div>
+        <div class="hero-image animate__animated animate__zoomIn">
+            <img src="https://share.google/AWAqcza3tOcWrYfru" alt="Smart Drainage Visualization">
+        </div>
+    </section>
+
+    <section class="about-store" id="about">
+        <div class="glass-box animate__animated animate__fadeInUp">
+            <h2 class="section-title">Solusi Masa Depan Teknik Sipil</h2>
+            <p><strong>Civil-IoT Store</strong> adalah pionir penyedia perangkat cerdas untuk manajemen air perkotaan. Kami mengintegrasikan sensor presisi tinggi dengan mekanika pembersihan otomatis untuk memastikan saluran drainase tetap berfungsi optimal tanpa perlu pemantauan manual 24/7.</p>
+        </div>
+    </section>
+
+    <section id="products" class="products-section">
+        <h2 class="section-title">Katalog Alat Cerdas</h2>
         
-        body {
-            background: var(--navy);
-            color: var(--white);
-            font-family: 'DM Sans', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- Custom Scrollbar --- */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--navy); }
-        ::-webkit-scrollbar-thumb { background: var(--blue-glow); border-radius: 10px; }
-
-        /* --- Navbar --- */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            z-index: 1000;
-            background: rgba(6, 11, 19, 0.8);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(0, 200, 224, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 5%;
-        }
-
-        .logo {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--cyan);
-            text-transform: uppercase;
-        }
-
-        .logo span { color: var(--white); }
-
-        .nav-links a {
-            color: var(--gray);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--cyan); }
-
-        /* --- Hero Section --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            background: radial-gradient(circle at 80% 20%, rgba(26, 79, 214, 0.15) 0%, transparent 50%);
-        }
-
-        .hero-text { flex: 1; }
-        .hero-image { flex: 1; display: flex; justify-content: center; position: relative; }
-
-        .hero-image img {
-            width: 80%;
-            border-radius: 30px;
-            box-shadow: 0 0 50px rgba(0, 200, 224, 0.2);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-        }
-
-        h1 em {
-            font-style: normal;
-            background: linear-gradient(90deg, var(--cyan), var(--accent));
-            -webkit-background-clip: text;
+        <div class="products-container">
+            <div class="product
             -webkit-text-fill-color: transparent;
         }
 
