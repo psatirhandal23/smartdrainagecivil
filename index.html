@@ -1,107 +1,382 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Civil-IoT | Smart Drainage System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>DrainioMart - Smart IoT Civil Engineering Marketplace</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-    <nav>
-        <div class="logo">Civil<span>IoT</span></div>
-        <div class="nav-links">
-            <a href="#home">Beranda</a>
-            <a href="#about">Tentang</a>
-            <a href="#products">Produk</a>
-            <a href="#contact">Kontak</a>
-        </div>
-        <button class="nav-cta">Konsultasi Ahli</button>
-    </nav>
+<!-- NAVBAR -->
 
-    <section class="hero" id="home">
-        <div class="hero-content" data-aos="fade-right">
-            <div class="hero-badge">IoT & Civil Engineering</div>
-            <h1>Inovasi <em>Drainase Pintar</em> Bebas Banjir</h1>
-            <p>Solusi monitoring dan pembersihan saluran air otomatis berbasis Cloud. Mengurangi risiko banjir perkotaan dengan teknologi AI.</p>
-            <div class="hero-btns">
-                <a href="#products" class="btn-primary">Lihat Produk</a>
-                <a href="#about" class="btn-secondary">Pelajari Teknologi</a>
-            </div>
-        </div>
-        <div class="hero-visual" data-aos="zoom-in">
-            <div class="glow-sphere"></div>
-            <img src="https://share.google/AWAqcza3tOcWrYfru" alt="Smart Drainage Main Display">
-        </div>
-    </section>
+<nav class="navbar">
 
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-text" data-aos="fade-up">
-                    <h2 class="section-title">Membangun Kota Pintar</h2>
-                    <p>Civil-IoT adalah pusat inovasi teknologi untuk teknik sipil. Kami fokus pada pengembangan sistem <strong>Smart Drainage Blockage Cleaning</strong>, yang menggabungkan sensor presisi tinggi dengan mekanik otomatis untuk menjaga infrastruktur publik tetap bersih dan berfungsi maksimal.</p>
-                </div>
-                <div class="stats-grid" data-aos="fade-left">
-                    <div class="stat-card">
-                        <h3>98%</h3>
-                        <p>Akurasi Deteksi</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>24/7</h3>
-                        <p>Real-time Monitoring</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="nav-container">
 
-    <section class="products" id="products">
-        <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up">Katalog Produk Unggulan</h2>
-            <div class="product-grid">
-                <div class="product-card" data-aos="flip-left">
-                    <div class="product-img">
-                        <img src="https://share.google/pwaD1sL1YowAmolqY" alt="Cleaning System">
-                    </div>
-                    <div class="product-body">
-                        <h3>Smart Cleaning System v4</h3>
-                        <p>Unit robotik pembersihan sampah otomatis yang bekerja saat sensor mendeteksi hambatan.</p>
-                        <div class="price">Rp 15.500.000</div>
-                        <a href="#" class="buy-btn">Detail Produk</a>
-                    </div>
-                </div>
+<div class="logo">
+Drainio<span>Mart</span>
+</div>
 
-                <div class="product-card" data-aos="flip-left" data-aos-delay="200">
-                    <div class="product-img">
-                        <img src="https://share.google/DXXdv1S7Y1ry0tDGc" alt="IoT Sensor">
-                    </div>
-                    <div class="product-body">
-                        <h3>Multi-Sensing IoT Node</h3>
-                        <p>Sensor pemantau ketinggian air dan sedimen lumpur dengan koneksi LoRaWAN/4G.</p>
-                        <div class="price">Rp 4.200.000</div>
-                        <a href="#" class="buy-btn">Detail Produk</a>
-                    </div>
-                </div>
+<div class="nav-links">
+<a href="#">Beranda</a>
+<a href="#about">Tentang</a>
+<a href="#products">Produk</a>
+<a href="#iot">IoT</a>
+<a href="#contact">Kontak</a>
+</div>
 
-                <div class="product-card" data-aos="flip-left" data-aos-delay="400">
-                    <div class="product-img">
-                        <img src="https://via.placeholder.com/400x300/0a1628/00c8e0?text=Flood+Gate+Control" alt="Gate Control">
-                    </div>
-                    <div class="product-body">
-                        <h3>Automated Gate Control</h3>
-                        <p>Sistem kontrol pintu air jarak jauh untuk manajemen banjir kawasan industri.</p>
-                        <div class="price">Rp 22.000.000</div>
-                        <a href="#" class="buy-btn">Detail Produk</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="nav-right">
 
+<div class="search-box">
+🔍
+<input type="text" placeholder="Cari produk IoT...">
+</div>
+
+<div class="cart-btn">
+🛒 Keranjang
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-container">
+
+<div class="hero-text reveal">
+
+<h1>
+Smart <span>Drainage</span><br>
+IoT Marketplace
+</h1>
+
+<p>
+Platform penjualan perangkat IoT teknik sipil modern untuk monitoring drainase, pengendalian penyumbatan saluran, smart water management, dan sistem infrastruktur cerdas.
+</p>
+
+<div class="hero-buttons">
+
+<button class="btn btn-primary">
+Lihat Produk
+</button>
+
+<button class="btn btn-secondary">
+Pelajari Teknologi
+</button>
+
+</div>
+
+</div>
+
+<div class="hero-image reveal">
+
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- INFO -->
+
+<section class="section" id="about">
+
+<div class="section-title reveal">
+
+<h2>Solusi Infrastruktur Modern</h2>
+
+<p>
+Sistem berbasis IoT untuk teknik sipil dan smart drainage monitoring.
+</p>
+
+</div>
+
+<div class="info-scroll">
+
+<div class="info-card reveal">
+
+<h3>Smart Monitoring</h3>
+
+<p>
+Pantau kondisi drainase, debit air, dan potensi penyumbatan secara real-time menggunakan sensor modern dan dashboard otomatis.
+</p>
+
+</div>
+
+<div class="info-card reveal">
+
+<h3>Efisiensi Maintenance</h3>
+
+<p>
+Mengurangi biaya perawatan saluran dengan sistem prediksi dan notifikasi otomatis saat terjadi penyumbatan.
+</p>
+
+</div>
+
+<div class="info-card reveal">
+
+<h3>Integrasi IoT</h3>
+
+<p>
+Seluruh perangkat kompatibel dengan ESP32, Arduino, cloud monitoring, dan aplikasi mobile.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PRODUCTS -->
+
+<section class="section" id="products">
+
+<div class="section-title reveal">
+
+<h2>Produk Unggulan</h2>
+
+<p>
+Peralatan IoT teknik sipil dengan desain modern dan performa tinggi.
+</p>
+
+</div>
+
+<div class="products-grid">
+
+<!-- PRODUCT -->
+
+<div class="product-card reveal">
+
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1581092919535-7146ff1a590d?q=80&w=1200&auto=format&fit=crop">
+</div>
+
+<div class="product-content">
+
+<h3>Smart Drainage Cleaner</h3>
+
+<p>
+Sistem pembersih saluran otomatis berbasis sensor dan motor penggerak IoT.
+</p>
+
+<div class="price">
+Rp 12.500.000
+</div>
+
+<div class="product-actions">
+
+<button class="buy-btn">
+Beli Sekarang
+</button>
+
+<button class="detail-btn">
+Detail
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT -->
+
+<div class="product-card reveal">
+
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+</div>
+
+<div class="product-content">
+
+<h3>Water Flow Sensor</h3>
+
+<p>
+Sensor debit air presisi tinggi untuk monitoring drainase dan aliran air kota.
+</p>
+
+<div class="price">
+Rp 1.850.000
+</div>
+
+<div class="product-actions">
+
+<button class="buy-btn">
+Beli Sekarang
+</button>
+
+<button class="detail-btn">
+Detail
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT -->
+
+<div class="product-card reveal">
+
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop">
+</div>
+
+<div class="product-content">
+
+<h3>Ultrasonic Water Sensor</h3>
+
+<p>
+Sensor ultrasonik waterproof untuk pengukuran ketinggian air secara real-time.
+</p>
+
+<div class="price">
+Rp 2.350.000
+</div>
+
+<div class="product-actions">
+
+<button class="buy-btn">
+Beli Sekarang
+</button>
+
+<button class="detail-btn">
+Detail
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT -->
+
+<div class="product-card reveal">
+
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop">
+</div>
+
+<div class="product-content">
+
+<h3>IoT Control Panel</h3>
+
+<p>
+Panel kontrol smart infrastructure dengan monitoring cloud dan dashboard AI.
+</p>
+
+<div class="price">
+Rp 7.250.000
+</div>
+
+<div class="product-actions">
+
+<button class="buy-btn">
+Beli Sekarang
+</button>
+
+<button class="detail-btn">
+Detail
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PARALLAX -->
+
+<section class="parallax" id="iot">
+
+<div class="parallax-content reveal">
+
+<h2>
+Future of Smart Drainage
+</h2>
+
+<p>
+Teknologi drainase modern berbasis Internet of Things memungkinkan kota lebih aman dari banjir, lebih efisien dalam maintenance, dan lebih cepat mendeteksi kerusakan infrastruktur.
+</p>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer id="contact">
+
+<div class="footer-grid">
+
+<div class="footer-brand">
+
+<h2>DrainioMart</h2>
+
+<p>
+Marketplace perangkat IoT teknik sipil dan smart drainage system modern dengan tampilan premium dan teknologi masa depan.
+</p>
+
+</div>
+
+<div class="footer-links">
+
+<h3>Menu</h3>
+
+<a href="#">Beranda</a>
+<a href="#">Produk</a>
+<a href="#">Tentang</a>
+<a href="#">Kontak</a>
+
+</div>
+
+<div class="footer-links">
+
+<h3>Kontak</h3>
+
+<a href="#">WhatsApp</a>
+<a href="#">Instagram</a>
+<a href="#">Email</a>
+<a href="#">LinkedIn</a>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+© 2026 DrainioMart — Smart Civil Engineering Marketplace
+
+</div>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
     <footer id="contact">
         <p>&copy; 2026 Civil-IoT Tech Indonesia. Inovasi untuk Masa Depan.</p>
     </footer>
