@@ -4,7 +4,7 @@ const products = [
         id: 1,
         name: "Smart Drainage Blockage Cleaning System v2.0 - Auto Sensor",
         price: "12.500.000",
-        image: "https://pin.it/5GVu5eN10",
+        image: "https://via.placeholder.com/200?text=Smart+Drainage",
         sold: "12 Terjual",
         location: "Semarang"
     },
