@@ -20,23 +20,10 @@ overflow:hidden;
 position:relative;
 }
 
-.hero::before{
-content:'';
-position:absolute;
-width:700px;
-height:700px;
-background:rgba(255,255,255,0.08);
-border-radius:50%;
-top:-250px;
-right:-200px;
-}
-
 nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
-position:relative;
-z-index:2;
 }
 
 .logo{
@@ -54,8 +41,6 @@ font-weight:bold;
 .hero-content{
 text-align:center;
 margin-top:180px;
-position:relative;
-z-index:2;
 animation:fadeUp 1.2s ease;
 }
 
@@ -66,6 +51,8 @@ margin-bottom:20px;
 
 .hero-content p{
 font-size:22px;
+max-width:850px;
+margin:auto;
 margin-bottom:35px;
 }
 
@@ -108,7 +95,7 @@ font-size:42px;
 
 .product-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 gap:30px;
 }
 
@@ -139,9 +126,27 @@ margin-bottom:15px;
 }
 
 .card-content p{
-margin-bottom:20px;
 color:#555;
-line-height:1.6;
+line-height:1.7;
+margin-bottom:20px;
+}
+
+.advantages{
+background:#eef8ff;
+padding:18px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.advantages h4{
+margin-bottom:10px;
+color:#0066ff;
+}
+
+.advantages ul{
+padding-left:18px;
+line-height:1.8;
+color:#444;
 }
 
 .specs{
@@ -171,10 +176,10 @@ color:#0066ff;
 
 .buy-btn{
 background:#00b4ff;
+color:white;
+text-decoration:none;
 padding:12px 18px;
 border-radius:12px;
-text-decoration:none;
-color:white;
 font-weight:bold;
 }
 
@@ -185,7 +190,7 @@ text-align:center;
 }
 
 .tentang p{
-max-width:800px;
+max-width:900px;
 margin:auto;
 line-height:1.8;
 color:#555;
@@ -224,12 +229,12 @@ padding:25px;
 
 .wa-float{
 position:fixed;
-bottom:20px;
 right:20px;
+bottom:20px;
 width:65px;
 height:65px;
-border-radius:50%;
 background:#25d366;
+border-radius:50%;
 display:flex;
 justify-content:center;
 align-items:center;
