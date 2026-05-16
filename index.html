@@ -181,7 +181,7 @@ Rp 12.500.000
 
 <div class="product-actions">
 
-<button class="buy-btn">
+<button class="buy-btn" onclick="openPayment()">
 Beli Sekarang
 </button>
 
@@ -217,7 +217,7 @@ Rp 1.850.000
 
 <div class="product-actions">
 
-<button class="buy-btn">
+<button class="buy-btn" onclick="openPayment()">
 Beli Sekarang
 </button>
 
@@ -253,7 +253,7 @@ Rp 2.350.000
 
 <div class="product-actions">
 
-<button class="buy-btn">
+<button class="buy-btn" onclick="openPayment()">
 Beli Sekarang
 </button>
 
@@ -289,7 +289,7 @@ Rp 7.250.000
 
 <div class="product-actions">
 
-<button class="buy-btn">
+<button class="buy-btn" onclick="openPayment()">
 Beli Sekarang
 </button>
 
@@ -375,6 +375,50 @@ Marketplace perangkat IoT teknik sipil dan smart drainage system modern dengan t
 
 <script src="script.js"></script>
 
+
+<a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20bertanya%20tentang%20produk%20SmartDrainage"
+class="wa-float"
+target="_blank">
+💬
+</a>
+
+<div id="paymentModal" class="payment-modal">
+  <div class="payment-box">
+    <span class="close-modal" onclick="closePayment()">&times;</span>
+    <h2>Pembayaran Produk</h2>
+
+    <label>Metode Pembayaran</label>
+    <select>
+      <option>ShopeePay</option>
+      <option>DANA</option>
+      <option>OVO</option>
+      <option>Transfer Bank</option>
+    </select>
+
+    <label>Jasa Pengiriman</label>
+    <select>
+      <option>JNE</option>
+      <option>J&T</option>
+    </select>
+
+    <button onclick="checkoutWA()">Lanjut Checkout</button>
+  </div>
+</div>
+
+<script>
+function openPayment(){
+  document.getElementById('paymentModal').style.display='flex';
+}
+
+function closePayment(){
+  document.getElementById('paymentModal').style.display='none';
+}
+
+function checkoutWA(){
+  window.open('https://wa.me/6281234567890?text=Saya%20ingin%20checkout%20produk%20SmartDrainage','_blank');
+}
+</script>
+
 </body>
 </html>
     <footer id="contact">
@@ -383,6 +427,50 @@ Marketplace perangkat IoT teknik sipil dan smart drainage system modern dengan t
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
+
+<a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20bertanya%20tentang%20produk%20SmartDrainage"
+class="wa-float"
+target="_blank">
+💬
+</a>
+
+<div id="paymentModal" class="payment-modal">
+  <div class="payment-box">
+    <span class="close-modal" onclick="closePayment()">&times;</span>
+    <h2>Pembayaran Produk</h2>
+
+    <label>Metode Pembayaran</label>
+    <select>
+      <option>ShopeePay</option>
+      <option>DANA</option>
+      <option>OVO</option>
+      <option>Transfer Bank</option>
+    </select>
+
+    <label>Jasa Pengiriman</label>
+    <select>
+      <option>JNE</option>
+      <option>J&T</option>
+    </select>
+
+    <button onclick="checkoutWA()">Lanjut Checkout</button>
+  </div>
+</div>
+
+<script>
+function openPayment(){
+  document.getElementById('paymentModal').style.display='flex';
+}
+
+function closePayment(){
+  document.getElementById('paymentModal').style.display='none';
+}
+
+function checkoutWA(){
+  window.open('https://wa.me/6281234567890?text=Saya%20ingin%20checkout%20produk%20SmartDrainage','_blank');
+}
+</script>
+
 </body>
 </html>
             object-fit: cover;
@@ -515,6 +603,50 @@ Marketplace perangkat IoT teknik sipil dan smart drainage system modern dengan t
             });
         });
     </script>
+
+<a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20bertanya%20tentang%20produk%20SmartDrainage"
+class="wa-float"
+target="_blank">
+💬
+</a>
+
+<div id="paymentModal" class="payment-modal">
+  <div class="payment-box">
+    <span class="close-modal" onclick="closePayment()">&times;</span>
+    <h2>Pembayaran Produk</h2>
+
+    <label>Metode Pembayaran</label>
+    <select>
+      <option>ShopeePay</option>
+      <option>DANA</option>
+      <option>OVO</option>
+      <option>Transfer Bank</option>
+    </select>
+
+    <label>Jasa Pengiriman</label>
+    <select>
+      <option>JNE</option>
+      <option>J&T</option>
+    </select>
+
+    <button onclick="checkoutWA()">Lanjut Checkout</button>
+  </div>
+</div>
+
+<script>
+function openPayment(){
+  document.getElementById('paymentModal').style.display='flex';
+}
+
+function closePayment(){
+  document.getElementById('paymentModal').style.display='none';
+}
+
+function checkoutWA(){
+  window.open('https://wa.me/6281234567890?text=Saya%20ingin%20checkout%20produk%20SmartDrainage','_blank');
+}
+</script>
+
 </body>
 </html>
 
