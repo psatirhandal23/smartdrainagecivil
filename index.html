@@ -1,24 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DrainioMart — Smart IoT Civil Engineering Marketplace</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DrainioMart – Smart IoT Civil Engineering Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="loading-screen" id="loadingScreen">
-  <div class="loader-ring"></div>
-  <h2>DrainioMart</h2>
-</div>
-
+<!-- ═══════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════ -->
 <nav class="navbar" id="navbar">
   <div class="nav-container">
 
@@ -29,8 +24,7 @@
       <a href="#about">Tentang</a>
       <a href="#products">Produk</a>
       <a href="#iot">Teknologi</a>
-      <a href="#monitoring">Monitoring</a>
-      <a href="#payment">Pembayaran</a>
+      <a href="#testimonials">Testimoni</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Kontak</a>
     </div>
@@ -40,323 +34,419 @@
         <span>🔍</span>
         <input type="text" id="searchInput" placeholder="Cari produk IoT..." oninput="filterProducts()">
       </div>
-
-      <div class="wishlist-btn" onclick="toggleWishlist()">
-        ❤ <span id="wishlistCount">0</span>
-      </div>
-
       <div class="cart-btn" onclick="toggleCart()">
         🛒 <span id="cartCount">0</span>
       </div>
     </div>
 
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#beranda"      onclick="toggleMenu()">Beranda</a>
+    <a href="#about"        onclick="toggleMenu()">Tentang</a>
+    <a href="#products"     onclick="toggleMenu()">Produk</a>
+    <a href="#iot"          onclick="toggleMenu()">Teknologi</a>
+    <a href="#testimonials" onclick="toggleMenu()">Testimoni</a>
+    <a href="#faq"          onclick="toggleMenu()">FAQ</a>
+    <a href="#contact"      onclick="toggleMenu()">Kontak</a>
   </div>
 </nav>
 
+
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
 <section class="hero" id="beranda">
   <div class="hero-glow"></div>
-
   <div class="hero-container">
 
     <div class="hero-text reveal">
-      <div class="hero-badge">🚀 Smart Infrastructure Platform Indonesia</div>
-
-      <h1>
-        Smart <span>Drainage</span><br>
-        IoT Marketplace
-      </h1>
-
-      <p>
-        Platform penjualan perangkat IoT teknik sipil modern untuk monitoring drainase,
-        smart water management, cloud telemetry, dan sistem infrastruktur cerdas.
-      </p>
-
+      <div class="hero-badge">🚀 Platform IoT Drainase #1 Indonesia</div>
+      <h1>Smart <span>Drainage</span><br>IoT Marketplace</h1>
+      <p>Platform penjualan perangkat IoT teknik sipil modern untuk monitoring drainase, pengendalian penyumbatan saluran, smart water management, dan sistem infrastruktur cerdas.</p>
       <div class="hero-buttons">
         <a href="#products" class="btn btn-primary">Lihat Produk</a>
-        <a href="#monitoring" class="btn btn-secondary">Live Monitoring</a>
+        <a href="#iot"      class="btn btn-secondary">Pelajari Teknologi</a>
       </div>
-
       <div class="hero-stats">
-        <div class="stat">
-          <strong>120+</strong>
-          <span>Produk IoT</span>
-        </div>
-
-        <div class="stat">
-          <strong>850+</strong>
-          <span>Pelanggan</span>
-        </div>
-
-        <div class="stat">
-          <strong>50+</strong>
-          <span>Kota</span>
-        </div>
+        <div class="stat"><strong>120+</strong><span>Produk IoT</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>850+</strong><span>Pelanggan</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>50+</strong><span>Kota</span></div>
       </div>
     </div>
 
     <div class="hero-image reveal">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="">
-
-      <div class="hero-live-card">
-        <div class="pulse-dot"></div>
-        Live Infrastructure Monitoring
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="Smart Drainage IoT">
+      <div class="hero-img-badge">
+        <span class="pulse-dot"></span>
+        Live Monitoring Aktif
       </div>
     </div>
 
   </div>
 </section>
 
+
+<!-- ═══════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════ -->
 <section class="section" id="about">
   <div class="section-title reveal">
     <h2>Solusi Infrastruktur Modern</h2>
-    <p>Sistem IoT premium untuk teknik sipil dan smart drainage monitoring.</p>
+    <p>Sistem berbasis IoT untuk teknik sipil dan smart drainage monitoring.</p>
   </div>
 
-  <div class="about-grid">
-
-    <div class="about-card reveal">
-      <div class="about-icon">🌐</div>
-      <h3>Cloud Monitoring</h3>
-      <p>Monitoring realtime berbasis cloud untuk sistem drainase modern.</p>
+  <div class="info-grid">
+    <div class="info-card reveal">
+      <div class="info-icon">📡</div>
+      <h3>Smart Monitoring</h3>
+      <p>Pantau kondisi drainase, debit air, dan potensi penyumbatan secara real-time menggunakan sensor modern dan dashboard otomatis.</p>
     </div>
-
-    <div class="about-card reveal">
-      <div class="about-icon">📡</div>
-      <h3>AI Analytics</h3>
-      <p>Analisis otomatis berbasis AI untuk deteksi banjir dan penyumbatan.</p>
+    <div class="info-card reveal">
+      <div class="info-icon">⚙️</div>
+      <h3>Efisiensi Maintenance</h3>
+      <p>Mengurangi biaya perawatan saluran dengan sistem prediksi dan notifikasi otomatis saat terjadi penyumbatan.</p>
     </div>
-
-    <div class="about-card reveal">
-      <div class="about-icon">⚡</div>
-      <h3>Realtime Telemetry</h3>
-      <p>Sinkronisasi data realtime untuk proyek smart city.</p>
+    <div class="info-card reveal">
+      <div class="info-icon">🔗</div>
+      <h3>Integrasi IoT</h3>
+      <p>Seluruh perangkat kompatibel dengan ESP32, Arduino, cloud monitoring, dan aplikasi mobile.</p>
     </div>
-
   </div>
 </section>
 
-<section class="section" id="products">
 
+<!-- ═══════════════════════════════════════
+     PRODUCTS
+═══════════════════════════════════════ -->
+<section class="section" id="products">
   <div class="section-title reveal">
     <h2>Produk Unggulan</h2>
-    <p>Perangkat IoT teknik sipil premium dengan desain modern.</p>
+    <p>Peralatan IoT teknik sipil dengan desain modern dan performa tinggi.</p>
   </div>
 
-  <div class="products-grid">
+  <div class="products-grid" id="productsGrid">
 
+    <!-- Produk 1: Smart Drainage Cleaner -->
     <div class="product-card reveal" data-name="smart drainage cleaner">
-      <div class="product-badge">Best Seller</div>
-
-      <div class="product-image">
-        <img src="https://images.unsplash.com/photo-1581092919535-7146ff1a590d?q=80&w=800&auto=format&fit=crop">
+      <div class="product-badge">
       </div>
-
+      <div class="wishlist-btn" onclick="toggleWishlist(this)">❤</div>
+      <div class="product-badge">Best Seller</div>
+      <div class="product-image">
+        <img
+          src="https://chatgpt.com/backend-api/estuary/content?id=file_00000000e18471fabc24fb072ba171ab&ts=494167&p=fs&cid=1&sig=00063dae73125fa6b21fb5d5ae5dab53b1590dc36d12c120e8fdebeaf2070baa&v=0"
+          alt="Smart Drainage Cleaner"
+          onerror="this.src='https://images.unsplash.com/photo-1581092919535-7146ff1a590d?q=80&w=800&auto=format&fit=crop'"
+        >
+      </div>
       <div class="product-content">
         <h3>Smart Drainage Cleaner</h3>
         <p>Sistem pembersih saluran otomatis berbasis sensor dan motor penggerak IoT.</p>
-
         <div class="product-meta">
           <span class="product-tag">ESP32</span>
           <span class="product-tag">Waterproof</span>
         </div>
-
         <div class="price">Rp 12.500.000</div>
-
         <div class="product-actions">
-          <button class="cart-add-btn" onclick="addToCart('Smart Drainage Cleaner',12500000)">+ Keranjang</button>
-          <button class="detail-btn" onclick="addWishlist('Smart Drainage Cleaner')">❤ Wishlist</button>
+          <button class="cart-add-btn" onclick="addToCart('Smart Drainage Cleaner', 12500000)">+ Keranjang</button>
+          <button class="detail-btn" onclick="openDetail(
+            'Smart Drainage Cleaner',
+            'Sistem pembersih saluran otomatis berbasis sensor berat dan motor penggerak IoT. Dilengkapi dengan deteksi sampah, alarm penyumbatan, dan koneksi WiFi untuk kontrol jarak jauh.',
+            'https://chatgpt.com/backend-api/estuary/content?id=file_00000000e18471fabc24fb072ba171ab&ts=494167&p=fs&cid=1&sig=00063dae73125fa6b21fb5d5ae5dab53b1590dc36d12c120e8fdebeaf2070baa&v=0',
+            12500000,
+            [\'ESP32\',\'WiFi\',\'Waterproof IP67\',\'Sensor Berat\',\'Motor DC 24V\',\'App Control\']
+          )">Detail</button>
         </div>
       </div>
     </div>
 
+    <!-- Produk 2: Water Flow Sensor -->
     <div class="product-card reveal" data-name="water flow sensor">
+      <div class="product-image" style="background:#0f1a2b;">
+        <img
+          src="https://tse2.mm.bing.net/th/id/OIP.XtqexGTrmKHY7eyP1YpCmgHaEK?pid=Api&P=0&h=400"
+          alt="Water Flow Sensor"
+          style="object-fit:contain; padding:20px;"
+          onerror="this.style.padding='0';this.style.objectFit='cover';"
+        >
+      </div>
+      <div class="product-content">
+        <h3>Water Flow Sensor</h3>
+        <p>Sensor debit air presisi tinggi untuk monitoring drainase dan aliran air kota.</p>
+        <div class="product-meta">
+          <span class="product-tag">Arduino</span>
+          <span class="product-tag">Real-time</span>
+        </div>
+        <div class="price">Rp 1.850.000</div>
+        <div class="product-actions">
+          <button class="cart-add-btn" onclick="addToCart('Water Flow Sensor', 1850000)">+ Keranjang</button>
+          <button class="detail-btn" onclick="openDetail(
+            'Water Flow Sensor',
+            'Sensor debit air presisi tinggi untuk monitoring drainase dan aliran air kota secara real-time. Compatible dengan Arduino dan ESP32, output digital dan analog.',
+            'https://tse2.mm.bing.net/th/id/OIP.XtqexGTrmKHY7eyP1YpCmgHaEK?pid=Api&P=0&h=400',
+            1850000,
+            [\'Arduino\',\'ESP32\',\'Real-time\',\'Output Digital\',\'Tahan Korosi\',\'IP65\']
+          )">Detail</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produk 3: Ultrasonic Water Sensor -->
+    <div class="product-card reveal" data-name="ultrasonic water sensor">
+      <div class="product-badge new">Baru</div>
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" alt="Ultrasonic Water Sensor">
+      </div>
+      <div class="product-content">
+        <h3>Ultrasonic Water Sensor</h3>
+        <p>Sensor ultrasonik waterproof untuk pengukuran ketinggian air secara real-time.</p>
+        <div class="product-meta">
+          <span class="product-tag">Ultrasonik</span>
+          <span class="product-tag">IP68</span>
+        </div>
+        <div class="price">Rp 2.350.000</div>
+        <div class="product-actions">
+          <button class="cart-add-btn" onclick="addToCart('Ultrasonic Water Sensor', 2350000)">+ Keranjang</button>
+          <button class="detail-btn" onclick="openDetail(
+            'Ultrasonic Water Sensor',
+            'Sensor ultrasonik waterproof untuk pengukuran ketinggian air secara real-time. Akurasi tinggi dengan rating IP68, cocok untuk instalasi dalam saluran drainase.',
+            'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800',
+            2350000,
+            [\'Ultrasonik\',\'IP68\',\'Akurasi ±1mm\',\'Output 4-20mA\',\'Jangkauan 5m\']
+          )">Detail</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produk 4: IoT Control Panel -->
+    <div class="product-card reveal" data-name="iot control panel">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" alt="IoT Control Panel">
+      </div>
+      <div class="product-content">
+        <h3>IoT Control Panel</h3>
+        <p>Panel kontrol smart infrastructure dengan monitoring cloud dan dashboard AI.</p>
+        <div class="product-meta">
+          <span class="product-tag">Cloud</span>
+          <span class="product-tag">Dashboard AI</span>
+        </div>
+        <div class="price">Rp 7.250.000</div>
+        <div class="product-actions">
+          <button class="cart-add-btn" onclick="addToCart('IoT Control Panel', 7250000)">+ Keranjang</button>
+          <button class="detail-btn" onclick="openDetail(
+            'IoT Control Panel',
+            'Panel kontrol smart infrastructure dengan monitoring cloud dan dashboard AI. Kelola seluruh sensor dari satu antarmuka, dengan laporan otomatis dan alert real-time.',
+            'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800',
+            7250000,
+            [\'Cloud Dashboard\',\'Multi-sensor\',\'Alert Otomatis\',\'Laporan PDF\',\'Mobile App\']
+          )">Detail</button>
+        </div>
+      </div>
+    </div>
+
+  
+    <!-- Produk Tambahan -->
+    <div class="product-card reveal" data-name="smart flood sensor">
+      <div class="wishlist-btn" onclick="toggleWishlist(this)">❤</div>
+      <div class="product-badge">HOT</div>
       <div class="product-image">
         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop">
       </div>
-
       <div class="product-content">
-        <h3>Water Flow Sensor</h3>
-        <p>Sensor debit air realtime untuk sistem monitoring saluran.</p>
-
+        <h3>Smart Flood Sensor</h3>
+        <p>Sensor pendeteksi banjir otomatis dengan AI monitoring system.</p>
         <div class="product-meta">
-          <span class="product-tag">Realtime</span>
-          <span class="product-tag">Cloud</span>
+          <span class="product-tag">AI Sensor</span>
+          <span class="product-tag">IoT</span>
         </div>
-
-        <div class="price">Rp 5.200.000</div>
-
+        <div class="price">Rp 3.450.000</div>
         <div class="product-actions">
-          <button class="cart-add-btn" onclick="addToCart('Water Flow Sensor',5200000)">+ Keranjang</button>
-          <button class="detail-btn" onclick="addWishlist('Water Flow Sensor')">❤ Wishlist</button>
+          <button class="cart-add-btn" onclick="addToCart('Smart Flood Sensor',3450000)">+ Keranjang</button>
+          <button class="detail-btn">Detail</button>
         </div>
       </div>
     </div>
 
-    <div class="product-card reveal" data-name="ai monitoring tower">
-      <div class="product-badge">New</div>
-
+    <div class="product-card reveal" data-name="iot hub controller">
+      <div class="wishlist-btn" onclick="toggleWishlist(this)">❤</div>
+      <div class="product-badge new">NEW</div>
       <div class="product-image">
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop">
+        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=800&auto=format&fit=crop">
       </div>
-
       <div class="product-content">
-        <h3>AI Monitoring Tower</h3>
-        <p>Sistem monitoring infrastruktur realtime berbasis AI cloud.</p>
-
+        <h3>IoT Hub Controller</h3>
+        <p>Kontrol seluruh sensor dan perangkat dalam satu dashboard pintar.</p>
         <div class="product-meta">
-          <span class="product-tag">AI</span>
-          <span class="product-tag">Smart City</span>
+          <span class="product-tag">Cloud</span>
+          <span class="product-tag">Dashboard</span>
         </div>
-
-        <div class="price">Rp 18.400.000</div>
-
+        <div class="price">Rp 8.750.000</div>
         <div class="product-actions">
-          <button class="cart-add-btn" onclick="addToCart('AI Monitoring Tower',18400000)">+ Keranjang</button>
-          <button class="detail-btn" onclick="addWishlist('AI Monitoring Tower')">❤ Wishlist</button>
+          <button class="cart-add-btn" onclick="addToCart('IoT Hub Controller',8750000)">+ Keranjang</button>
+          <button class="detail-btn">Detail</button>
         </div>
       </div>
     </div>
 
+
+  <div id="noResults" class="no-results" style="display:none;">
+    <p>😔 Produk tidak ditemukan. Coba kata kunci lain.</p>
   </div>
 </section>
 
+
+<!-- ═══════════════════════════════════════
+     TEKNOLOGI
+═══════════════════════════════════════ -->
 <section class="parallax" id="iot">
   <div class="parallax-content reveal">
-    <h2>Future Smart-City Infrastructure</h2>
-    <p>
-      Teknologi modern untuk monitoring drainase,
-      cloud telemetry, dan AI infrastructure system.
-    </p>
-
+    <h2>Future of Smart Drainage</h2>
+    <p>Teknologi drainase modern berbasis Internet of Things memungkinkan kota lebih aman dari banjir, lebih efisien dalam maintenance, dan lebih cepat mendeteksi kerusakan infrastruktur.</p>
     <div class="tech-badges">
-      <span>Cloud AI</span>
-      <span>IoT Sensor</span>
-      <span>ESP32</span>
-      <span>Smart Monitoring</span>
-      <span>Infrastructure AI</span>
+      <span>ESP32 / Arduino</span>
+      <span>MQTT Protocol</span>
+      <span>Cloud IoT</span>
+      <span>Mobile App</span>
+      <span>AI Analytics</span>
     </div>
   </div>
 </section>
 
-<section class="section" id="monitoring">
 
+<!-- ═══════════════════════════════════════
+     TESTIMONI
+═══════════════════════════════════════ -->
+<section class="section" id="testimonials">
   <div class="section-title reveal">
-    <h2>Live Infrastructure Monitoring</h2>
-    <p>Dashboard realtime smart drainage infrastructure.</p>
+    <h2>Apa Kata Pelanggan Kami</h2>
+    <p>Dipercaya oleh instansi pemerintah dan kontraktor sipil di seluruh Indonesia.</p>
   </div>
 
-  <div class="monitor-grid">
-
-    <div class="monitor-card reveal">
-      <h3>Water Level</h3>
-      <strong>2.4m</strong>
-      <div class="monitor-bar"><span style="width:72%"></span></div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p>"Sensor ultrasonik dari DrainioMart sangat akurat. Kami pasang di 12 titik drainase kota dan hasilnya luar biasa — tidak ada lagi banjir mendadak karena sudah ada peringatan dini."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">BW</div>
+        <div>
+          <strong>Bambang Wicaksono</strong>
+          <span>Dinas PU Kota Semarang</span>
+        </div>
+      </div>
     </div>
 
-    <div class="monitor-card reveal">
-      <h3>Cloud Sync</h3>
-      <strong>98%</strong>
-      <div class="monitor-bar"><span style="width:98%"></span></div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p>"Pengiriman cepat, packaging aman, dan produknya langsung bisa diintegrasikan ke sistem SCADA kami. Tim support DrainioMart sangat responsif dan membantu."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RS</div>
+        <div>
+          <strong>Rudi Setiawan</strong>
+          <span>PT. Bangun Infrastruktur Nusantara</span>
+        </div>
+      </div>
     </div>
 
-    <div class="monitor-card reveal">
-      <h3>AI Prediction</h3>
-      <strong>92%</strong>
-      <div class="monitor-bar"><span style="width:92%"></span></div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★☆</div>
+      <p>"Harga kompetitif untuk kualitas yang ditawarkan. IoT Control Panel-nya mudah dikonfigurasi bahkan oleh teknisi junior kami. Highly recommended untuk proyek smart city."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">NA</div>
+        <div>
+          <strong>Nanda Ariani</strong>
+          <span>Kontraktor Teknik Sipil, Surabaya</span>
+        </div>
+      </div>
     </div>
-
-    <div class="monitor-card reveal">
-      <h3>System Health</h3>
-      <strong>Excellent</strong>
-      <div class="monitor-bar"><span style="width:88%"></span></div>
-    </div>
-
-  </div>
-</section>
-
-<section class="section expedition-section">
-
-  <div class="section-title reveal">
-    <h2>Ekspedisi Tembalang Semarang</h2>
-    <p>Pilihan pengiriman premium untuk seluruh Indonesia.</p>
-  </div>
-
-  <div class="expedition-grid">
-
-    <div class="expedition-card reveal">
-      <h3>J&T Express</h3>
-      <p>Estimasi 1-2 Hari</p>
-    </div>
-
-    <div class="expedition-card reveal">
-      <h3>JNE REG</h3>
-      <p>Estimasi 2-3 Hari</p>
-    </div>
-
-    <div class="expedition-card reveal">
-      <h3>SiCepat BEST</h3>
-      <p>Estimasi 1 Hari</p>
-    </div>
-
-    <div class="expedition-card reveal">
-      <h3>GoSend Instant</h3>
-      <p>Estimasi 2 Jam</p>
-    </div>
-
   </div>
 </section>
 
-<section class="section payment-section" id="payment">
 
-  <div class="payment-card reveal">
-    <h2>Metode Pembayaran</h2>
-
-    <div class="payment-method">BCA • 1234567890</div>
-    <div class="payment-method">Mandiri • 9876543210</div>
-    <div class="payment-method">QRIS / Dana / OVO / GoPay</div>
-  </div>
-
-  <div class="payment-card reveal">
-    <h2>Upload Bukti Pembayaran</h2>
-
-    <div class="upload-box">
-      Drag & Drop Bukti Pembayaran
-    </div>
-  </div>
-
-</section>
-
+<!-- ═══════════════════════════════════════
+     FAQ
+═══════════════════════════════════════ -->
 <section class="section faq-section" id="faq">
-
   <div class="section-title reveal">
-    <h2>Pertanyaan Umum</h2>
-    <p>Informasi seputar produk dan pemesanan.</p>
+    <h2>Pertanyaan yang Sering Diajukan</h2>
+    <p>Belum menemukan jawaban? Hubungi kami via WhatsApp.</p>
   </div>
 
-  <div class="faq-list">
+  <div class="faq-list reveal">
 
-    <div class="faq-item reveal">
+    <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Apakah produk support monitoring realtime?</span>
+        <span class="faq-q-text">🛡️ &nbsp;Apakah produk dilengkapi garansi?</span>
         <span class="faq-icon">+</span>
       </button>
-
       <div class="faq-answer">
         <div class="faq-answer-inner">
-          Ya, semua produk mendukung monitoring realtime berbasis cloud IoT.
+          Ya, seluruh produk DrainioMart dilengkapi garansi resmi minimal <strong>1 tahun</strong> untuk kerusakan pabrik. Klaim garansi bisa dilakukan melalui WhatsApp kami dengan menyertakan bukti pembelian.
         </div>
       </div>
     </div>
 
-    <div class="faq-item reveal">
+    <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Apakah tersedia pengiriman seluruh Indonesia?</span>
+        <span class="faq-q-text">🔧 &nbsp;Apakah tersedia layanan instalasi/pemasangan?</span>
         <span class="faq-icon">+</span>
       </button>
-
       <div class="faq-answer">
         <div class="faq-answer-inner">
-          Tersedia pengiriman seluruh Indonesia melalui ekspedisi premium.
+          Tersedia layanan instalasi untuk wilayah Jawa Tengah dan sekitarnya. Untuk wilayah lain, kami menyediakan panduan instalasi lengkap dan <strong>konsultasi teknis via video call</strong> tanpa biaya tambahan.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-q-text">🔗 &nbsp;Perangkat ini kompatibel dengan sistem yang sudah ada?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Semua perangkat kami mendukung protokol standar industri seperti <strong>MQTT, Modbus, dan HTTP REST API</strong>, sehingga kompatibel dengan sistem SCADA, dashboard cloud, maupun platform IoT seperti Blynk, Ubidots, dan ThingsBoard.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-q-text">🚚 &nbsp;Berapa lama waktu pengiriman?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Pengiriman dalam kota <strong>1–2 hari kerja</strong>. Antar pulau <strong>3–7 hari kerja</strong> tergantung jasa ekspedisi yang dipilih. Kami bekerja sama dengan JNE, J&T, SiCepat, dan Anteraja.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-q-text">📦 &nbsp;Apakah bisa pembelian dalam jumlah besar (bulk order)?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Tentu! Kami melayani pembelian bulk untuk proyek pemerintah maupun swasta dengan <strong>harga spesial</strong>. Hubungi kami via WhatsApp untuk mendapatkan penawaran harga proyek.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-q-text">💬 &nbsp;Bagaimana cara melakukan pemesanan?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Sangat mudah! Tambahkan produk ke keranjang lalu klik <strong>"Checkout via WhatsApp"</strong>, atau klik tombol <strong>"Pesan via WhatsApp"</strong> di halaman detail produk. Tim kami akan segera membalas dan memproses pesanan Anda.
         </div>
       </div>
     </div>
@@ -364,62 +454,161 @@
   </div>
 </section>
 
+
+
+<section class="section payment-section reveal">
+  <div class="section-title">
+    <h2>Metode Pembayaran</h2>
+    <p>Pembayaran aman dan fleksibel untuk seluruh Indonesia.</p>
+  </div>
+
+  <div class="payment-grid">
+    <div class="payment-card">BCA</div>
+    <div class="payment-card">Mandiri</div>
+    <div class="payment-card">BRI</div>
+    <div class="payment-card">BNI</div>
+    <div class="payment-card">QRIS</div>
+    <div class="payment-card">OVO</div>
+    <div class="payment-card">Dana</div>
+    <div class="payment-card">GoPay</div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FOOTER / KONTAK
+═══════════════════════════════════════ -->
 <footer id="contact">
   <div class="footer-grid">
 
     <div class="footer-brand">
       <h2>DrainioMart</h2>
-      <p>
-        Smart IoT Civil Engineering Marketplace untuk monitoring drainase,
-        smart-city infrastructure, dan cloud telemetry system.
-      </p>
+      <p>Marketplace perangkat IoT teknik sipil dan smart drainage system modern. Semua transaksi dilayani langsung via WhatsApp untuk kemudahan dan keamanan Anda.</p>
     </div>
 
     <div class="footer-links">
-      <h3>Navigasi</h3>
-      <a href="#">Beranda</a>
-      <a href="#">Produk</a>
-      <a href="#">Monitoring</a>
+      <h3>Menu</h3>
+      <a href="#beranda">Beranda</a>
+      <a href="#products">Produk</a>
+      <a href="#about">Tentang</a>
+      <a href="#testimonials">Testimoni</a>
+      <a href="#faq">FAQ</a>
     </div>
 
     <div class="footer-links">
-      <h3>Kontak</h3>
-      <a href="#">WhatsApp</a>
-      <a href="#">Instagram</a>
-      <a href="#">Email</a>
+      <h3>Hubungi Kami</h3>
+      <a href="https://wa.me/628813925995" target="_blank">💬 WhatsApp: 0881-3925-995</a>
+      <a href="mailto:info@drainiomart.id">✉️ Email</a>
+      <a href="#">💼 LinkedIn</a>
     </div>
 
   </div>
 
   <div class="footer-bottom">
-    © 2026 DrainioMart. All rights reserved.
+    © 2026 DrainioMart — Smart Civil Engineering Marketplace
   </div>
 </footer>
 
-<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 
+<!-- ═══════════════════════════════════════
+     FLOATING WA BUTTON
+═══════════════════════════════════════ -->
+<a href="https://wa.me/628813925995?text=Halo%20DrainioMart%2C%20saya%20ingin%20bertanya%20tentang%20produk%20IoT%20Anda."
+   class="wa-float" target="_blank" title="Chat WhatsApp">💬</a>
+
+
+<!-- ═══════════════════════════════════════
+     CART SIDEBAR
+═══════════════════════════════════════ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
   <div class="cart-header">
-    <h3>Keranjang</h3>
+    <h3>🛒 Keranjang Belanja</h3>
     <button onclick="toggleCart()">✕</button>
   </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Keranjang masih kosong.<br><small>Tekan "+ Keranjang" pada produk.</small></div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total">Total: <strong id="cartTotal">Rp 0</strong></div>
+    
+    <div class="shipping-box">
+      <h4 style="margin-bottom:12px;">Pilih Ekspedisi</h4>
 
-  <div class="cart-items" id="cartItems"></div>
+      <label class="shipping-option">
+        <input type="radio" name="shipping" checked>
+        <span>JNE REG (2-3 Hari)</span>
+        <strong>Rp 18.000</strong>
+      </label>
 
-  <div class="cart-footer" id="cartFooter">
-    <div class="cart-total">
-      Total: <strong id="cartTotal">Rp 0</strong>
+      <label class="shipping-option">
+        <input type="radio" name="shipping">
+        <span>SiCepat BEST</span>
+        <strong>Rp 25.000</strong>
+      </label>
+
+      <label class="shipping-option">
+        <input type="radio" name="shipping">
+        <span>GoSend Instant</span>
+        <strong>Rp 45.000</strong>
+      </label>
     </div>
 
-    <button class="btn btn-primary" onclick="checkoutWA()">Checkout WhatsApp</button>
+    <button class="btn btn-primary" style="width:100%;" onclick="checkoutWA()">
+      💬 Checkout via WhatsApp
+    </button>
   </div>
 </div>
 
-<a href="https://wa.me/628813925995" class="wa-float" target="_blank">💬</a>
 
-<div class="toast" id="toast"></div>
+<!-- ═══════════════════════════════════════
+     DETAIL MODAL
+═══════════════════════════════════════ -->
+<div class="modal-overlay" id="detailModal" onclick="handleModalOverlayClick(event)">
+  <div class="modal-box modal-detail">
+    <button class="modal-close" onclick="closeDetail()">✕</button>
+    <img id="detailImg" src="" alt=""
+      style="width:100%;border-radius:16px;margin-bottom:20px;max-height:240px;object-fit:cover;"
+      onerror="this.style.display='none'">
+    <h2 id="detailName" style="font-family:'Syne',sans-serif;"></h2>
+    <p id="detailDesc"  style="color:#9db4cf;margin:14px 0;line-height:1.75;font-size:14px;"></p>
+    <div id="detailSpecs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;"></div>
+    <div id="detailPrice" style="font-size:26px;color:#4da3ff;font-weight:700;margin-bottom:24px;font-family:'Syne',sans-serif;"></div>
+    <div style="display:flex;gap:10px;">
+      <button class="modal-submit outline" id="detailCartBtn">+ Keranjang</button>
+      <button class="modal-submit"         id="detailBuyBtn" >💬 Pesan via WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+
+<div class="ai-chatbot" onclick="openAIChat()">
+  <div class="ai-dot"></div>
+  🤖 AI Assistant
+</div>
+
+<div class="ai-chat-window" id="aiChatWindow">
+  <div class="ai-header">
+    Drainio AI Assistant
+  </div>
+
+  <div class="ai-body">
+    <div class="ai-message">
+      Halo 👋 saya siap membantu rekomendasi produk IoT Anda.
+    </div>
+  </div>
+
+  <div class="ai-actions">
+    <button onclick="quickWA('Saya ingin bertanya tentang produk.')">Produk</button>
+    <button onclick="quickWA('Saya ingin mengetahui ongkir.')">Ongkir</button>
+    <button onclick="quickWA('Saya ingin konsultasi instalasi.')">Instalasi</button>
+  </div>
+</div>
+
 
 <script src="script.js"></script>
-
 </body>
 </html>
