@@ -1,55 +1,2606 @@
+
+:root{
+ --bg:#07111f;
+ --card:#0f1727;
+ --primary:#55a8ff;
+ --text:#eef4ff;
+ --muted:#9caec9;
+}
+
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  scroll-behavior:smooth;
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+ scroll-behavior:smooth;
 }
 
 body{
-  background:#020817;
-  color:white;
-  font-family:Arial,sans-serif;
-  overflow-x:hidden;
+ background:linear-gradient(180deg,#07111f,#09182a);
+ color:var(--text);
+ font-family:'Poppins',sans-serif;
+ overflow-x:hidden;
 }
 
-canvas#bg{
-  position:fixed;
-  inset:0;
-  z-index:-1;
+.navbar{
+ position:fixed;
+ top:0;
+ width:100%;
+ z-index:999;
+ backdrop-filter:blur(18px);
+ background:rgba(7,17,31,.78);
+ border-bottom:1px solid rgba(255,255,255,.06);
 }
 
-#loader{
-  position:fixed;
-  inset:0;
-  background:#020817;
-  z-index:9999;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:20px;
-  transition:1s;
+.hero{
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:140px 8%;
+ gap:60px;
 }
 
-.hide-loader{
-  opacity:0;
-  visibility:hidden;
+.products-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+ gap:30px;
 }
 
-.loader-ring{
-  width:100px;
-  height:100px;
-  border:4px solid #00d9ff;
-  border-top:4px solid transparent;
-  border-radius:50%;
-  animation:spin 1s linear infinite;
+.product-card{
+ background:rgba(255,255,255,.03);
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:28px;
+ overflow:hidden;
+ transition:.4s ease;
 }
 
-@keyframes spin{
-  to{transform:rotate(360deg)}
+.product-card:hover{
+ transform:translateY(-8px);
+ border-color:rgba(85,168,255,.35);
 }
 
-.glass{
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(18px);
-    padding:120px 20px;
+.monitor-card{
+ background:rgba(255,255,255,.03);
+ border-radius:24px;
+ padding:30px;
+ border:1px solid rgba(255,255,255,.08);
+}
+
+.reveal{
+ opacity:0;
+ transform:translateY(50px);
+ transition:1s ease;
+}
+
+.reveal.active{
+ opacity:1;
+ transform:translateY(0);
+}
+
+@media(max-width:1000px){
+ .hero{
+   flex-direction:column;
+ }
+}
+
+
+.card-style-0{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-0:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-1{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:17px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-1:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-2{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-2:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-3{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:19px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-3:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-4{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-4:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-5{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:21px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-5:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-6{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:22px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-6:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-7{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:23px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-7:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-8{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:24px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-8:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-9{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:25px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-9:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-10{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:26px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-10:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-11{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:27px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-11:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-12{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:16px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-12:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-13{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:17px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-13:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-14{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:18px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-14:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-15{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:19px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-15:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-16{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-16:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-17{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:21px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-17:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-18{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:22px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-18:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-19{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:23px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-19:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-20{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-20:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-21{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-21:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-22{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:26px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-22:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-23{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:27px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-23:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-24{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-24:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-25{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:17px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-25:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-26{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-26:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-27{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:19px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-27:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-28{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-28:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-29{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:21px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-29:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-30{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:22px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-30:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-31{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:23px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-31:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-32{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:24px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-32:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-33{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:25px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-33:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-34{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:26px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-34:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-35{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:27px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-35:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-36{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:16px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-36:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-37{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:17px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-37:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-38{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:18px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-38:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-39{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:19px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-39:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-40{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-40:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-41{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:21px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-41:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-42{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:22px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-42:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-43{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:23px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-43:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-44{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-44:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-45{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-45:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-46{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:26px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-46:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-47{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:27px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-47:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-48{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-48:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-49{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:17px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-49:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-50{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-50:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-51{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:19px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-51:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-52{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-52:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-53{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:21px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-53:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-54{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:22px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-54:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-55{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:23px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-55:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-56{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:24px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-56:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-57{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:25px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-57:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-58{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:26px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-58:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-59{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:27px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-59:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-60{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:16px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-60:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-61{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:17px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-61:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-62{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:18px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-62:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-63{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:19px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-63:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-64{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-64:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-65{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:21px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-65:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-66{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:22px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-66:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-67{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:23px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-67:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-68{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-68:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-69{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-69:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-70{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:26px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-70:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-71{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:27px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-71:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-72{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-72:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-73{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:17px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-73:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-74{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-74:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-75{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:19px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-75:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-76{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-76:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-77{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:21px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-77:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-78{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:22px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-78:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-79{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:23px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-79:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-80{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:24px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-80:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-81{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:25px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-81:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-82{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:26px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-82:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-83{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:27px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-83:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-84{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:16px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-84:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-85{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:17px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-85:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-86{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:18px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-86:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-87{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:19px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-87:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-88{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-88:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-89{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:21px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-89:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-90{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:22px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-90:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-91{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:23px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-91:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-92{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-92:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-93{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-93:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-94{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:26px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-94:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-95{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:27px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-95:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-96{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-96:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-97{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:17px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-97:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-98{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-98:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-99{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:19px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-99:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-100{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-100:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-101{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:21px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-101:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-102{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:22px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-102:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-103{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:23px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-103:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-104{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:24px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-104:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-105{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:25px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-105:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-106{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:26px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-106:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-107{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:27px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-107:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-108{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:16px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-108:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-109{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:17px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-109:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-110{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:18px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-110:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-111{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:19px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-111:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-112{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-112:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-113{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:21px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-113:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-114{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:22px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-114:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-115{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:23px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-115:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-116{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-116:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-117{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-117:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-118{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:26px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-118:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-119{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:27px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-119:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-120{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-120:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-121{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:17px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-121:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-122{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-122:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-123{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:19px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-123:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-124{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-124:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-125{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:21px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-125:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-126{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:22px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-126:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-127{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:23px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-127:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-128{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:24px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-128:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-129{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:25px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-129:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-130{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:26px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-130:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-131{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:27px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-131:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-132{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:16px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-132:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-133{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:17px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-133:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-134{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:18px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-134:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-135{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:19px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-135:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-136{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-136:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-137{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:21px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-137:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-138{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:22px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-138:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-139{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:23px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-139:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-140{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-140:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-141{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-141:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-142{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:26px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-142:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-143{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:27px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-143:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-144{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-144:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-145{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:17px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-145:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-146{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-146:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-147{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:19px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-147:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-148{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-148:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-149{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:21px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-149:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-150{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:22px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-150:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-151{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:23px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-151:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-152{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:24px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-152:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-153{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:25px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-153:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-154{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:26px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-154:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-155{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:27px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-155:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-156{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:16px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-156:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-157{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:17px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-157:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-158{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:18px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-158:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-159{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:19px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-159:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-160{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-160:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-161{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:21px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-161:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-162{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:22px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-162:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-163{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:23px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-163:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-164{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-164:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-165{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-165:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-166{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:26px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-166:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-167{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:27px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-167:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-168{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-168:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-169{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:17px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-169:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-170{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:18px;
+    transition:.35s ease;
+}
+
+.card-style-170:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-171{
+    background:rgba(255,255,255,.00);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:19px;
+    padding:19px;
+    transition:.35s ease;
+}
+
+.card-style-171:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-172{
+    background:rgba(255,255,255,.01);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:20px;
+    transition:.35s ease;
+}
+
+.card-style-172:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-173{
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:21px;
+    padding:21px;
+    transition:.35s ease;
+}
+
+.card-style-173:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-174{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(16px);
+    border-radius:22px;
+    padding:22px;
+    transition:.35s ease;
+}
+
+.card-style-174:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-175{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(17px);
+    border-radius:23px;
+    padding:23px;
+    transition:.35s ease;
+}
+
+.card-style-175:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-176{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:24px;
+    padding:24px;
+    transition:.35s ease;
+}
+
+.card-style-176:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-177{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(11px);
+    border-radius:25px;
+    padding:25px;
+    transition:.35s ease;
+}
+
+.card-style-177:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-178{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border-radius:26px;
+    padding:26px;
+    transition:.35s ease;
+}
+
+.card-style-178:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.card-style-179{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(13px);
+    border-radius:27px;
+    padding:27px;
+    transition:.35s ease;
+}
+
+.card-style-179:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
