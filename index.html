@@ -5,1257 +5,1085 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>DrainioMart – Smart IoT Civil Engineering Marketplace</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-/* ══════════════════════════════════
-   ROOT & RESET
-══════════════════════════════════ */
-:root{
-  --bg:#050d18;
-  --bg2:#091523;
-  --bg3:#0d1e30;
-  --card:#0f2035;
-  --border:#1a3a5c;
-  --accent:#00aaff;
-  --accent2:#0066cc;
-  --accent3:#00d4aa;
-  --text:#e2eef9;
-  --muted:#6a8fab;
-  --danger:#ff4d6d;
-  --success:#00c48c;
-  --warn:#ffb700;
-  --font-head:'Syne',sans-serif;
-  --font-body:'DM Sans',sans-serif;
-  --r:14px;
-  --sh:0 8px 32px rgba(0,0,0,.5);
+/* =========================================
+   VARIABLES & RESET
+========================================= */
+:root {
+  --bg0: #020b14;
+  --bg1: #050f1c;
+  --bg2: #071526;
+  --bg3: #0a1d30;
+  --card: #0d2440;
+  --card2: #102b4a;
+  --border: #163450;
+  --border2: #1e4a72;
+  --accent: #00c8ff;
+  --accent2: #0099cc;
+  --accent-glow: rgba(0,200,255,.18);
+  --teal: #00e5b3;
+  --teal-glow: rgba(0,229,179,.15);
+  --green: #00e096;
+  --red: #ff4f6a;
+  --orange: #ffa940;
+  --purple: #a78bfa;
+  --yellow: #ffd700;
+  --text: #e8f4ff;
+  --text2: #7aaccf;
+  --text3: #3d6a8a;
+  --r: 10px;
+  --r2: 16px;
+  --r3: 22px;
+  --sh: 0 8px 32px rgba(0,0,0,.5);
+  --ff: 'Outfit', sans-serif;
+  --fh: 'Space Grotesk', sans-serif;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--font-body);
-  font-size:15px;
-  line-height:1.65;
-  overflow-x:hidden;
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--border2) transparent; }
+body { background: var(--bg0); color: var(--text); font-family: var(--ff); font-size: 15px; line-height: 1.65; overflow-x: hidden; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button, input, select, textarea { font-family: var(--ff); }
+button { cursor: pointer; }
+
+/* =========================================
+   BUTTONS
+========================================= */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  padding: 11px 24px; border-radius: var(--r); font-size: 14px; font-weight: 600;
+  border: none; transition: all .2s; white-space: nowrap; letter-spacing: .2px;
 }
-a{color:inherit;text-decoration:none;}
-img{display:block;max-width:100%;}
-button,input,select,textarea{font-family:var(--font-body);}
+.btn-primary { background: var(--accent); color: #000; }
+.btn-primary:hover { background: #22d4ff; transform: translateY(-2px); box-shadow: 0 6px 22px var(--accent-glow); }
+.btn-secondary { background: transparent; border: 1.5px solid var(--border2); color: var(--text); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.btn-green { background: var(--green); color: #000; }
+.btn-green:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 6px 22px var(--teal-glow); }
+.btn-red { background: var(--red); color: #fff; }
+.btn-teal { background: var(--teal); color: #000; }
+.btn-teal:hover { filter: brightness(1.08); transform: translateY(-2px); }
+.btn-ghost { background: rgba(255,255,255,.05); border: 1.5px solid var(--border2); color: var(--text2); }
+.btn-ghost:hover { background: rgba(0,200,255,.06); border-color: var(--accent); color: var(--accent); }
+.btn-sm { padding: 7px 15px; font-size: 12.5px; }
+.btn-lg { padding: 14px 32px; font-size: 16px; }
+.btn-full { width: 100%; }
+.btn:disabled { opacity: .4; cursor: not-allowed; transform: none !important; }
+.btn:active { transform: scale(.97) !important; }
 
-/* ══════════════════════════════════
-   SCROLLBAR
-══════════════════════════════════ */
-::-webkit-scrollbar{width:6px;}
-::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+/* =========================================
+   FORM ELEMENTS
+========================================= */
+.form-group { margin-bottom: 15px; }
+.form-label { display: block; font-size: 12.5px; color: var(--text2); margin-bottom: 6px; font-weight: 500; letter-spacing: .3px; text-transform: uppercase; }
+.form-control {
+  width: 100%; background: var(--bg3); border: 1.5px solid var(--border);
+  border-radius: var(--r); padding: 11px 14px; color: var(--text); font-size: 14px;
+  outline: none; transition: .2s;
+}
+.form-control:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.form-control::placeholder { color: var(--text3); }
+textarea.form-control { resize: vertical; min-height: 80px; }
+select.form-control {
+  cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%233d6a8a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-err { font-size: 12px; color: var(--red); margin-top: 4px; display: none; }
+.form-group.has-error .form-control { border-color: var(--red) !important; }
+.form-group.has-error .form-err { display: block; }
 
-/* ══════════════════════════════════
+/* =========================================
    NAVBAR
-══════════════════════════════════ */
-.navbar{
-  position:fixed;top:0;left:0;right:0;z-index:900;
-  background:rgba(5,13,24,.92);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border);
-  transition:box-shadow .3s;
+========================================= */
+.navbar {
+  position: fixed; top: 0; inset-x: 0; z-index: 900;
+  background: rgba(2,11,20,.9); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); transition: .3s;
 }
-.navbar.scrolled{box-shadow:0 4px 24px rgba(0,170,255,.08);}
-.nav-inner{
-  max-width:1280px;margin:0 auto;
-  display:flex;align-items:center;gap:24px;
-  padding:0 24px;height:68px;
+.navbar.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.5); }
+.nav-inner {
+  max-width: 1320px; margin: 0 auto; display: flex; align-items: center;
+  height: 64px; padding: 0 24px; gap: 16px;
 }
-.logo{
-  font-family:var(--font-head);font-size:22px;font-weight:800;
-  color:#fff;white-space:nowrap;
+.logo { font-family: var(--fh); font-size: 21px; font-weight: 700; flex-shrink: 0; letter-spacing: -.3px; }
+.logo span { color: var(--accent); }
+.logo sub { font-size: 9px; color: var(--text3); vertical-align: super; font-weight: 400; letter-spacing: 1px; }
+.nav-links { display: flex; gap: 2px; flex: 1; }
+.nav-links a { padding: 7px 12px; border-radius: 8px; font-size: 13.5px; color: var(--text2); transition: .2s; }
+.nav-links a:hover { color: var(--text); background: rgba(0,200,255,.07); }
+.nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.search-box {
+  display: flex; align-items: center; gap: 8px; background: var(--bg3);
+  border: 1.5px solid var(--border); border-radius: var(--r); padding: 7px 13px;
+  transition: .2s;
 }
-.logo span{color:var(--accent);}
-.nav-links{display:flex;gap:4px;flex:1;}
-.nav-links a{
-  padding:7px 13px;border-radius:8px;font-size:13.5px;
-  color:var(--muted);transition:all .2s;
+.search-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }
+.search-box input { background: none; border: none; outline: none; color: var(--text); font-size: 13.5px; width: 145px; }
+.search-box input::placeholder { color: var(--text3); }
+.icon-btn {
+  display: flex; align-items: center; gap: 6px; padding: 8px 14px;
+  background: var(--bg3); border: 1.5px solid var(--border); border-radius: var(--r);
+  font-size: 13.5px; color: var(--text2); transition: .2s; position: relative;
 }
-.nav-links a:hover{color:#fff;background:rgba(0,170,255,.1);}
-.nav-right{display:flex;align-items:center;gap:12px;}
-.search-box{
-  display:flex;align-items:center;gap:8px;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:10px;padding:6px 12px;
+.icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+.badge {
+  background: var(--red); color: #fff; border-radius: 99px; font-size: 10px;
+  font-weight: 700; padding: 1px 5px; min-width: 17px; text-align: center; line-height: 1.6;
 }
-.search-box input{
-  background:none;border:none;outline:none;
-  color:var(--text);font-size:13px;width:160px;
-}
-.search-box input::placeholder{color:var(--muted);}
-.icon-btn{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:10px;padding:8px 14px;cursor:pointer;
-  font-size:14px;color:var(--text);transition:all .2s;
-  display:flex;align-items:center;gap:6px;
-}
-.icon-btn:hover{border-color:var(--accent);color:var(--accent);}
-.badge{
-  background:var(--danger);color:#fff;
-  border-radius:999px;font-size:10px;
-  padding:1px 6px;font-weight:700;min-width:18px;text-align:center;
-}
-.hamburger{
-  display:none;background:none;border:none;cursor:pointer;
-  flex-direction:column;gap:5px;padding:4px;
-}
-.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:.3s;}
-.mobile-menu{
-  display:none;flex-direction:column;
-  background:var(--bg2);border-top:1px solid var(--border);
-  padding:12px 24px;
-}
-.mobile-menu a{
-  padding:10px 0;border-bottom:1px solid rgba(26,58,92,.4);
-  color:var(--muted);font-size:14px;
-}
-.mobile-menu a:last-child{border-bottom:none;}
-.mobile-menu.open{display:flex;}
+.ham { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 6px; }
+.ham span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+.mob-nav { display: none; flex-direction: column; background: var(--bg2); border-top: 1px solid var(--border); padding: 12px 20px 16px; }
+.mob-nav.open { display: flex; }
+.mob-nav a { padding: 10px 0; color: var(--text2); font-size: 14px; border-bottom: 1px solid var(--border); }
+.mob-nav a:last-child { border: none; }
 
-/* ══════════════════════════════════
+/* =========================================
    HERO
-══════════════════════════════════ */
-.hero{
-  min-height:100vh;display:flex;align-items:center;
-  padding:120px 24px 80px;position:relative;overflow:hidden;
+========================================= */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 96px 24px 72px; position: relative; overflow: hidden;
 }
-.hero-bg{
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,102,204,.18) 0%, transparent 65%),
-             radial-gradient(ellipse 50% 40% at 10% 80%, rgba(0,212,170,.08) 0%, transparent 60%);
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,200,255,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,229,179,.07) 0%, transparent 50%);
 }
-.hero-grid-lines{
-  position:absolute;inset:0;opacity:.04;
-  background-image:linear-gradient(var(--accent) 1px,transparent 1px),linear-gradient(90deg,var(--accent) 1px,transparent 1px);
-  background-size:60px 60px;
+.hero-grid {
+  position: absolute; inset: 0; opacity: .03;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
-.hero-inner{
-  max-width:1280px;margin:0 auto;width:100%;
-  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
-  position:relative;z-index:1;
+.hero-inner {
+  max-width: 1320px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1;
 }
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(0,170,255,.12);border:1px solid rgba(0,170,255,.25);
-  border-radius:999px;padding:6px 16px;font-size:12.5px;
-  color:var(--accent);margin-bottom:20px;font-weight:500;
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,200,255,.08); border: 1px solid rgba(0,200,255,.2);
+  border-radius: 99px; padding: 5px 14px; font-size: 12px; color: var(--accent); margin-bottom: 20px;
 }
-.hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-.hero h1{
-  font-family:var(--font-head);font-size:clamp(42px,5.5vw,72px);
-  font-weight:900;line-height:1.05;margin-bottom:20px;
-  letter-spacing:-1.5px;
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.8)} }
+.hero h1 {
+  font-family: var(--fh); font-size: clamp(38px, 5vw, 66px);
+  font-weight: 700; line-height: 1.06; letter-spacing: -1.5px; margin-bottom: 20px;
 }
-.hero h1 span{
-  background:linear-gradient(135deg,var(--accent),var(--accent3));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+.hero h1 .hl {
+  background: linear-gradient(120deg, var(--accent), var(--teal));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.hero p{color:var(--muted);font-size:16px;max-width:480px;margin-bottom:36px;line-height:1.75;}
-.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;}
-.btn{
-  padding:13px 28px;border-radius:10px;font-size:14px;font-weight:600;
-  cursor:pointer;border:none;transition:all .25s;display:inline-flex;align-items:center;gap:8px;
+.hero p { color: var(--text2); font-size: 15.5px; max-width: 460px; margin-bottom: 32px; line-height: 1.75; }
+.hero-cta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+.hero-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border: 1.5px solid var(--border); border-radius: var(--r2); overflow: hidden;
 }
-.btn-primary{background:var(--accent);color:#fff;}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,170,255,.3);}
-.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text);}
-.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
-.btn-success{background:var(--success);color:#fff;}
-.btn-success:hover{filter:brightness(1.1);transform:translateY(-2px);}
-.btn-danger{background:var(--danger);color:#fff;}
+.stat {
+  padding: 14px 16px; text-align: center; background: var(--bg3);
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border: none; }
+.stat-val { font-family: var(--fh); font-size: 22px; font-weight: 700; color: var(--accent); display: block; }
+.stat-lbl { font-size: 11px; color: var(--text3); display: block; margin-top: 2px; }
+.hero-visual { position: relative; }
+.hero-img {
+  width: 100%; border-radius: var(--r3); border: 1px solid var(--border2);
+  box-shadow: 0 0 60px rgba(0,200,255,.1), var(--sh);
+}
+.hero-live {
+  position: absolute; bottom: 18px; left: 18px;
+  background: rgba(2,11,20,.88); backdrop-filter: blur(12px);
+  border: 1px solid var(--border2); border-radius: var(--r); padding: 9px 15px;
+  display: flex; align-items: center; gap: 8px; font-size: 13px;
+}
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: #00e096; box-shadow: 0 0 8px #00e096; animation: pulse 1.5s infinite; }
 
-.hero-stats{display:flex;gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-.hero-stat{
-  flex:1;padding:18px 24px;text-align:center;
-  border-right:1px solid var(--border);background:var(--card);
-}
-.hero-stat:last-child{border-right:none;}
-.hero-stat strong{display:block;font-family:var(--font-head);font-size:26px;color:var(--accent);}
-.hero-stat span{font-size:12px;color:var(--muted);}
-.hero-image{position:relative;}
-.hero-image img{
-  width:100%;border-radius:20px;
-  box-shadow:0 0 60px rgba(0,170,255,.15),0 32px 64px rgba(0,0,0,.6);
-  border:1px solid var(--border);
-}
-.live-badge{
-  position:absolute;bottom:20px;left:20px;
-  background:rgba(5,13,24,.9);border:1px solid var(--border);
-  border-radius:10px;padding:10px 16px;
-  display:flex;align-items:center;gap:8px;font-size:13px;
-  backdrop-filter:blur(8px);
-}
-.live-dot{width:8px;height:8px;border-radius:50%;background:#0f0;animation:pulse 1.5s infinite;}
+/* =========================================
+   SECTIONS
+========================================= */
+.section { padding: 80px 24px; }
+.section-inner { max-width: 1320px; margin: 0 auto; }
+.section-alt { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.sec-head { text-align: center; margin-bottom: 52px; }
+.sec-head h2 { font-family: var(--fh); font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; letter-spacing: -.5px; margin-bottom: 10px; }
+.sec-head p { color: var(--text2); max-width: 450px; margin: 0 auto; font-size: 15px; }
+.accent-bar { width: 40px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--teal)); border-radius: 2px; margin: 12px auto 0; }
 
-/* ══════════════════════════════════
-   SECTION COMMONS
-══════════════════════════════════ */
-.section{max-width:1280px;margin:0 auto;padding:80px 24px;}
-.sec-head{text-align:center;margin-bottom:60px;}
-.sec-head h2{
-  font-family:var(--font-head);font-size:clamp(28px,4vw,44px);
-  font-weight:800;margin-bottom:12px;letter-spacing:-1px;
-}
-.sec-head p{color:var(--muted);font-size:15px;max-width:480px;margin:0 auto;}
-.sec-head .line{
-  width:48px;height:3px;background:var(--accent);
-  border-radius:2px;margin:16px auto 0;
-}
-.reveal{opacity:0;transform:translateY(30px);transition:all .6s ease;}
-.reveal.visible{opacity:1;transform:none;}
+/* Reveal animation */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.visible { opacity: 1; transform: none; }
 
-/* ══════════════════════════════════
-   INFO GRID
-══════════════════════════════════ */
-.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.info-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);padding:28px;transition:all .3s;
+/* =========================================
+   FLOW STEPS
+========================================= */
+.flow-wrap { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.flow-steps { display: flex; gap: 0; position: relative; }
+.flow-steps::before {
+  content: ''; position: absolute; top: 28px; left: 8%; right: 8%;
+  height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal)); opacity: .3; z-index: 0;
 }
-.info-card:hover{border-color:var(--accent);transform:translateY(-4px);}
-.info-icon{font-size:28px;margin-bottom:14px;}
-.info-card h3{font-family:var(--font-head);font-size:18px;margin-bottom:10px;}
-.info-card p{color:var(--muted);font-size:14px;line-height:1.7;}
+.flow-step { flex: 1; text-align: center; padding: 0 12px; position: relative; z-index: 1; }
+.fs-circle {
+  width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal));
+  display: flex; align-items: center; justify-content: center; font-family: var(--fh);
+  font-size: 18px; font-weight: 700; color: #000; margin: 0 auto 14px;
+  box-shadow: 0 4px 18px var(--accent-glow);
+}
+.flow-step h4 { font-family: var(--fh); font-size: 13.5px; font-weight: 600; margin-bottom: 6px; }
+.flow-step p { font-size: 12px; color: var(--text2); line-height: 1.55; }
 
-/* ══════════════════════════════════
-   PRODUCTS FILTER TABS
-══════════════════════════════════ */
-.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;justify-content:center;}
-.filter-tab{
-  padding:8px 20px;border-radius:999px;font-size:13px;
-  background:var(--card);border:1px solid var(--border);
-  cursor:pointer;color:var(--muted);transition:all .2s;
+/* =========================================
+   FEATURE CARDS
+========================================= */
+.feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.feat-card {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: var(--r2);
+  padding: 26px; transition: .3s;
 }
-.filter-tab.active,.filter-tab:hover{
-  background:var(--accent);border-color:var(--accent);color:#fff;
-}
+.feat-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 10px 30px var(--accent-glow); }
+.feat-icon { font-size: 28px; margin-bottom: 14px; }
+.feat-card h3 { font-family: var(--fh); font-size: 16px; margin-bottom: 8px; }
+.feat-card p { color: var(--text2); font-size: 13.5px; line-height: 1.7; }
 
-/* ══════════════════════════════════
-   PRODUCTS GRID
-══════════════════════════════════ */
-.products-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;
+/* =========================================
+   PRODUCT FILTERS
+========================================= */
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+.ftab {
+  padding: 8px 20px; border-radius: 99px; font-size: 13px; font-weight: 500;
+  background: var(--card); border: 1.5px solid var(--border); color: var(--text2); transition: .2s; cursor: pointer;
 }
-.product-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);overflow:hidden;position:relative;
-  transition:all .3s;display:flex;flex-direction:column;
-}
-.product-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:var(--sh);}
-.product-label{
-  position:absolute;top:12px;left:12px;z-index:2;
-  background:var(--warn);color:#000;
-  font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:999px;
-}
-.product-label.new{background:var(--accent3);color:#000;}
-.product-label.hot{background:var(--danger);color:#fff;}
-.wishlist-btn{
-  position:absolute;top:12px;right:12px;z-index:2;
-  width:34px;height:34px;border-radius:50%;
-  background:rgba(5,13,24,.8);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:15px;transition:all .2s;
-  color:var(--muted);
-}
-.wishlist-btn.active,.wishlist-btn:hover{border-color:var(--danger);color:var(--danger);}
-.product-img{
-  height:200px;overflow:hidden;background:var(--bg3);
-}
-.product-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
-.product-card:hover .product-img img{transform:scale(1.06);}
-.product-body{padding:18px;flex:1;display:flex;flex-direction:column;}
-.product-body h3{font-family:var(--font-head);font-size:16px;margin-bottom:7px;}
-.product-body p{color:var(--muted);font-size:13px;margin-bottom:12px;flex:1;}
-.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
-.tag{
-  background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.2);
-  color:var(--accent);font-size:11px;padding:2px 9px;border-radius:999px;
-}
-.price{
-  font-family:var(--font-head);font-size:20px;color:var(--accent);
-  font-weight:700;margin-bottom:14px;
-}
-.rating{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--warn);margin-bottom:8px;}
-.rating span{color:var(--muted);}
-.p-actions{display:flex;gap:8px;}
-.p-actions button{
-  flex:1;padding:10px;border-radius:8px;font-size:13px;
-  font-weight:600;cursor:pointer;border:none;transition:all .2s;
-}
-.add-cart{background:var(--accent);color:#fff;}
-.add-cart:hover{background:var(--accent2);}
-.view-detail{background:transparent;border:1.5px solid var(--border);color:var(--text);}
-.view-detail:hover{border-color:var(--accent);color:var(--accent);}
-.no-results{
-  text-align:center;padding:60px;color:var(--muted);
-  grid-column:1/-1;display:none;
-}
+.ftab:hover { border-color: var(--accent); color: var(--accent); }
+.ftab.active { background: var(--accent); border-color: var(--accent); color: #000; box-shadow: 0 4px 14px var(--accent-glow); }
 
-/* ══════════════════════════════════
-   PARALLAX BAND
-══════════════════════════════════ */
-.parallax-band{
-  background:linear-gradient(135deg,var(--bg3) 0%,rgba(0,102,204,.15) 100%);
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  padding:80px 24px;text-align:center;position:relative;overflow:hidden;
+/* =========================================
+   PRODUCT GRID
+========================================= */
+.prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px; }
+.prod-card {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: var(--r2);
+  overflow: hidden; display: flex; flex-direction: column; position: relative; transition: .3s; cursor: pointer;
 }
-.parallax-band::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(0,170,255,.08),transparent);
+.prod-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,200,255,.1); }
+.prod-badge {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  padding: 3px 10px; border-radius: 99px; font-size: 10.5px; font-weight: 700; letter-spacing: .3px;
 }
-.parallax-band h2{
-  font-family:var(--font-head);font-size:clamp(28px,4vw,48px);
-  font-weight:900;margin-bottom:16px;position:relative;
+.badge-best { background: var(--orange); color: #000; }
+.badge-new { background: var(--green); color: #000; }
+.badge-hot { background: var(--red); color: #fff; }
+.badge-sale { background: var(--purple); color: #fff; }
+.wish-btn {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  width: 34px; height: 34px; border-radius: 50%; background: rgba(2,11,20,.8);
+  border: 1.5px solid var(--border2); display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: var(--text3); transition: .2s; cursor: pointer;
 }
-.parallax-band p{color:var(--muted);max-width:560px;margin:0 auto 28px;position:relative;}
-.tech-badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;position:relative;}
-.tech-badge{
-  background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.25);
-  padding:8px 18px;border-radius:999px;font-size:13px;color:var(--accent);
-}
+.wish-btn:hover, .wish-btn.loved { border-color: var(--red); color: var(--red); background: rgba(255,79,106,.1); }
+.prod-img { height: 185px; overflow: hidden; background: var(--bg3); flex-shrink: 0; }
+.prod-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.prod-card:hover .prod-img img { transform: scale(1.08); }
+.prod-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+.prod-rating { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--orange); margin-bottom: 6px; }
+.prod-rating span { color: var(--text3); }
+.prod-body h3 { font-family: var(--fh); font-size: 15px; margin-bottom: 5px; line-height: 1.35; }
+.prod-desc { color: var(--text2); font-size: 13px; margin-bottom: 10px; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.prod-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 11px; }
+.ptag { background: rgba(0,200,255,.07); border: 1px solid rgba(0,200,255,.16); color: var(--accent); font-size: 11px; padding: 2px 8px; border-radius: 99px; }
+.prod-price { font-family: var(--fh); font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+.prod-price .orig-price { font-size: 12.5px; color: var(--text3); text-decoration: line-through; margin-left: 7px; font-weight: 400; }
+.prod-btns { display: flex; gap: 8px; }
+.btn-cart { flex: 1; padding: 9px 0; border-radius: 8px; background: var(--accent); color: #000; font-size: 13px; font-weight: 600; border: none; transition: .2s; }
+.btn-cart:hover { background: #22d4ff; }
+.btn-detail { padding: 9px 14px; border-radius: 8px; background: transparent; border: 1.5px solid var(--border2); color: var(--text2); font-size: 13px; transition: .2s; }
+.btn-detail:hover { border-color: var(--accent); color: var(--accent); }
+.no-results { text-align: center; padding: 60px 20px; color: var(--text2); grid-column: 1/-1; }
 
-/* ══════════════════════════════════
+/* =========================================
    SHIPPING SECTION
-══════════════════════════════════ */
-.shipping-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.shipping-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:0;}
-.shipping-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);padding:22px;text-align:center;transition:all .3s;
+========================================= */
+.ship-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.ship-card {
+  background: var(--bg3); border: 1.5px solid var(--border); border-radius: var(--r);
+  padding: 18px; text-align: center; transition: .3s;
 }
-.shipping-card:hover{border-color:var(--accent);}
-.shipping-logo{
-  font-family:var(--font-head);font-size:22px;font-weight:800;
-  color:var(--accent);margin-bottom:8px;
-}
-.shipping-card p{font-size:12.5px;color:var(--muted);margin-bottom:10px;}
-.shipping-time{
-  background:rgba(0,170,255,.1);border-radius:6px;
-  padding:4px 10px;font-size:12px;color:var(--accent);display:inline-block;
-}
-.est-cost{font-size:13px;font-weight:600;color:var(--text);margin-top:8px;}
+.ship-card:hover { border-color: var(--teal); }
+.ship-name { font-family: var(--fh); font-size: 20px; font-weight: 700; color: var(--teal); margin-bottom: 5px; }
+.ship-card p { font-size: 12.5px; color: var(--text2); margin-bottom: 9px; }
+.ship-eta { background: rgba(0,229,179,.1); border: 1px solid rgba(0,229,179,.2); color: var(--teal); border-radius: 6px; padding: 3px 9px; font-size: 12px; }
+.ship-fee { font-size: 13px; font-weight: 600; color: var(--text); margin-top: 7px; }
+.ship-note { background: rgba(0,200,255,.05); border: 1px solid rgba(0,200,255,.14); border-radius: 10px; padding: 14px 18px; font-size: 13.5px; color: var(--text2); line-height: 1.65; }
 
-/* ══════════════════════════════════
+/* =========================================
    PAYMENT SECTION
-══════════════════════════════════ */
-.payment-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
-  gap:12px;margin-top:0;
-}
-.payment-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:10px;padding:16px 10px;text-align:center;
-  font-family:var(--font-head);font-size:14px;font-weight:700;
-  transition:all .2s;cursor:default;
-}
-.payment-card:hover{border-color:var(--accent);color:var(--accent);}
-.payment-how{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:16px;margin-top:32px;
-}
-.payment-step{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);padding:22px;
-  display:flex;gap:16px;align-items:flex-start;transition:.3s;
-}
-.payment-step:hover{border-color:var(--accent);}
-.step-num{
-  width:36px;height:36px;border-radius:50%;
-  background:var(--accent);color:#fff;
-  font-family:var(--font-head);font-size:15px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.step-body h4{font-size:14px;margin-bottom:4px;}
-.step-body p{font-size:13px;color:var(--muted);}
+========================================= */
+.pay-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap: 9px; margin-bottom: 36px; }
+.pay-badge { background: var(--card); border: 1.5px solid var(--border); border-radius: 9px; padding: 13px 8px; text-align: center; font-family: var(--fh); font-size: 13px; font-weight: 600; transition: .2s; }
+.pay-badge:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ══════════════════════════════════
+/* =========================================
    TESTIMONIAL
-══════════════════════════════════ */
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.testi-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;transition:all .3s;
+========================================= */
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.testi-card {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: var(--r2);
+  padding: 22px; transition: .3s;
 }
-.testi-card:hover{border-color:rgba(0,170,255,.3);}
-.stars{color:var(--warn);font-size:14px;margin-bottom:12px;}
-.testi-card>p{color:var(--muted);font-size:14px;line-height:1.75;margin-bottom:20px;}
-.testi-author{display:flex;align-items:center;gap:12px;}
-.testi-av{
-  width:40px;height:40px;border-radius:50%;
-  background:var(--accent2);display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-head);font-size:13px;font-weight:700;flex-shrink:0;
+.testi-card:hover { border-color: rgba(0,200,255,.3); transform: translateY(-3px); }
+.testi-stars { color: var(--yellow); font-size: 13px; margin-bottom: 12px; letter-spacing: 1.5px; }
+.testi-text { color: var(--text2); font-size: 13.5px; line-height: 1.75; margin-bottom: 18px; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 11px; }
+.testi-av {
+  width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal));
+  display: flex; align-items: center; justify-content: center; font-family: var(--fh); font-size: 12.5px; font-weight: 700; color: #000; flex-shrink: 0;
 }
-.testi-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
-.testi-author strong{display:block;font-size:14px;}
-.testi-author span{font-size:12px;color:var(--muted);}
+.testi-author strong { display: block; font-size: 14px; }
+.testi-author span { font-size: 12px; color: var(--text2); }
 
-/* ══════════════════════════════════
+/* =========================================
    FAQ
-══════════════════════════════════ */
-.faq-wrap{max-width:760px;margin:0 auto;}
-.faq-item{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:10px;margin-bottom:10px;overflow:hidden;
-}
-.faq-q{
-  width:100%;background:none;border:none;text-align:left;
-  padding:18px 20px;cursor:pointer;color:var(--text);
-  display:flex;align-items:center;justify-content:space-between;
-  font-size:14px;font-weight:500;gap:12px;transition:.2s;
-}
-.faq-q:hover{color:var(--accent);}
-.faq-icon{
-  font-size:20px;color:var(--accent);flex-shrink:0;
-  transition:transform .3s;font-weight:300;
-}
-.faq-item.open .faq-icon{transform:rotate(45deg);}
-.faq-ans{
-  max-height:0;overflow:hidden;transition:max-height .35s ease;
-}
-.faq-item.open .faq-ans{max-height:300px;}
-.faq-ans-inner{padding:0 20px 18px;color:var(--muted);font-size:14px;line-height:1.75;}
+========================================= */
+.faq-list { max-width: 700px; margin: 0 auto; }
+.faq-item { background: var(--card); border: 1.5px solid var(--border); border-radius: var(--r); margin-bottom: 9px; overflow: hidden; transition: .3s; }
+.faq-item.open { border-color: rgba(0,200,255,.3); }
+.faq-q { width: 100%; background: none; border: none; padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: var(--text); font-size: 14px; font-weight: 500; gap: 12px; text-align: left; transition: .2s; }
+.faq-q:hover { color: var(--accent); }
+.faq-icon { font-size: 20px; color: var(--accent); flex-shrink: 0; transition: transform .3s; line-height: 1; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-ans { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.faq-item.open .faq-ans { max-height: 220px; }
+.faq-ans-inner { padding: 0 18px 16px; color: var(--text2); font-size: 13.5px; line-height: 1.75; }
 
-/* ══════════════════════════════════
+/* =========================================
    FOOTER
-══════════════════════════════════ */
-footer{
-  background:var(--bg2);border-top:1px solid var(--border);
-  padding:60px 24px 32px;
-}
-.footer-inner{max-width:1280px;margin:0 auto;}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:48px;}
-.footer-brand h2{font-family:var(--font-head);font-size:22px;margin-bottom:12px;}
-.footer-brand h2 span{color:var(--accent);}
-.footer-brand p{color:var(--muted);font-size:13.5px;line-height:1.75;}
-.footer-col h3{font-family:var(--font-head);font-size:14px;margin-bottom:16px;color:var(--accent);}
-.footer-col a{display:block;color:var(--muted);font-size:13.5px;margin-bottom:10px;transition:.2s;}
-.footer-col a:hover{color:var(--accent);}
-.footer-bottom{
-  border-top:1px solid var(--border);padding-top:24px;
-  text-align:center;font-size:13px;color:var(--muted);
-}
+========================================= */
+footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 52px 24px 26px; }
+.footer-inner { max-width: 1320px; margin: 0 auto; }
+.footer-cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 44px; margin-bottom: 36px; }
+.footer-brand h2 { font-family: var(--fh); font-size: 20px; margin-bottom: 10px; }
+.footer-brand p { color: var(--text2); font-size: 13px; line-height: 1.75; }
+.footer-col h3 { font-family: var(--fh); font-size: 12px; color: var(--accent); margin-bottom: 14px; text-transform: uppercase; letter-spacing: .6px; }
+.footer-col a { display: block; color: var(--text2); font-size: 13.5px; margin-bottom: 8px; transition: .2s; }
+.footer-col a:hover { color: var(--accent); }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 20px; text-align: center; font-size: 12.5px; color: var(--text3); }
 
-/* ══════════════════════════════════
-   CART SIDEBAR
-══════════════════════════════════ */
-.overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.6);
-  z-index:950;opacity:0;pointer-events:none;transition:.3s;
-  backdrop-filter:blur(4px);
+/* =========================================
+   OVERLAY & SIDEBARS
+========================================= */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 950; opacity: 0; pointer-events: none; transition: .3s; backdrop-filter: blur(6px); }
+.overlay.show { opacity: 1; pointer-events: auto; }
+.sidebar {
+  position: fixed; top: 0; right: 0; bottom: 0; width: 430px; max-width: 100vw;
+  background: var(--bg2); border-left: 1px solid var(--border); z-index: 960;
+  display: flex; flex-direction: column; transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1);
 }
-.overlay.open{opacity:1;pointer-events:auto;}
-.sidebar{
-  position:fixed;top:0;right:0;bottom:0;width:420px;max-width:100vw;
-  background:var(--bg2);border-left:1px solid var(--border);
-  z-index:960;display:flex;flex-direction:column;
-  transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+.sidebar.show { transform: none; }
+.sb-head {
+  padding: 18px 22px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
 }
-.sidebar.open{transform:none;}
-.sidebar-head{
-  padding:20px 24px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
+.sb-head h3 { font-family: var(--fh); font-size: 17px; }
+.sb-close {
+  width: 30px; height: 30px; border-radius: 7px; background: var(--bg3);
+  border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--text2); transition: .2s; cursor: pointer;
 }
-.sidebar-head h3{font-family:var(--font-head);font-size:18px;}
-.close-btn{
-  width:32px;height:32px;border-radius:8px;background:var(--card);
-  border:1px solid var(--border);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;color:var(--muted);transition:.2s;
-}
-.close-btn:hover{border-color:var(--danger);color:var(--danger);}
-.sidebar-body{flex:1;overflow-y:auto;padding:20px 24px;}
-.cart-empty-msg{
-  text-align:center;padding:60px 0;color:var(--muted);font-size:14px;
-}
-.cart-empty-msg span{font-size:40px;display:block;margin-bottom:12px;}
-.cart-item{
-  display:flex;gap:14px;align-items:flex-start;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:10px;padding:14px;margin-bottom:12px;
-}
-.cart-item-img{
-  width:60px;height:60px;border-radius:8px;
-  object-fit:cover;flex-shrink:0;background:var(--bg3);
-}
-.cart-item-info{flex:1;}
-.cart-item-info h4{font-size:13.5px;margin-bottom:4px;}
-.cart-item-info .item-price{color:var(--accent);font-size:13px;font-weight:600;}
-.qty-row{display:flex;align-items:center;gap:8px;margin-top:8px;}
-.qty-btn{
-  width:26px;height:26px;border-radius:6px;
-  background:var(--bg3);border:1px solid var(--border);
-  cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;
-  transition:.2s;
-}
-.qty-btn:hover{border-color:var(--accent);color:var(--accent);}
-.qty-val{font-size:14px;min-width:20px;text-align:center;}
-.remove-item{
-  background:none;border:none;cursor:pointer;
-  color:var(--muted);font-size:18px;transition:.2s;
-  margin-left:auto;
-}
-.remove-item:hover{color:var(--danger);}
+.sb-close:hover { border-color: var(--red); color: var(--red); }
+.sb-body { flex: 1; overflow-y: auto; padding: 18px 22px; }
+.sb-foot { padding: 16px 22px; border-top: 1px solid var(--border); background: var(--bg2); flex-shrink: 0; }
 
-/* Shipping options in sidebar */
-.shipping-select{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:10px;padding:16px;margin-bottom:16px;
-}
-.shipping-select h4{font-size:13.5px;margin-bottom:12px;color:var(--muted);}
-.ship-opt{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 12px;border-radius:8px;cursor:pointer;
-  border:1.5px solid transparent;margin-bottom:8px;
-  background:var(--bg3);transition:.2s;
-}
-.ship-opt:last-child{margin-bottom:0;}
-.ship-opt input[type=radio]{accent-color:var(--accent);}
-.ship-opt.selected{border-color:var(--accent);}
-.ship-opt label{
-  flex:1;cursor:pointer;font-size:13px;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.ship-opt label span{color:var(--muted);font-size:12px;}
-.ship-opt label strong{color:var(--text);}
+/* Empty state */
+.empty-state { text-align: center; padding: 55px 20px; color: var(--text2); }
+.empty-state .ei { font-size: 42px; margin-bottom: 12px; }
+.empty-state p { font-size: 14px; }
 
-.sidebar-foot{
-  padding:16px 24px;border-top:1px solid var(--border);
-  background:var(--bg2);
+/* Cart Item */
+.cart-item { display: flex; gap: 12px; background: var(--bg3); border: 1.5px solid var(--border); border-radius: var(--r); padding: 12px; margin-bottom: 9px; align-items: flex-start; }
+.ci-img { width: 56px; height: 56px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: var(--card); }
+.ci-info { flex: 1; min-width: 0; }
+.ci-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; line-height: 1.3; }
+.ci-price { color: var(--accent); font-size: 13px; font-weight: 600; }
+.qty-ctrl { display: flex; align-items: center; gap: 8px; margin-top: 7px; }
+.qty-btn {
+  width: 26px; height: 26px; border-radius: 6px; background: var(--card);
+  border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: var(--text); transition: .2s; cursor: pointer;
 }
-.total-row{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:6px;font-size:13.5px;color:var(--muted);
-}
-.total-row.grand{font-size:16px;color:var(--text);font-weight:700;margin-bottom:16px;}
-.total-row strong{color:var(--accent);}
-.sidebar-foot .btn{width:100%;justify-content:center;font-size:14px;padding:14px;}
+.qty-btn:hover { border-color: var(--accent); color: var(--accent); }
+.qty-num { font-size: 13.5px; min-width: 20px; text-align: center; font-weight: 600; }
+.ci-del { background: none; border: none; color: var(--text3); font-size: 17px; transition: .2s; padding: 4px; flex-shrink: 0; cursor: pointer; }
+.ci-del:hover { color: var(--red); }
 
-/* ══════════════════════════════════
-   WISHLIST SIDEBAR
-══════════════════════════════════ */
-/* Reuses .sidebar styles, just different content */
+/* Cart shipping selector */
+.ship-sel-box { background: var(--bg3); border: 1.5px solid var(--border); border-radius: var(--r); padding: 14px; margin-bottom: 13px; }
+.ship-sel-box h4 { font-size: 13px; color: var(--text2); margin-bottom: 10px; }
+.ship-opt { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 7px; border: 1.5px solid transparent; background: var(--card); margin-bottom: 6px; cursor: pointer; transition: .2s; }
+.ship-opt:last-child { margin-bottom: 0; }
+.ship-opt:hover { border-color: rgba(0,200,255,.3); }
+.ship-opt.picked { border-color: var(--accent); background: rgba(0,200,255,.05); }
+.ship-opt input[type=radio] { accent-color: var(--accent); flex-shrink: 0; }
+.ship-opt-lbl { flex: 1; display: flex; justify-content: space-between; align-items: center; font-size: 13px; cursor: pointer; }
+.ship-opt-lbl em { color: var(--text3); font-size: 12px; font-style: normal; }
 
-/* ══════════════════════════════════
-   PRODUCT MODAL
-══════════════════════════════════ */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.7);
-  z-index:970;display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:.3s;padding:20px;
-  backdrop-filter:blur(6px);
-}
-.modal-overlay.open{opacity:1;pointer-events:auto;}
-.modal-box{
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:20px;width:100%;max-width:560px;
-  max-height:88vh;overflow-y:auto;
-  transform:scale(.95) translateY(10px);
-  transition:transform .3s;position:relative;
-}
-.modal-overlay.open .modal-box{transform:none;}
-.modal-close{
-  position:absolute;top:16px;right:16px;z-index:2;
-  width:32px;height:32px;border-radius:8px;
-  background:var(--card);border:1px solid var(--border);
-  cursor:pointer;font-size:16px;color:var(--muted);transition:.2s;
-  display:flex;align-items:center;justify-content:center;
-}
-.modal-close:hover{border-color:var(--danger);color:var(--danger);}
-.modal-img{
-  width:100%;height:240px;object-fit:cover;
-  border-radius:18px 18px 0 0;
-}
-.modal-body{padding:24px;}
-.modal-body h2{font-family:var(--font-head);font-size:22px;margin-bottom:10px;}
-.modal-body .modal-price{
-  font-family:var(--font-head);font-size:28px;
-  color:var(--accent);font-weight:700;margin:12px 0;
-}
-.modal-body p{color:var(--muted);font-size:14px;line-height:1.75;margin-bottom:16px;}
-.spec-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
-.spec-chip{
-  background:rgba(0,170,255,.08);border:1px solid rgba(0,170,255,.2);
-  color:var(--accent);font-size:12px;padding:4px 12px;border-radius:999px;
-}
-.modal-actions{display:flex;gap:10px;}
-.modal-actions .btn{flex:1;justify-content:center;}
+/* Cart totals */
+.total-row { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--text2); margin-bottom: 5px; }
+.total-row.grand { font-size: 16px; font-weight: 700; color: var(--text); margin: 10px 0 14px; }
+.total-row.grand strong { color: var(--accent); }
 
-/* ══════════════════════════════════
-   PAYMENT MODAL
-══════════════════════════════════ */
-.pay-modal-box{max-width:480px;}
-.pay-modal-box .modal-body{padding:28px;}
-.pay-step{display:none;}
-.pay-step.active{display:block;}
-.form-group{margin-bottom:16px;}
-.form-group label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;}
-.form-control{
-  width:100%;background:var(--card);border:1.5px solid var(--border);
-  border-radius:8px;padding:10px 14px;color:var(--text);font-size:14px;
-  outline:none;transition:.2s;
+/* =========================================
+   MODALS
+========================================= */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 970; display: flex; align-items: center; justify-content: center;
+  padding: 16px; background: rgba(0,0,0,.8); backdrop-filter: blur(8px);
+  opacity: 0; pointer-events: none; transition: .3s;
 }
-.form-control:focus{border-color:var(--accent);}
-select.form-control{cursor:pointer;}
-.order-summary{
-  background:var(--bg3);border:1px solid var(--border);
-  border-radius:10px;padding:16px;margin-bottom:16px;
+.modal-overlay.show { opacity: 1; pointer-events: auto; }
+.modal-box {
+  background: var(--bg2); border: 1.5px solid var(--border); border-radius: var(--r3);
+  width: 100%; position: relative; transform: scale(.94) translateY(14px);
+  transition: .3s; max-height: 92vh; overflow-y: auto;
 }
-.order-summary-row{
-  display:flex;justify-content:space-between;
-  font-size:13.5px;padding:5px 0;
+.modal-overlay.show .modal-box { transform: none; }
+.modal-close {
+  position: absolute; top: 14px; right: 14px; z-index: 5;
+  width: 30px; height: 30px; background: var(--bg3); border: 1.5px solid var(--border);
+  border-radius: 7px; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--text2); transition: .2s; cursor: pointer;
 }
-.order-summary-row.total{
-  font-weight:700;font-size:15px;
-  border-top:1px solid var(--border);margin-top:8px;padding-top:12px;
-  color:var(--accent);
-}
-.bank-info{
-  background:var(--bg3);border:1.5px solid var(--accent);
-  border-radius:10px;padding:16px;margin:16px 0;
-}
-.bank-info h4{color:var(--accent);margin-bottom:10px;font-size:14px;}
-.bank-row{
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:13.5px;margin-bottom:6px;
-}
-.copy-btn{
-  background:rgba(0,170,255,.15);border:1px solid rgba(0,170,255,.3);
-  color:var(--accent);border-radius:6px;padding:3px 10px;
-  font-size:11px;cursor:pointer;transition:.2s;
-}
-.copy-btn:hover{background:var(--accent);color:#fff;}
-.qris-img{width:100%;border-radius:10px;border:1px solid var(--border);}
-.upload-area{
-  border:2px dashed var(--border);border-radius:10px;
-  padding:24px;text-align:center;cursor:pointer;transition:.3s;
-}
-.upload-area:hover{border-color:var(--accent);}
-.upload-area input{display:none;}
-.upload-area p{font-size:13.5px;color:var(--muted);margin-top:8px;}
-.progress-steps{
-  display:flex;align-items:center;margin-bottom:28px;gap:0;
-}
-.ps{
-  flex:1;text-align:center;font-size:11.5px;color:var(--muted);
-  position:relative;
-}
-.ps::after{
-  content:'';position:absolute;top:16px;right:-50%;
-  width:100%;height:2px;background:var(--border);z-index:0;
-}
-.ps:last-child::after{display:none;}
-.ps-dot{
-  width:32px;height:32px;border-radius:50%;
-  background:var(--card);border:2px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;margin:0 auto 6px;position:relative;z-index:1;font-weight:700;
-  transition:.3s;
-}
-.ps.active .ps-dot{background:var(--accent);border-color:var(--accent);color:#fff;}
-.ps.done .ps-dot{background:var(--success);border-color:var(--success);color:#fff;}
-.ps.done::after,.ps.active::after{background:var(--accent);}
+.modal-close:hover { border-color: var(--red); color: var(--red); }
 
-/* ══════════════════════════════════
+/* Product Detail Modal */
+.detail-modal { max-width: 620px; }
+.detail-img { width: 100%; height: 250px; object-fit: cover; border-radius: 20px 20px 0 0; }
+.detail-body { padding: 24px; }
+.detail-title { font-family: var(--fh); font-size: 22px; margin-bottom: 4px; }
+.detail-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; color: var(--orange); font-size: 13.5px; }
+.detail-rating span { color: var(--text2); font-size: 12.5px; }
+.detail-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+.detail-price { font-family: var(--fh); font-size: 26px; font-weight: 700; color: var(--accent); }
+.detail-orig { font-size: 14px; color: var(--text3); text-decoration: line-through; }
+.detail-desc { color: var(--text2); font-size: 14px; line-height: 1.75; margin-bottom: 16px; }
+.specs-title { font-size: 12px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 10px; }
+.specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 18px; }
+.spec-item { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 8px 11px; font-size: 13px; }
+.spec-k { display: block; color: var(--text3); font-size: 11px; margin-bottom: 2px; }
+.spec-v { font-weight: 600; color: var(--text); font-size: 13px; }
+.detail-qty-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.detail-qty-row .qty-btn { width: 34px; height: 34px; font-size: 16px; }
+.detail-qty-row .qty-num { font-size: 15px; min-width: 26px; }
+.stock-tag { background: rgba(0,224,150,.1); border: 1px solid rgba(0,224,150,.25); color: var(--green); border-radius: 6px; padding: 3px 10px; font-size: 12px; }
+.detail-btns { display: flex; gap: 9px; }
+.detail-btns .btn { flex: 1; }
+
+/* =========================================
+   CHECKOUT MODAL
+========================================= */
+.ck-modal { max-width: 560px; }
+.ck-header { padding: 22px 26px 0; }
+.ck-header h2 { font-family: var(--fh); font-size: 20px; margin-bottom: 4px; }
+.ck-header p { color: var(--text2); font-size: 13.5px; }
+.ck-body { padding: 18px 26px 26px; }
+
+/* Progress */
+.prog-bar { display: flex; align-items: center; margin-bottom: 26px; }
+.prog-step { flex: 1; text-align: center; position: relative; }
+.prog-step::after { content: ''; position: absolute; top: 18px; left: 50%; right: -50%; height: 2px; background: var(--border); z-index: 0; }
+.prog-step:last-child::after { display: none; }
+.prog-step.done::after, .prog-step.act::after { background: var(--accent); }
+.ps-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; margin: 0 auto 6px; position: relative; z-index: 1; transition: .3s; }
+.prog-step.act .ps-dot { background: var(--accent); border-color: var(--accent); color: #000; box-shadow: 0 0 0 4px var(--accent-glow); }
+.prog-step.done .ps-dot { background: var(--green); border-color: var(--green); color: #000; }
+.ps-lbl { font-size: 11px; color: var(--text3); }
+.prog-step.act .ps-lbl, .prog-step.done .ps-lbl { color: var(--text); }
+
+.ck-step { display: none; }
+.ck-step.on { display: block; }
+
+/* Summary box in checkout */
+.ck-summary { background: var(--bg3); border: 1.5px solid var(--border); border-radius: var(--r); padding: 13px 15px; margin-bottom: 16px; }
+.ck-sum-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text2); padding: 3px 0; }
+.ck-sum-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: 700; color: var(--text); padding: 9px 0 3px; border-top: 1px solid var(--border); margin-top: 7px; }
+.ck-sum-total strong { color: var(--accent); }
+
+/* Midtrans Block */
+.mt-header { background: linear-gradient(135deg, #003d7a, #005eb8); border-radius: var(--r); padding: 16px; margin-bottom: 16px; text-align: center; }
+.mt-logo { font-family: var(--fh); font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.mt-logo em { color: #69dbff; font-style: normal; }
+.mt-sub { font-size: 11.5px; color: rgba(255,255,255,.6); }
+.mt-amount { background: rgba(255,255,255,.1); border-radius: 7px; padding: 9px; margin-top: 9px; }
+.mt-amount p { font-size: 11.5px; color: rgba(255,255,255,.65); margin-bottom: 2px; }
+.mt-amount strong { font-family: var(--fh); font-size: 20px; color: #fff; }
+
+/* Pay method tabs */
+.pay-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 14px; }
+.pay-opt {
+  background: var(--bg3); border: 1.5px solid var(--border); border-radius: var(--r);
+  padding: 13px; cursor: pointer; transition: .2s; text-align: center;
+}
+.pay-opt:hover { border-color: var(--accent); }
+.pay-opt.sel { border-color: var(--accent); background: rgba(0,200,255,.06); }
+.po-icon { font-size: 22px; margin-bottom: 5px; }
+.po-name { font-size: 13px; font-weight: 600; }
+.po-desc { font-size: 11.5px; color: var(--text2); margin-top: 2px; }
+
+/* Bank detail */
+.bank-box { background: var(--bg3); border: 1.5px solid var(--accent); border-radius: var(--r); padding: 15px; margin-bottom: 12px; }
+.bank-box h4 { color: var(--accent); font-size: 13.5px; margin-bottom: 11px; }
+.bank-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-size: 13.5px; border-bottom: 1px solid var(--border); }
+.bank-row:last-child { border: none; padding-top: 8px; margin-top: 3px; }
+.bank-key { color: var(--text2); }
+.bank-val { font-weight: 600; color: var(--text); }
+.copy-btn { background: rgba(0,200,255,.1); border: 1px solid rgba(0,200,255,.25); color: var(--accent); border-radius: 6px; padding: 3px 9px; font-size: 11px; cursor: pointer; transition: .2s; }
+.copy-btn:hover { background: var(--accent); color: #000; }
+
+/* QRIS */
+.qris-wrap { text-align: center; padding: 14px; }
+.qris-mock {
+  width: 160px; height: 160px; background: linear-gradient(135deg, var(--bg3), var(--card));
+  border: 2px solid var(--border2); border-radius: 12px; margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  gap: 6px; font-size: 12.5px; color: var(--text3);
+}
+.qris-wrap p { font-size: 13px; color: var(--text2); }
+
+/* E-wallet */
+.ew-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 13px; }
+.ew-opt { background: var(--bg3); border: 1.5px solid var(--border); border-radius: var(--r); padding: 13px; cursor: pointer; transition: .2s; text-align: center; }
+.ew-opt:hover, .ew-opt.sel { border-color: var(--teal); background: rgba(0,229,179,.05); }
+.ew-name { font-weight: 700; font-size: 14px; }
+.ew-no { font-size: 12px; color: var(--text2); margin-top: 3px; }
+
+/* Upload proof */
+.upload-zone { border: 2px dashed var(--border2); border-radius: var(--r); padding: 26px; text-align: center; cursor: pointer; transition: .3s; }
+.upload-zone:hover { border-color: var(--accent); background: rgba(0,200,255,.03); }
+.upload-zone input { display: none; }
+.uz-icon { font-size: 36px; margin-bottom: 9px; }
+.upload-zone p { font-size: 13.5px; color: var(--text2); }
+.upload-zone .uz-hint { font-size: 12px; color: var(--text3); margin-top: 4px; }
+.proof-prev { margin-top: 12px; display: none; }
+.proof-prev img { width: 100%; border-radius: 9px; border: 1.5px solid var(--border); max-height: 170px; object-fit: cover; }
+.proof-ok { font-size: 12.5px; color: var(--green); margin-top: 6px; display: flex; align-items: center; gap: 5px; }
+
+/* =========================================
    RECEIPT MODAL
-══════════════════════════════════ */
-.receipt-box{max-width:520px;}
-.receipt-head{
-  background:linear-gradient(135deg,var(--accent2),var(--accent));
-  padding:24px;border-radius:18px 18px 0 0;text-align:center;
+========================================= */
+.receipt-modal { max-width: 520px; }
+.receipt-hdr {
+  background: linear-gradient(135deg, #002d5a 0%, #005eb8 60%, var(--teal) 100%);
+  padding: 26px; border-radius: 20px 20px 0 0; text-align: center;
 }
-.receipt-head h2{font-family:var(--font-head);font-size:22px;color:#fff;}
-.receipt-head p{color:rgba(255,255,255,.8);font-size:13px;margin-top:4px;}
-.receipt-checkmark{font-size:48px;margin-bottom:8px;}
-.receipt-body{padding:24px;}
-.receipt-no{
-  text-align:center;font-size:13px;color:var(--muted);margin-bottom:20px;
-}
-.receipt-no strong{color:var(--accent);font-family:var(--font-head);}
-.receipt-table{width:100%;border-collapse:collapse;margin-bottom:16px;}
-.receipt-table th{
-  text-align:left;font-size:12px;color:var(--muted);
-  padding:6px 0;font-weight:500;border-bottom:1px solid var(--border);
-}
-.receipt-table td{
-  padding:10px 0;font-size:13.5px;
-  border-bottom:1px solid rgba(26,58,92,.4);
-}
-.receipt-table td:last-child{text-align:right;color:var(--text);}
-.receipt-total-row{
-  display:flex;justify-content:space-between;
-  font-size:16px;font-weight:700;
-  background:rgba(0,170,255,.08);border-radius:8px;
-  padding:12px 14px;margin:12px 0;
-}
-.receipt-total-row span{color:var(--accent);}
-.receipt-actions{display:flex;gap:10px;margin-top:20px;}
-.receipt-actions .btn{flex:1;justify-content:center;}
-.receipt-stamp{
-  text-align:center;margin:16px 0 8px;
-}
-.receipt-stamp .stamp{
-  display:inline-block;
-  border:3px solid var(--success);
-  color:var(--success);
-  border-radius:12px;
-  padding:8px 24px;
-  font-family:var(--font-head);
-  font-size:18px;
-  font-weight:800;
-  letter-spacing:2px;
-  transform:rotate(-5deg);
-}
+.receipt-hdr .check { font-size: 48px; margin-bottom: 7px; }
+.receipt-hdr h2 { font-family: var(--fh); font-size: 21px; color: #fff; margin-bottom: 3px; }
+.receipt-hdr p { color: rgba(255,255,255,.7); font-size: 13px; }
+.receipt-body { padding: 24px; }
+.receipt-meta { background: var(--bg3); border: 1.5px solid var(--border); border-radius: var(--r); padding: 13px 15px; margin-bottom: 15px; }
+.rm-row { display: flex; justify-content: space-between; font-size: 13.5px; padding: 3.5px 0; border-bottom: 1px solid rgba(22,52,80,.3); }
+.rm-row:last-child { border: none; }
+.rm-k { color: var(--text2); }
+.rm-v { font-weight: 600; color: var(--text); text-align: right; max-width: 210px; font-size: 13px; }
+.receipt-tbl { width: 100%; border-collapse: collapse; margin-bottom: 13px; font-size: 13px; }
+.receipt-tbl th { text-align: left; color: var(--text3); font-size: 11.5px; font-weight: 500; padding: 5px 0; border-bottom: 1px solid var(--border); }
+.receipt-tbl td { padding: 8px 0; border-bottom: 1px solid rgba(22,52,80,.3); }
+.receipt-tbl td:last-child { text-align: right; font-weight: 600; }
+.receipt-total-box { background: rgba(0,200,255,.07); border: 1.5px solid rgba(0,200,255,.2); border-radius: var(--r); padding: 12px 15px; margin-bottom: 13px; }
+.rt-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+.rt-grand { display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; color: var(--text); padding-top: 8px; border-top: 1px solid rgba(0,200,255,.2); margin-top: 6px; }
+.rt-grand strong { color: var(--accent); }
+.stamp-wrap { text-align: center; margin: 12px 0; }
+.stamp { display: inline-block; border: 3px solid var(--green); color: var(--green); border-radius: 8px; padding: 6px 24px; font-family: var(--fh); font-size: 22px; font-weight: 700; letter-spacing: 3px; transform: rotate(-4deg); box-shadow: 0 0 14px var(--teal-glow); }
+.receipt-btns { display: flex; gap: 10px; margin-top: 16px; }
+.receipt-btns .btn { flex: 1; }
 
-/* ══════════════════════════════════
+/* =========================================
    TOAST
-══════════════════════════════════ */
-.toast{
-  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--card);border:1px solid var(--border);
-  border-radius:10px;padding:12px 20px;font-size:13.5px;
-  z-index:1000;opacity:0;transition:all .3s;pointer-events:none;
-  display:flex;align-items:center;gap:8px;white-space:nowrap;
-  box-shadow:var(--sh);
+========================================= */
+.toast {
+  position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(12px);
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 9px;
+  padding: 10px 20px; font-size: 13.5px; z-index: 1100; opacity: 0; pointer-events: none;
+  transition: .3s; display: flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: var(--sh);
 }
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.toast.success{border-color:var(--success);color:var(--success);}
-.toast.error{border-color:var(--danger);color:var(--danger);}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.ok { border-color: var(--green); color: var(--green); }
+.toast.err { border-color: var(--red); color: var(--red); }
+.toast.info { border-color: var(--accent); color: var(--accent); }
 
-/* ══════════════════════════════════
-   WA FLOAT
-══════════════════════════════════ */
-.wa-float{
-  position:fixed;bottom:28px;right:28px;z-index:800;
-  background:#25d366;color:#fff;
-  width:56px;height:56px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:26px;box-shadow:0 4px 20px rgba(37,211,102,.4);
-  transition:all .3s;
+/* WA float button */
+.wa-float {
+  position: fixed; bottom: 26px; right: 26px; z-index: 800;
+  width: 54px; height: 54px; border-radius: 50%; background: #25d366;
+  display: flex; align-items: center; justify-content: center; font-size: 24px;
+  box-shadow: 0 4px 20px rgba(37,211,102,.4); transition: .3s;
 }
-.wa-float:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,.5);}
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(37,211,102,.5); }
 
-/* ══════════════════════════════════
+/* Tech banner */
+.tech-banner {
+  background: var(--bg3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 68px 24px; text-align: center; position: relative; overflow: hidden;
+}
+.tech-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,200,255,.06), transparent); }
+.tech-banner h2 { font-family: var(--fh); font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; margin-bottom: 12px; position: relative; }
+.tech-banner p { color: var(--text2); max-width: 520px; margin: 0 auto 24px; position: relative; font-size: 15px; }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; position: relative; }
+.tech-chip { background: rgba(0,200,255,.07); border: 1px solid rgba(0,200,255,.18); color: var(--accent); padding: 7px 17px; border-radius: 99px; font-size: 12.5px; }
+
+/* =========================================
    RESPONSIVE
-══════════════════════════════════ */
-@media(max-width:900px){
-  .nav-links,.search-box{display:none;}
-  .hamburger{display:flex;}
-  .hero-inner{grid-template-columns:1fr;}
-  .hero-image{display:none;}
-  .info-grid{grid-template-columns:1fr;}
-  .testi-grid{grid-template-columns:1fr;}
-  .footer-grid{grid-template-columns:1fr;}
+========================================= */
+@media (max-width: 960px) {
+  .nav-links, .search-box { display: none; }
+  .ham { display: flex; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .feat-grid, .testi-grid { grid-template-columns: 1fr; }
+  .footer-cols { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .flow-steps { flex-direction: column; gap: 18px; }
+  .flow-steps::before { display: none; }
 }
-@media(max-width:640px){
-  .sidebar{width:100%;}
-  .payment-how{grid-template-columns:1fr;}
+@media (max-width: 600px) {
+  .sidebar { width: 100%; }
+  .pay-opts, .ew-grid, .specs-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════ NAVBAR ═══════════════════════════════════════ -->
+<!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <div class="nav-inner">
-    <div class="logo">Drainio<span>Mart</span></div>
+    <div class="logo">Drainio<span>Mart</span> <sub>IoT</sub></div>
     <div class="nav-links">
       <a href="#hero">Beranda</a>
-      <a href="#about">Tentang</a>
       <a href="#products">Produk</a>
       <a href="#shipping">Ekspedisi</a>
-      <a href="#payment">Pembayaran</a>
+      <a href="#payment-info">Pembayaran</a>
       <a href="#testimonials">Testimoni</a>
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-right">
       <div class="search-box">
-        <span style="font-size:14px;color:var(--muted)">🔍</span>
-        <input type="text" id="searchInput" placeholder="Cari produk IoT..." oninput="filterProducts()">
+        <span style="color:var(--text3);font-size:14px">🔍</span>
+        <input type="text" id="searchInput" placeholder="Cari produk IoT..." oninput="applyFilters()">
       </div>
-      <button class="icon-btn" onclick="openWishlist()" title="Wishlist">
-        ♡ <span id="wishlistCount">0</span>
-      </button>
-      <button class="icon-btn" onclick="openCart()" title="Keranjang">
-        🛒 <span id="cartCount" class="badge">0</span>
-      </button>
+      <button class="icon-btn" onclick="openWishlist()">♡ <span id="wCount">0</span></button>
+      <button class="icon-btn" onclick="openCart()">🛒 <span class="badge" id="cCount">0</span></button>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="ham" id="hamBtn" onclick="toggleMobNav()"><span></span><span></span><span></span></button>
   </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#hero" onclick="toggleMenu()">Beranda</a>
-    <a href="#about" onclick="toggleMenu()">Tentang</a>
-    <a href="#products" onclick="toggleMenu()">Produk</a>
-    <a href="#shipping" onclick="toggleMenu()">Ekspedisi</a>
-    <a href="#payment" onclick="toggleMenu()">Pembayaran</a>
-    <a href="#testimonials" onclick="toggleMenu()">Testimoni</a>
-    <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <div class="mob-nav" id="mobNav">
+    <a href="#hero" onclick="closeMobNav()">🏠 Beranda</a>
+    <a href="#products" onclick="closeMobNav()">📦 Produk</a>
+    <a href="#shipping" onclick="closeMobNav()">🚚 Ekspedisi</a>
+    <a href="#payment-info" onclick="closeMobNav()">💳 Pembayaran</a>
+    <a href="#faq" onclick="closeMobNav()">❓ FAQ</a>
+    <a href="javascript:void(0)" onclick="openWishlist();closeMobNav()">♡ Wishlist (<span id="wCountM">0</span>)</a>
+    <a href="javascript:void(0)" onclick="openCart();closeMobNav()">🛒 Keranjang (<span id="cCountM">0</span>)</a>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-grid-lines"></div>
+  <div class="hero-grid"></div>
   <div class="hero-inner">
     <div class="reveal">
-      <div class="hero-badge">🚀 Platform IoT Drainase #1 Indonesia</div>
-      <h1>Smart <span>Drainage</span><br>IoT Marketplace</h1>
-      <p>Platform penjualan perangkat IoT teknik sipil modern untuk monitoring drainase, pengendalian penyumbatan saluran, smart water management, dan sistem infrastruktur cerdas.</p>
-      <div class="btn-row">
-        <a href="#products" class="btn btn-primary">🛒 Lihat Produk</a>
-        <a href="#iot" class="btn btn-outline">📡 Pelajari Teknologi</a>
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Platform IoT Drainase #1 Indonesia</div>
+      <h1>Smart <span class="hl">Drainage</span><br>IoT Marketplace</h1>
+      <p>Platform penjualan perangkat IoT teknik sipil untuk monitoring drainase, pengendalian penyumbatan, smart water management, dan infrastruktur cerdas.</p>
+      <div class="hero-cta">
+        <a href="#products" class="btn btn-primary btn-lg">🛒 Belanja Sekarang</a>
+        <a href="#about" class="btn btn-secondary btn-lg">📡 Pelajari Lebih</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><strong>120+</strong><span>Produk IoT</span></div>
-        <div class="hero-stat"><strong>850+</strong><span>Pelanggan</span></div>
-        <div class="hero-stat"><strong>50+</strong><span>Kota</span></div>
+        <div class="stat"><span class="stat-val">120+</span><span class="stat-lbl">Produk IoT</span></div>
+        <div class="stat"><span class="stat-val">850+</span><span class="stat-lbl">Pelanggan</span></div>
+        <div class="stat"><span class="stat-val">50+</span><span class="stat-lbl">Kota</span></div>
+        <div class="stat"><span class="stat-val">1 Thn</span><span class="stat-lbl">Garansi</span></div>
       </div>
     </div>
-    <div class="hero-image reveal">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop" alt="Smart IoT">
-      <div class="live-badge"><span class="live-dot"></span> Live Monitoring Aktif</div>
+    <div class="hero-visual reveal">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop" alt="Smart IoT Drainage" onerror="this.style.display='none'">
+      <div class="hero-live"><span class="live-dot"></span> Live Monitoring Aktif</div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════ ABOUT ═══════════════════════════════════════ -->
-<div class="section" id="about">
-  <div class="sec-head reveal">
-    <h2>Solusi Infrastruktur Modern</h2>
-    <p>Sistem berbasis IoT untuk teknik sipil dan smart drainage monitoring.</p>
-    <div class="line"></div>
-  </div>
-  <div class="info-grid">
-    <div class="info-card reveal">
-      <div class="info-icon">📡</div>
-      <h3>Smart Monitoring</h3>
-      <p>Pantau kondisi drainase, debit air, dan potensi penyumbatan secara real-time menggunakan sensor modern dan dashboard otomatis.</p>
-    </div>
-    <div class="info-card reveal">
-      <div class="info-icon">⚙️</div>
-      <h3>Efisiensi Maintenance</h3>
-      <p>Mengurangi biaya perawatan saluran dengan sistem prediksi dan notifikasi otomatis saat terjadi penyumbatan.</p>
-    </div>
-    <div class="info-card reveal">
-      <div class="info-icon">🔗</div>
-      <h3>Integrasi IoT</h3>
-      <p>Seluruh perangkat kompatibel dengan ESP32, Arduino, cloud monitoring, dan aplikasi mobile.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ PRODUCTS ═══════════════════════════════════════ -->
-<div class="section" id="products">
-  <div class="sec-head reveal">
-    <h2>Produk Unggulan</h2>
-    <p>Peralatan IoT teknik sipil dengan desain modern dan performa tinggi.</p>
-    <div class="line"></div>
-  </div>
-  <div class="filter-tabs">
-    <button class="filter-tab active" onclick="setFilter('semua',this)">Semua</button>
-    <button class="filter-tab" onclick="setFilter('sensor',this)">Sensor</button>
-    <button class="filter-tab" onclick="setFilter('controller',this)">Controller</button>
-    <button class="filter-tab" onclick="setFilter('panel',this)">Panel & Hub</button>
-    <button class="filter-tab" onclick="setFilter('cleaner',this)">Cleaner</button>
-  </div>
-  <div class="products-grid" id="productsGrid"><!-- filled by JS --></div>
-  <div id="noResults" class="no-results"><p>😔 Produk tidak ditemukan.</p></div>
-</div>
-
-<!-- ═══════════════════════════════════════ TEKNOLOGI ═══════════════════════════════════════ -->
-<div class="parallax-band" id="iot">
-  <h2>Future of Smart Drainage</h2>
-  <p>Teknologi drainase modern berbasis IoT memungkinkan kota lebih aman dari banjir, lebih efisien dalam maintenance, dan lebih cepat mendeteksi kerusakan infrastruktur.</p>
-  <div class="tech-badges">
-    <span class="tech-badge">ESP32 / Arduino</span>
-    <span class="tech-badge">MQTT Protocol</span>
-    <span class="tech-badge">Cloud IoT</span>
-    <span class="tech-badge">Mobile App</span>
-    <span class="tech-badge">AI Analytics</span>
-    <span class="tech-badge">Modbus RTU</span>
-    <span class="tech-badge">LoRaWAN</span>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ SHIPPING ═══════════════════════════════════════ -->
-<div class="shipping-section" id="shipping">
+<!-- HOW IT WORKS -->
+<div class="flow-wrap" id="how">
   <div class="section">
-    <div class="sec-head reveal">
-      <h2>Pilihan Ekspedisi</h2>
-      <p>Pengiriman ke seluruh Indonesia dengan berbagai pilihan kurir terpercaya.</p>
-      <div class="line"></div>
-    </div>
-    <div class="shipping-grid">
-      <div class="shipping-card reveal">
-        <div class="shipping-logo">JNE</div>
-        <p>Reguler & Express ke seluruh Indonesia</p>
-        <div class="shipping-time">2–5 Hari Kerja</div>
-        <div class="est-cost">Mulai Rp 18.000</div>
+    <div class="section-inner">
+      <div class="sec-head reveal">
+        <h2>Cara Berbelanja di DrainioMart</h2>
+        <p>Alur pembelian yang mudah, aman, dan tercatat.</p>
+        <div class="accent-bar"></div>
       </div>
-      <div class="shipping-card reveal">
-        <div class="shipping-logo">J&T</div>
-        <p>Express dengan tracking real-time</p>
-        <div class="shipping-time">1–4 Hari Kerja</div>
-        <div class="est-cost">Mulai Rp 20.000</div>
-      </div>
-      <div class="shipping-card reveal">
-        <div class="shipping-logo">SiCepat</div>
-        <p>BEST & REG untuk semua wilayah</p>
-        <div class="shipping-time">1–3 Hari Kerja</div>
-        <div class="est-cost">Mulai Rp 22.000</div>
-      </div>
-      <div class="shipping-card reveal">
-        <div class="shipping-logo">AnterAja</div>
-        <p>Solusi pengiriman Jawa-Bali-Sumatra</p>
-        <div class="shipping-time">2–4 Hari Kerja</div>
-        <div class="est-cost">Mulai Rp 16.000</div>
-      </div>
-      <div class="shipping-card reveal">
-        <div class="shipping-logo">GoSend</div>
-        <p>Instant & Same Day untuk area Jabodetabek</p>
-        <div class="shipping-time">2–6 Jam</div>
-        <div class="est-cost">Mulai Rp 35.000</div>
-      </div>
-      <div class="shipping-card reveal">
-        <div class="shipping-logo">Wahana</div>
-        <p>Hemat untuk pengiriman antar kota</p>
-        <div class="shipping-time">3–6 Hari Kerja</div>
-        <div class="est-cost">Mulai Rp 14.000</div>
-      </div>
-    </div>
-    <div style="background:rgba(0,170,255,.07);border:1px solid rgba(0,170,255,.2);border-radius:12px;padding:18px 22px;margin-top:24px;font-size:14px;color:var(--muted);">
-      📦 <strong style="color:var(--text)">Gratis ongkir</strong> untuk pembelian di atas <strong style="color:var(--accent)">Rp 5.000.000</strong> ke seluruh Jawa. Pembelian bulk & proyek pemerintah hubungi kami via WhatsApp untuk negosiasi ongkir.
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ PAYMENT ═══════════════════════════════════════ -->
-<div class="section" id="payment">
-  <div class="sec-head reveal">
-    <h2>Metode & Tata Cara Pembayaran</h2>
-    <p>Pembayaran aman dan fleksibel untuk seluruh Indonesia.</p>
-    <div class="line"></div>
-  </div>
-  <div class="payment-grid reveal">
-    <div class="payment-card">BCA</div>
-    <div class="payment-card">Mandiri</div>
-    <div class="payment-card">BRI</div>
-    <div class="payment-card">BNI</div>
-    <div class="payment-card">BSI</div>
-    <div class="payment-card">QRIS</div>
-    <div class="payment-card">OVO</div>
-    <div class="payment-card">Dana</div>
-    <div class="payment-card">GoPay</div>
-    <div class="payment-card">ShopeePay</div>
-  </div>
-  <h3 style="font-family:var(--font-head);font-size:18px;margin:40px 0 20px;text-align:center;">Tata Cara Pembelian</h3>
-  <div class="payment-how">
-    <div class="payment-step reveal">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <h4>Pilih Produk</h4>
-        <p>Tambahkan produk IoT yang diinginkan ke keranjang belanja Anda.</p>
-      </div>
-    </div>
-    <div class="payment-step reveal">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <h4>Isi Data Pengiriman</h4>
-        <p>Masukkan nama lengkap, alamat, dan pilih ekspedisi yang diinginkan.</p>
-      </div>
-    </div>
-    <div class="payment-step reveal">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <h4>Pilih Metode Bayar</h4>
-        <p>Pilih transfer bank, QRIS, atau e-wallet yang tersedia.</p>
-      </div>
-    </div>
-    <div class="payment-step reveal">
-      <div class="step-num">4</div>
-      <div class="step-body">
-        <h4>Transfer & Upload Bukti</h4>
-        <p>Lakukan pembayaran sesuai nominal dan upload bukti transfer.</p>
-      </div>
-    </div>
-    <div class="payment-step reveal">
-      <div class="step-num">5</div>
-      <div class="step-body">
-        <h4>Konfirmasi & Struk</h4>
-        <p>Setelah terverifikasi, struk pembayaran lunas bisa diunduh dalam format PDF.</p>
-      </div>
-    </div>
-    <div class="payment-step reveal">
-      <div class="step-num">6</div>
-      <div class="step-body">
-        <h4>Barang Dikirim</h4>
-        <p>Pesanan diproses dan dikirim dalam 1×24 jam setelah pembayaran dikonfirmasi.</p>
+      <div class="flow-steps">
+        <div class="flow-step reveal"><div class="fs-circle">1</div><h4>Pilih Produk</h4><p>Browse katalog IoT kami, lihat spesifikasi lengkap lewat tombol Detail.</p></div>
+        <div class="flow-step reveal"><div class="fs-circle">2</div><h4>Keranjang</h4><p>Atur jumlah dan tambahkan ke keranjang, lanjut belanja atau checkout.</p></div>
+        <div class="flow-step reveal"><div class="fs-circle">3</div><h4>Isi Data & Ekspedisi</h4><p>Masukkan data diri, alamat pengiriman, dan pilih kurir favorit Anda.</p></div>
+        <div class="flow-step reveal"><div class="fs-circle">4</div><h4>Bayar via Midtrans</h4><p>Transfer bank, QRIS, atau e-wallet melalui gateway aman Midtrans.</p></div>
+        <div class="flow-step reveal"><div class="fs-circle">5</div><h4>Invoice PDF</h4><p>Struk resmi otomatis tersedia setelah pembayaran dikonfirmasi.</p></div>
+        <div class="flow-step reveal"><div class="fs-circle">6</div><h4>Barang Dikirim</h4><p>Pesanan diproses 1×24 jam. Nomor resi dikirim via WhatsApp.</p></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ TESTIMONI ═══════════════════════════════════════ -->
-<div class="section" id="testimonials" style="background:var(--bg2);border-radius:0;max-width:100%;padding:80px 24px;">
-  <div style="max-width:1280px;margin:0 auto;">
-  <div class="sec-head reveal">
-    <h2>Apa Kata Pelanggan Kami</h2>
-    <p>Dipercaya oleh instansi pemerintah dan kontraktor sipil di seluruh Indonesia.</p>
-    <div class="line"></div>
-  </div>
-  <div class="testi-grid">
-    <div class="testi-card reveal">
-      <div class="stars">★★★★★</div>
-      <p>"Sensor ultrasonik dari DrainioMart sangat akurat. Kami pasang di 12 titik drainase kota dan hasilnya luar biasa — tidak ada lagi banjir mendadak karena sudah ada peringatan dini."</p>
-      <div class="testi-author">
-        <div class="testi-av">BW</div>
-        <div><strong>Bambang Wicaksono</strong><span>Dinas PU Kota Semarang</span></div>
-      </div>
-    </div>
-    <div class="testi-card reveal">
-      <div class="stars">★★★★★</div>
-      <p>"Pengiriman cepat, packaging aman, dan produknya langsung bisa diintegrasikan ke sistem SCADA kami. Tim support DrainioMart sangat responsif dan membantu."</p>
-      <div class="testi-author">
-        <div class="testi-av">RS</div>
-        <div><strong>Rudi Setiawan</strong><span>PT. Bangun Infrastruktur Nusantara</span></div>
-      </div>
-    </div>
-    <div class="testi-card reveal">
-      <div class="stars">★★★★☆</div>
-      <p>"Harga kompetitif untuk kualitas yang ditawarkan. IoT Control Panel-nya mudah dikonfigurasi bahkan oleh teknisi junior kami. Highly recommended untuk proyek smart city."</p>
-      <div class="testi-author">
-        <div class="testi-av">NA</div>
-        <div><strong>Nanda Ariani</strong><span>Kontraktor Teknik Sipil, Surabaya</span></div>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ FAQ ═══════════════════════════════════════ -->
-<div class="section" id="faq">
-  <div class="sec-head reveal">
-    <h2>Pertanyaan yang Sering Diajukan</h2>
-    <p>Belum menemukan jawaban? Hubungi kami via WhatsApp.</p>
-    <div class="line"></div>
-  </div>
-  <div class="faq-wrap">
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        🛡️ &nbsp;Apakah produk dilengkapi garansi?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-ans"><div class="faq-ans-inner">Ya, seluruh produk DrainioMart dilengkapi garansi resmi minimal <strong>1 tahun</strong> untuk kerusakan pabrik. Klaim garansi bisa dilakukan melalui WhatsApp kami dengan menyertakan bukti pembelian.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        🔧 &nbsp;Apakah tersedia layanan instalasi/pemasangan?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-ans"><div class="faq-ans-inner">Tersedia layanan instalasi untuk wilayah Jawa Tengah dan sekitarnya. Untuk wilayah lain, kami menyediakan panduan instalasi lengkap dan <strong>konsultasi teknis via video call</strong> tanpa biaya tambahan.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        🔗 &nbsp;Perangkat ini kompatibel dengan sistem yang sudah ada?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-ans"><div class="faq-ans-inner">Semua perangkat kami mendukung protokol standar industri seperti <strong>MQTT, Modbus, dan HTTP REST API</strong>, sehingga kompatibel dengan SCADA, cloud IoT, Blynk, Ubidots, dan ThingsBoard.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        🚚 &nbsp;Berapa lama waktu pengiriman?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-ans"><div class="faq-ans-inner">Pengiriman dalam kota <strong>1–2 hari kerja</strong>. Antar pulau <strong>3–7 hari kerja</strong> tergantung jasa ekspedisi. Kami bekerja sama dengan JNE, J&T, SiCepat, Wahana, GoSend, dan Anteraja.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        📦 &nbsp;Apakah bisa pembelian dalam jumlah besar (bulk order)?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-ans"><div class="faq-ans-inner">Tentu! Kami melayani pembelian bulk untuk proyek pemerintah maupun swasta dengan <strong>harga spesial</strong>. Hubungi kami via WhatsApp untuk mendapatkan penawaran harga proyek.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        💬 &nbsp;Bagaimana cara melakukan pemesanan?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-ans"><div class="faq-ans-inner">Tambahkan produk ke keranjang → isi data pengiriman → pilih pembayaran → upload bukti bayar → terima struk lunas PDF. Atau langsung chat via <strong>WhatsApp</strong> untuk bantuan pemesanan.</div></div>
+<!-- ABOUT -->
+<div class="section" id="about">
+  <div class="section-inner">
+    <div class="sec-head reveal"><h2>Solusi Infrastruktur Modern</h2><p>Sistem berbasis IoT untuk teknik sipil dan smart drainage monitoring.</p><div class="accent-bar"></div></div>
+    <div class="feat-grid">
+      <div class="feat-card reveal"><div class="feat-icon">📡</div><h3>Smart Monitoring</h3><p>Pantau kondisi drainase, debit air, dan potensi penyumbatan secara real-time menggunakan sensor modern dan dashboard otomatis.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">⚙️</div><h3>Efisiensi Maintenance</h3><p>Mengurangi biaya perawatan saluran dengan sistem prediksi dan notifikasi otomatis saat terjadi penyumbatan atau anomali.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">🔗</div><h3>Integrasi IoT</h3><p>Seluruh perangkat kompatibel ESP32, Arduino, cloud monitoring, dan aplikasi mobile via MQTT, Modbus, REST API.</p></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
+<!-- PRODUCTS -->
+<div class="section section-alt" id="products">
+  <div class="section-inner">
+    <div class="sec-head reveal"><h2>Produk Unggulan</h2><p>Peralatan IoT teknik sipil dengan desain modern dan performa tinggi.</p><div class="accent-bar"></div></div>
+    <div class="filter-bar">
+      <button class="ftab active" onclick="setFilter('all',this)">Semua</button>
+      <button class="ftab" onclick="setFilter('sensor',this)">Sensor</button>
+      <button class="ftab" onclick="setFilter('controller',this)">Controller</button>
+      <button class="ftab" onclick="setFilter('panel',this)">Panel & Hub</button>
+      <button class="ftab" onclick="setFilter('cleaner',this)">Cleaner & Pump</button>
+    </div>
+    <div class="prod-grid" id="prodGrid"></div>
+    <div id="noResults" class="no-results" style="display:none;">😔 Produk tidak ditemukan. Coba kata kunci lain.</div>
+  </div>
+</div>
+
+<!-- TECH BANNER -->
+<div class="tech-banner">
+  <h2>Future of Smart Drainage</h2>
+  <p>Teknologi drainase modern berbasis IoT memungkinkan kota lebih aman dari banjir, efisien dalam maintenance, dan cepat mendeteksi kerusakan infrastruktur.</p>
+  <div class="tech-chips">
+    <span class="tech-chip">ESP32 / Arduino</span><span class="tech-chip">MQTT Protocol</span>
+    <span class="tech-chip">Cloud IoT</span><span class="tech-chip">Mobile App</span>
+    <span class="tech-chip">AI Analytics</span><span class="tech-chip">LoRaWAN</span>
+    <span class="tech-chip">Modbus RTU</span><span class="tech-chip">NB-IoT</span>
+  </div>
+</div>
+
+<!-- SHIPPING -->
+<div class="section" id="shipping">
+  <div class="section-inner">
+    <div class="sec-head reveal"><h2>Pilihan Ekspedisi</h2><p>Pengiriman ke seluruh Indonesia dengan kurir terpercaya.</p><div class="accent-bar"></div></div>
+    <div class="ship-grid">
+      <div class="ship-card reveal"><div class="ship-name">JNE</div><p>Reguler & Express ke seluruh Indonesia</p><span class="ship-eta">2–5 Hari Kerja</span><div class="ship-fee">Mulai Rp 18.000</div></div>
+      <div class="ship-card reveal"><div class="ship-name">J&T</div><p>Express dengan tracking real-time</p><span class="ship-eta">1–4 Hari Kerja</span><div class="ship-fee">Mulai Rp 20.000</div></div>
+      <div class="ship-card reveal"><div class="ship-name">SiCepat</div><p>BEST & REG untuk semua wilayah</p><span class="ship-eta">1–3 Hari Kerja</span><div class="ship-fee">Mulai Rp 22.000</div></div>
+      <div class="ship-card reveal"><div class="ship-name">AnterAja</div><p>Hemat Jawa-Bali-Sumatra</p><span class="ship-eta">2–4 Hari Kerja</span><div class="ship-fee">Mulai Rp 16.000</div></div>
+      <div class="ship-card reveal"><div class="ship-name">GoSend</div><p>Same Day Jabodetabek & kota besar</p><span class="ship-eta">2–6 Jam</span><div class="ship-fee">Mulai Rp 35.000</div></div>
+      <div class="ship-card reveal"><div class="ship-name">Wahana</div><p>Hemat antar kota Jawa</p><span class="ship-eta">3–6 Hari Kerja</span><div class="ship-fee">Mulai Rp 14.000</div></div>
+    </div>
+    <div class="ship-note">📦 <strong>Gratis ongkir</strong> untuk pembelian di atas <strong style="color:var(--accent)">Rp 5.000.000</strong> ke seluruh Jawa. Pembelian bulk & proyek pemerintah hubungi kami via WhatsApp.</div>
+  </div>
+</div>
+
+<!-- PAYMENT INFO -->
+<div class="section section-alt" id="payment-info">
+  <div class="section-inner">
+    <div class="sec-head reveal"><h2>Metode Pembayaran</h2><p>Transaksi aman via Midtrans Payment Gateway — bank transfer, QRIS, dan e-wallet.</p><div class="accent-bar"></div></div>
+    <div class="pay-grid reveal">
+      <div class="pay-badge">BCA</div><div class="pay-badge">Mandiri</div>
+      <div class="pay-badge">BRI</div><div class="pay-badge">BNI</div>
+      <div class="pay-badge">BSI</div><div class="pay-badge">QRIS</div>
+      <div class="pay-badge">GoPay</div><div class="pay-badge">OVO</div>
+      <div class="pay-badge">DANA</div><div class="pay-badge">ShopeePay</div>
+    </div>
+    <div class="feat-grid" style="margin-top:0;">
+      <div class="feat-card reveal"><div class="feat-icon">🔒</div><h3>Pembayaran Aman</h3><p>Semua transaksi diproses via Midtrans, payment gateway berlisensi Bank Indonesia. Data terenkripsi dan aman.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">📄</div><h3>Invoice Otomatis</h3><p>Invoice & struk pembayaran langsung tersedia untuk diunduh dalam format PDF setelah konfirmasi.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">💬</div><h3>Konfirmasi via WA</h3><p>Setelah pembayaran, kirim konfirmasi via WhatsApp. Tim kami akan memproses & mengirimkan nomor resi dalam 1×24 jam.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="section" id="testimonials">
+  <div class="section-inner">
+    <div class="sec-head reveal"><h2>Apa Kata Pelanggan Kami</h2><p>Dipercaya instansi pemerintah dan kontraktor sipil di seluruh Indonesia.</p><div class="accent-bar"></div></div>
+    <div class="testi-grid">
+      <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><p class="testi-text">"Sensor ultrasonik dari DrainioMart sangat akurat. Kami pasang di 12 titik drainase kota dan hasilnya luar biasa — tidak ada lagi banjir mendadak karena ada peringatan dini."</p><div class="testi-author"><div class="testi-av">BW</div><div><strong>Bambang Wicaksono</strong><span>Dinas PU Kota Semarang</span></div></div></div>
+      <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><p class="testi-text">"Pengiriman cepat, packaging aman, produk langsung bisa diintegrasikan ke sistem SCADA kami. Tim support DrainioMart sangat responsif dan membantu."</p><div class="testi-author"><div class="testi-av">RS</div><div><strong>Rudi Setiawan</strong><span>PT. Bangun Infrastruktur Nusantara</span></div></div></div>
+      <div class="testi-card reveal"><div class="testi-stars">★★★★☆</div><p class="testi-text">"Harga kompetitif untuk kualitas yang ditawarkan. IoT Control Panel-nya mudah dikonfigurasi bahkan oleh teknisi junior kami. Highly recommended untuk proyek smart city."</p><div class="testi-author"><div class="testi-av">NA</div><div><strong>Nanda Ariani</strong><span>Kontraktor Teknik Sipil, Surabaya</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section section-alt" id="faq">
+  <div class="section-inner">
+    <div class="sec-head reveal"><h2>Pertanyaan yang Sering Diajukan</h2><p>Belum menemukan jawaban? Chat kami via WhatsApp.</p><div class="accent-bar"></div></div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🛡️ &nbsp;Apakah produk dilengkapi garansi?<span class="faq-icon">+</span></button><div class="faq-ans"><div class="faq-ans-inner">Ya, seluruh produk DrainioMart dilengkapi garansi resmi minimal <strong>1 tahun</strong> untuk kerusakan pabrik. Klaim garansi melalui WhatsApp dengan menyertakan nomor pesanan dan invoice.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🔧 &nbsp;Apakah tersedia layanan instalasi?<span class="faq-icon">+</span></button><div class="faq-ans"><div class="faq-ans-inner">Tersedia layanan instalasi untuk wilayah Jawa Tengah. Wilayah lain disediakan panduan lengkap dan <strong>konsultasi teknis via video call</strong> gratis.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🔗 &nbsp;Kompatibel dengan sistem yang sudah ada?<span class="faq-icon">+</span></button><div class="faq-ans"><div class="faq-ans-inner">Semua perangkat mendukung <strong>MQTT, Modbus, dan HTTP REST API</strong> — kompatibel dengan SCADA, Blynk, Ubidots, dan ThingsBoard.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">🚚 &nbsp;Berapa lama waktu pengiriman?<span class="faq-icon">+</span></button><div class="faq-ans"><div class="faq-ans-inner">Dalam kota <strong>1–2 hari kerja</strong>. Antar pulau <strong>3–7 hari kerja</strong>. Kami bekerja sama dengan JNE, J&T, SiCepat, Wahana, GoSend, dan Anteraja.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">💳 &nbsp;Bagaimana cara pembayaran?<span class="faq-icon">+</span></button><div class="faq-ans"><div class="faq-ans-inner">Klik "Checkout" di keranjang → isi data → pilih metode bayar (bank/QRIS/e-wallet) → upload bukti → invoice PDF otomatis tersedia untuk diunduh.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">📦 &nbsp;Bisa pembelian bulk/proyek?<span class="faq-icon">+</span></button><div class="faq-ans"><div class="faq-ans-inner">Tentu! Kami melayani bulk order untuk proyek pemerintah & swasta dengan <strong>harga spesial</strong>. Hubungi via WhatsApp untuk penawaran proyek.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer id="contact">
   <div class="footer-inner">
-    <div class="footer-grid">
+    <div class="footer-cols">
       <div class="footer-brand">
-        <h2>Drainio<span>Mart</span></h2>
-        <p>Marketplace perangkat IoT teknik sipil dan smart drainage system modern. Semua transaksi dilayani langsung via WhatsApp untuk kemudahan dan keamanan Anda.</p>
+        <h2>Drainio<span style="color:var(--accent)">Mart</span></h2>
+        <p>Marketplace perangkat IoT teknik sipil dan smart drainage system modern. Transaksi aman via Midtrans Payment Gateway.</p>
       </div>
       <div class="footer-col">
         <h3>Menu</h3>
-        <a href="#hero">Beranda</a>
-        <a href="#products">Produk</a>
-        <a href="#shipping">Ekspedisi</a>
-        <a href="#payment">Pembayaran</a>
-        <a href="#faq">FAQ</a>
+        <a href="#hero">Beranda</a><a href="#products">Produk</a>
+        <a href="#shipping">Ekspedisi</a><a href="#payment-info">Pembayaran</a><a href="#faq">FAQ</a>
       </div>
       <div class="footer-col">
         <h3>Hubungi Kami</h3>
-        <a href="https://wa.me/628813925995" target="_blank">💬 WhatsApp: 0881-3925-995</a>
+        <a href="https://wa.me/628813925995?text=Halo%20DrainioMart%2C%20saya%20ingin%20bertanya%20tentang%20produk." target="_blank">💬 WA: 0881-3925-995</a>
         <a href="mailto:info@drainiomart.id">✉️ info@drainiomart.id</a>
-        <a href="#">📍 Jawa Tengah, Indonesia</a>
+        <a>📍 Jawa Tengah, Indonesia</a>
       </div>
     </div>
-    <div class="footer-bottom">© 2026 DrainioMart — Smart Civil Engineering IoT Marketplace</div>
+    <div class="footer-bottom">© 2026 DrainioMart — Smart Civil Engineering IoT Marketplace | Pembayaran aman via Midtrans</div>
   </div>
 </footer>
 
-<!-- WA Float -->
-<a href="https://wa.me/628813925995?text=Halo%20DrainioMart%2C%20saya%20ingin%20bertanya%20tentang%20produk%20IoT." class="wa-float" target="_blank" title="WhatsApp">💬</a>
+<!-- WA FLOAT -->
+<a href="https://wa.me/628813925995?text=Halo%20DrainioMart%2C%20saya%20ingin%20bertanya%20tentang%20produk%20Anda." class="wa-float" target="_blank" title="Tanya via WhatsApp">💬</a>
 
-<!-- ═══════════════════════════════════════ OVERLAYS ═══════════════════════════════════════ -->
-<div class="overlay" id="overlay" onclick="closeAll()"></div>
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeAllPanels()"></div>
 
 <!-- CART SIDEBAR -->
-<div class="sidebar" id="cartSidebar">
-  <div class="sidebar-head">
+<div class="sidebar" id="cartSB">
+  <div class="sb-head">
     <h3>🛒 Keranjang Belanja</h3>
-    <button class="close-btn" onclick="closeCart()">✕</button>
+    <button class="sb-close" onclick="closeCart()">✕</button>
   </div>
-  <div class="sidebar-body" id="cartBody"></div>
-  <div class="sidebar-foot" id="cartFoot" style="display:none;">
-    <div class="shipping-select">
+  <div class="sb-body" id="cartBody"></div>
+  <div class="sb-foot" id="cartFoot" style="display:none">
+    <div class="ship-sel-box">
       <h4>🚚 Pilih Ekspedisi</h4>
-      <div class="ship-opt selected" id="ship0" onclick="selectShip(0,18000,'JNE REG (2-3 hari)')">
-        <input type="radio" name="ship" checked><label><span>JNE REG</span><strong>Rp 18.000</strong></label>
-      </div>
-      <div class="ship-opt" id="ship1" onclick="selectShip(1,20000,'J&T Express (1-4 hari)')">
-        <input type="radio" name="ship"><label><span>J&T Express</span><strong>Rp 20.000</strong></label>
-      </div>
-      <div class="ship-opt" id="ship2" onclick="selectShip(2,22000,'SiCepat BEST (1-3 hari)')">
-        <input type="radio" name="ship"><label><span>SiCepat BEST</span><strong>Rp 22.000</strong></label>
-      </div>
-      <div class="ship-opt" id="ship3" onclick="selectShip(3,16000,'Anteraja (2-4 hari)')">
-        <input type="radio" name="ship"><label><span>Anteraja</span><strong>Rp 16.000</strong></label>
-      </div>
-      <div class="ship-opt" id="ship4" onclick="selectShip(4,35000,'GoSend Instant (2-6 jam)')">
-        <input type="radio" name="ship"><label><span>GoSend Instant</span><strong>Rp 35.000</strong></label>
-      </div>
+      <div class="ship-opt picked" id="sopt0" onclick="pickShip(0,18000,'JNE REG (2–3 hari)')"><input type="radio" name="ship" checked><div class="ship-opt-lbl"><span>JNE REG</span><em>Rp 18.000</em></div></div>
+      <div class="ship-opt" id="sopt1" onclick="pickShip(1,20000,'J&T Express (1–4 hari)')"><input type="radio" name="ship"><div class="ship-opt-lbl"><span>J&T Express</span><em>Rp 20.000</em></div></div>
+      <div class="ship-opt" id="sopt2" onclick="pickShip(2,22000,'SiCepat BEST (1–3 hari)')"><input type="radio" name="ship"><div class="ship-opt-lbl"><span>SiCepat BEST</span><em>Rp 22.000</em></div></div>
+      <div class="ship-opt" id="sopt3" onclick="pickShip(3,16000,'Anteraja (2–4 hari)')"><input type="radio" name="ship"><div class="ship-opt-lbl"><span>Anteraja</span><em>Rp 16.000</em></div></div>
+      <div class="ship-opt" id="sopt4" onclick="pickShip(4,35000,'GoSend Instant (2–6 jam)')"><input type="radio" name="ship"><div class="ship-opt-lbl"><span>GoSend Instant</span><em>Rp 35.000</em></div></div>
     </div>
-    <div class="total-row"><span>Subtotal</span><strong id="subtotalVal">Rp 0</strong></div>
-    <div class="total-row"><span>Ongkos Kirim</span><strong id="shipCostVal">Rp 18.000</strong></div>
-    <div class="total-row grand"><span>Total</span><strong id="totalVal">Rp 0</strong></div>
-    <button class="btn btn-primary" onclick="openPaymentFlow()">💳 Lanjut Pembayaran</button>
+    <div class="total-row"><span>Subtotal</span><span id="subVal">Rp 0</span></div>
+    <div class="total-row"><span>Ongkir (<span id="shipLbl">JNE REG</span>)</span><span id="shipVal">Rp 18.000</span></div>
+    <div class="total-row grand"><span>Total</span><strong id="grandVal">Rp 0</strong></div>
+    <button class="btn btn-primary btn-full" onclick="startCheckout()">💳 Checkout &amp; Bayar</button>
   </div>
 </div>
 
 <!-- WISHLIST SIDEBAR -->
-<div class="sidebar" id="wishSidebar">
-  <div class="sidebar-head">
+<div class="sidebar" id="wishSB">
+  <div class="sb-head">
     <h3>♡ Wishlist Saya</h3>
-    <button class="close-btn" onclick="closeWishlist()">✕</button>
+    <button class="sb-close" onclick="closeWishlist()">✕</button>
   </div>
-  <div class="sidebar-body" id="wishBody"></div>
+  <div class="sb-body" id="wishBody"></div>
 </div>
 
 <!-- PRODUCT DETAIL MODAL -->
-<div class="modal-overlay" id="detailModal">
-  <div class="modal-box">
+<div class="modal-overlay" id="detailModal" onclick="modalBGClick(event,'detailModal')">
+  <div class="modal-box detail-modal">
     <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
-    <img class="modal-img" id="detailImg" src="" alt="">
-    <div class="modal-body">
-      <h2 id="detailName"></h2>
-      <div class="modal-price" id="detailPrice"></div>
-      <p id="detailDesc"></p>
-      <div class="spec-list" id="detailSpecs"></div>
-      <div class="rating" id="detailRating"></div>
-      <div class="modal-actions">
-        <button class="btn btn-outline" id="detailCartBtn">+ Keranjang</button>
-        <button class="btn btn-primary" id="detailBuyBtn">💬 Pesan via WA</button>
+    <img class="detail-img" id="dImg" src="" alt="">
+    <div class="detail-body">
+      <h2 class="detail-title" id="dName"></h2>
+      <div class="detail-rating"><span id="dStars"></span><span id="dReviews"></span></div>
+      <div class="detail-price-row">
+        <span class="detail-price" id="dPrice"></span>
+        <span class="detail-orig" id="dOrig"></span>
+      </div>
+      <p class="detail-desc" id="dDesc"></p>
+      <div class="specs-title">Spesifikasi Teknis</div>
+      <div class="specs-grid" id="dSpecs"></div>
+      <div class="detail-qty-row">
+        <span style="font-size:13.5px;color:var(--text2)">Jumlah:</span>
+        <div class="qty-ctrl">
+          <button class="qty-btn" onclick="adjDetailQty(-1)">−</button>
+          <span class="qty-num" id="dQtyNum">1</span>
+          <button class="qty-btn" onclick="adjDetailQty(1)">+</button>
+        </div>
+        <span class="stock-tag" id="dStock"></span>
+      </div>
+      <div class="detail-btns">
+        <button class="btn btn-ghost" id="dWishBtn" onclick="toggleWishFromDetail()">♡ Wishlist</button>
+        <button class="btn btn-teal" onclick="addToCartFromDetail()">+ Keranjang</button>
+        <button class="btn btn-primary" onclick="buyNow()">⚡ Beli Sekarang</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- PAYMENT FLOW MODAL -->
-<div class="modal-overlay" id="payModal">
-  <div class="modal-box pay-modal-box">
-    <button class="modal-close" onclick="closeModal('payModal')">✕</button>
-    <div class="modal-body">
-      <h2 style="font-family:var(--font-head);margin-bottom:20px;">💳 Proses Pembayaran</h2>
-      <div class="progress-steps">
-        <div class="ps active" id="ps1"><div class="ps-dot">1</div>Data</div>
-        <div class="ps" id="ps2"><div class="ps-dot">2</div>Bayar</div>
-        <div class="ps" id="ps3"><div class="ps-dot">3</div>Bukti</div>
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="ckModal" onclick="modalBGClick(event,'ckModal')">
+  <div class="modal-box ck-modal">
+    <button class="modal-close" onclick="closeModal('ckModal')">✕</button>
+    <div class="ck-header">
+      <h2>💳 Checkout</h2>
+      <p>Lengkapi informasi untuk menyelesaikan pesanan Anda</p>
+    </div>
+    <div class="ck-body">
+      <!-- Progress -->
+      <div class="prog-bar">
+        <div class="prog-step act" id="prog1"><div class="ps-dot">1</div><div class="ps-lbl">Data Diri</div></div>
+        <div class="prog-step" id="prog2"><div class="ps-dot">2</div><div class="ps-lbl">Pembayaran</div></div>
+        <div class="prog-step" id="prog3"><div class="ps-dot">3</div><div class="ps-lbl">Konfirmasi</div></div>
       </div>
 
-      <!-- Step 1: Data Diri -->
-      <div class="pay-step active" id="payStep1">
-        <div class="form-group">
-          <label>Nama Lengkap</label>
-          <input class="form-control" id="custName" placeholder="Masukkan nama lengkap">
+      <!-- STEP 1: DATA DIRI -->
+      <div class="ck-step on" id="ck1">
+        <div class="ck-summary" id="ckSum1"></div>
+        <div class="form-row">
+          <div class="form-group" id="fg-name">
+            <label class="form-label">Nama Lengkap *</label>
+            <input class="form-control" id="fName" placeholder="Budi Santoso">
+            <div class="form-err">Nama wajib diisi</div>
+          </div>
+          <div class="form-group" id="fg-wa">
+            <label class="form-label">No. WhatsApp *</label>
+            <input class="form-control" id="fWa" placeholder="08123456789" type="tel">
+            <div class="form-err">No. WhatsApp wajib diisi</div>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Nomor WhatsApp</label>
-          <input class="form-control" id="custWa" placeholder="08xxxxxxxxxx">
+        <div class="form-group" id="fg-email">
+          <label class="form-label">Email *</label>
+          <input class="form-control" id="fEmail" placeholder="budi@email.com" type="email">
+          <div class="form-err">Email wajib diisi</div>
         </div>
-        <div class="form-group">
-          <label>Alamat Pengiriman</label>
-          <textarea class="form-control" id="custAddr" rows="3" placeholder="Jl. ... No. ..., Kota, Provinsi, Kode Pos"></textarea>
+        <div class="form-group" id="fg-addr">
+          <label class="form-label">Alamat Lengkap *</label>
+          <textarea class="form-control" id="fAddr" placeholder="Jl. Merdeka No.10, Kelurahan..., Kecamatan..., Kota..., Provinsi..., Kode Pos..."></textarea>
+          <div class="form-err">Alamat wajib diisi</div>
         </div>
-        <div class="form-group">
-          <label>Metode Pembayaran</label>
-          <select class="form-control" id="payMethod" onchange="updateBankInfo()">
-            <option value="bca">Transfer BCA</option>
-            <option value="mandiri">Transfer Mandiri</option>
-            <option value="bri">Transfer BRI</option>
-            <option value="bni">Transfer BNI</option>
-            <option value="qris">QRIS</option>
-            <option value="dana">DANA</option>
-            <option value="gopay">GoPay</option>
-          </select>
+        <div class="form-row">
+          <div class="form-group" id="fg-city">
+            <label class="form-label">Kota / Kabupaten *</label>
+            <input class="form-control" id="fCity" placeholder="Semarang">
+            <div class="form-err">Kota wajib diisi</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Catatan (opsional)</label>
+            <input class="form-control" id="fNote" placeholder="Pesan khusus, warna, dll...">
+          </div>
         </div>
-        <div class="order-summary" id="orderSummary"></div>
-        <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="goPayStep2()">Lanjut →</button>
+        <button class="btn btn-primary btn-full" onclick="goCkStep2()">Lanjut ke Pembayaran →</button>
       </div>
 
-      <!-- Step 2: Info Pembayaran -->
-      <div class="pay-step" id="payStep2">
-        <div class="bank-info" id="bankInfo"></div>
-        <div class="order-summary" id="orderSummary2"></div>
-        <div style="display:flex;gap:10px;">
-          <button class="btn btn-outline" onclick="goPayStep(1)">← Kembali</button>
-          <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="goPayStep3()">Sudah Bayar →</button>
+      <!-- STEP 2: PEMBAYARAN -->
+      <div class="ck-step" id="ck2">
+        <div class="mt-header">
+          <div class="mt-logo">Midtrans <em>Payment Gateway</em></div>
+          <div class="mt-sub">🔒 Transaksi aman berlisensi Bank Indonesia</div>
+          <div class="mt-amount"><p>Total Pembayaran</p><strong id="mtAmt">Rp 0</strong></div>
+        </div>
+        <p style="font-size:13.5px;color:var(--text2);margin-bottom:13px">Pilih metode pembayaran:</p>
+        <div class="pay-opts">
+          <div class="pay-opt sel" id="po-bank" onclick="setPayMethod('bank')"><div class="po-icon">🏦</div><div class="po-name">Transfer Bank</div><div class="po-desc">BCA, Mandiri, BRI, BNI</div></div>
+          <div class="pay-opt" id="po-qris" onclick="setPayMethod('qris')"><div class="po-icon">⬛</div><div class="po-name">QRIS</div><div class="po-desc">Scan QR semua aplikasi</div></div>
+          <div class="pay-opt" id="po-ew" onclick="setPayMethod('ewallet')"><div class="po-icon">📱</div><div class="po-name">E-Wallet</div><div class="po-desc">GoPay, OVO, DANA</div></div>
+          <div class="pay-opt" id="po-cc" onclick="setPayMethod('cc')"><div class="po-icon">💳</div><div class="po-name">Kartu Kredit</div><div class="po-desc">Visa / Mastercard</div></div>
+        </div>
+
+        <!-- Bank Transfer -->
+        <div id="pd-bank">
+          <div class="form-group">
+            <label class="form-label">Pilih Bank</label>
+            <select class="form-control" id="bankSel" onchange="renderBankDetail()">
+              <option value="bca">Bank BCA</option>
+              <option value="mandiri">Bank Mandiri</option>
+              <option value="bri">Bank BRI</option>
+              <option value="bni">Bank BNI</option>
+            </select>
+          </div>
+          <div id="bankDetail"></div>
+        </div>
+        <!-- QRIS -->
+        <div id="pd-qris" style="display:none">
+          <div class="qris-wrap">
+            <div class="qris-mock">⬛⬛⬛<span style="font-size:10px;text-align:center">QRIS<br>DrainioMart</span></div>
+            <p>Scan dengan GoPay, OVO, DANA, ShopeePay, atau aplikasi bank Anda</p>
+            <p style="font-size:12px;color:var(--text3);margin-top:5px">Berlaku 30 menit</p>
+          </div>
+        </div>
+        <!-- E-Wallet -->
+        <div id="pd-ew" style="display:none">
+          <div class="ew-grid">
+            <div class="ew-opt sel" id="ew-gopay" onclick="setEwallet('gopay')"><div class="ew-name">GoPay</div><div class="ew-no">0881-3925-995</div></div>
+            <div class="ew-opt" id="ew-ovo" onclick="setEwallet('ovo')"><div class="ew-name">OVO</div><div class="ew-no">0881-3925-995</div></div>
+            <div class="ew-opt" id="ew-dana" onclick="setEwallet('dana')"><div class="ew-name">DANA</div><div class="ew-no">0881-3925-995</div></div>
+            <div class="ew-opt" id="ew-spay" onclick="setEwallet('spay')"><div class="ew-name">ShopeePay</div><div class="ew-no">0881-3925-995</div></div>
+          </div>
+          <div class="bank-box">
+            <h4>📱 Detail Transfer E-Wallet</h4>
+            <div class="bank-row"><span class="bank-key">Nama</span><strong class="bank-val">DrainioMart</strong></div>
+            <div class="bank-row"><span class="bank-key">No. Akun</span><div style="display:flex;align-items:center;gap:8px"><strong class="bank-val">0881-3925-995</strong><button class="copy-btn" onclick="copyText('0881-3925-995')">Salin</button></div></div>
+            <div class="bank-row"><span class="bank-key">Jumlah</span><div style="display:flex;align-items:center;gap:8px"><strong class="bank-val" id="ewAmt" style="color:var(--accent)">Rp 0</strong><button class="copy-btn" id="ewAmtCopyBtn">Salin</button></div></div>
+          </div>
+        </div>
+        <!-- Credit Card -->
+        <div id="pd-cc" style="display:none">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Nomor Kartu</label><input class="form-control" id="ccNum" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)"></div>
+            <div class="form-group"><label class="form-label">Nama di Kartu</label><input class="form-control" placeholder="BUDI SANTOSO"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Expired (MM/YY)</label><input class="form-control" placeholder="12/28" maxlength="5" oninput="fmtExp(this)"></div>
+            <div class="form-group"><label class="form-label">CVV</label><input class="form-control" placeholder="•••" maxlength="3" type="password"></div>
+          </div>
+          <div style="background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.16);border-radius:8px;padding:10px 13px;font-size:12.5px;color:var(--text2)">🔒 Data kartu diproses melalui enkripsi SSL 256-bit Midtrans. DrainioMart tidak menyimpan data kartu Anda.</div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:16px">
+          <button class="btn btn-secondary" onclick="goCkStep(1)">← Kembali</button>
+          <button class="btn btn-green" style="flex:1" onclick="goCkStep3()">✓ Konfirmasi Pembayaran</button>
         </div>
       </div>
 
-      <!-- Step 3: Upload Bukti -->
-      <div class="pay-step" id="payStep3">
-        <p style="color:var(--muted);font-size:14px;margin-bottom:16px;">Upload foto atau screenshot bukti transfer/pembayaran Anda:</p>
-        <div class="upload-area" onclick="document.getElementById('proofInput').click()">
-          <input type="file" id="proofInput" accept="image/*" onchange="handleProofUpload(this)">
-          <div style="font-size:36px;">📤</div>
-          <p>Klik atau seret file bukti bayar di sini</p>
-          <p style="font-size:12px;color:var(--muted);">Format: JPG, PNG, PDF</p>
+      <!-- STEP 3: UPLOAD BUKTI -->
+      <div class="ck-step" id="ck3">
+        <div class="ck-summary" id="ckSum3"></div>
+        <p style="font-size:14px;color:var(--text2);margin-bottom:14px">Upload bukti pembayaran Anda (screenshot / foto transfer):</p>
+        <div class="upload-zone" onclick="document.getElementById('proofInput').click()">
+          <input type="file" id="proofInput" accept="image/*,application/pdf" onchange="handleProofUpload(this)">
+          <div class="uz-icon">📤</div>
+          <p>Klik atau seret file bukti pembayaran</p>
+          <div class="uz-hint">JPG, PNG, PDF — maks 10MB</div>
         </div>
-        <div id="proofPreview" style="margin-top:12px;display:none;">
-          <img id="proofImg" style="width:100%;border-radius:10px;border:1px solid var(--border);" src="" alt="">
-          <p style="font-size:12px;color:var(--success);margin-top:6px;">✓ Bukti berhasil diunggah</p>
+        <div class="proof-prev" id="proofPreview">
+          <img id="proofImg" src="" alt="">
+          <div class="proof-ok">✓ Bukti berhasil diunggah</div>
         </div>
-        <div style="display:flex;gap:10px;margin-top:16px;">
-          <button class="btn btn-outline" onclick="goPayStep(2)">← Kembali</button>
-          <button class="btn btn-success" style="flex:1;justify-content:center;" onclick="confirmPayment()">✓ Konfirmasi Pembayaran</button>
+        <div style="background:rgba(0,224,150,.06);border:1px solid rgba(0,224,150,.18);border-radius:8px;padding:11px 13px;font-size:13px;color:var(--text2);margin:14px 0">
+          ℹ️ Pesanan diverifikasi dalam <strong>1×24 jam</strong>. Invoice PDF akan tersedia segera setelah konfirmasi. Nomor resi dikirim via WhatsApp.
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-secondary" onclick="goCkStep(2)">← Kembali</button>
+          <button class="btn btn-green" style="flex:1" onclick="finishOrder()">🎉 Selesaikan Pesanan</button>
         </div>
       </div>
     </div>
@@ -1264,35 +1092,38 @@ select.form-control{cursor:pointer;}
 
 <!-- RECEIPT MODAL -->
 <div class="modal-overlay" id="receiptModal">
-  <div class="modal-box receipt-box">
-    <button class="modal-close" onclick="closeModal('receiptModal')">✕</button>
-    <div class="receipt-head">
-      <div class="receipt-checkmark">✅</div>
-      <h2>Pembayaran Lunas!</h2>
-      <p>Terima kasih telah berbelanja di DrainioMart</p>
+  <div class="modal-box receipt-modal">
+    <div class="receipt-hdr">
+      <div class="check">✅</div>
+      <h2>Pesanan Berhasil!</h2>
+      <p>Invoice & struk pembayaran Anda sudah siap</p>
     </div>
     <div class="receipt-body">
-      <div class="receipt-no">No. Pesanan: <strong id="receiptNo"></strong></div>
-      <table class="receipt-table">
-        <thead><tr><th>Produk</th><th>Qty</th><th>Harga</th></tr></thead>
-        <tbody id="receiptItems"></tbody>
+      <div class="receipt-meta">
+        <div class="rm-row"><span class="rm-k">No. Invoice</span><span class="rm-v" id="rcInv" style="color:var(--accent)"></span></div>
+        <div class="rm-row"><span class="rm-k">Tanggal</span><span class="rm-v" id="rcDate"></span></div>
+        <div class="rm-row"><span class="rm-k">Nama Pemesan</span><span class="rm-v" id="rcName"></span></div>
+        <div class="rm-row"><span class="rm-k">Email</span><span class="rm-v" id="rcEmail"></span></div>
+        <div class="rm-row"><span class="rm-k">No. WhatsApp</span><span class="rm-v" id="rcWa"></span></div>
+        <div class="rm-row"><span class="rm-k">Metode Bayar</span><span class="rm-v" id="rcMethod"></span></div>
+        <div class="rm-row"><span class="rm-k">Ekspedisi</span><span class="rm-v" id="rcShip"></span></div>
+        <div class="rm-row"><span class="rm-k">Alamat Kirim</span><span class="rm-v" id="rcAddr"></span></div>
+      </div>
+      <table class="receipt-tbl">
+        <thead><tr><th>Produk</th><th style="text-align:center">Qty</th><th style="text-align:right">Harga</th></tr></thead>
+        <tbody id="rcItems"></tbody>
       </table>
-      <div class="order-summary">
-        <div class="order-summary-row"><span>Subtotal</span><span id="rcptSubtotal"></span></div>
-        <div class="order-summary-row"><span>Ongkos Kirim (<span id="rcptShipName"></span>)</span><span id="rcptShipCost"></span></div>
-        <div class="order-summary-row total"><span>TOTAL DIBAYAR</span><span id="rcptTotal"></span></div>
+      <div class="receipt-total-box">
+        <div class="rt-row"><span>Subtotal</span><span id="rcSub"></span></div>
+        <div class="rt-row"><span>Ongkos Kirim (<span id="rcShipName"></span>)</span><span id="rcShipCost"></span></div>
+        <div class="rt-grand"><span>Total Dibayar</span><strong id="rcTotal"></strong></div>
       </div>
-      <div class="order-summary" style="margin-top:12px;">
-        <div class="order-summary-row"><span>Nama</span><span id="rcptName"></span></div>
-        <div class="order-summary-row"><span>Metode Bayar</span><span id="rcptMethod"></span></div>
-        <div class="order-summary-row"><span>Ekspedisi</span><span id="rcptShip"></span></div>
-        <div class="order-summary-row"><span>Tanggal</span><span id="rcptDate"></span></div>
+      <div class="stamp-wrap"><div class="stamp">LUNAS</div></div>
+      <div class="receipt-btns">
+        <button class="btn btn-ghost" onclick="sendWAConfirmation()">💬 Kirim Konfirmasi WA</button>
+        <button class="btn btn-teal" onclick="downloadPDF()">📄 Unduh Invoice PDF</button>
       </div>
-      <div class="receipt-stamp"><div class="stamp">LUNAS</div></div>
-      <div class="receipt-actions">
-        <button class="btn btn-outline" onclick="shareWA()">💬 Kirim WA</button>
-        <button class="btn btn-primary" onclick="downloadReceipt()">⬇ Unduh PDF</button>
-      </div>
+      <p style="text-align:center;font-size:12px;color:var(--text3);margin-top:14px">Invoice ini adalah dokumen resmi. Simpan sebagai bukti pembelian Anda.</p>
     </div>
   </div>
 </div>
@@ -1300,554 +1131,608 @@ select.form-control{cursor:pointer;}
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ═══════════════════════════════════════ SCRIPT ═══════════════════════════════════════ -->
+<!-- ================================================================
+     JAVASCRIPT
+================================================================ -->
 <script>
-/* ════════════════ DATA PRODUK ════════════════ */
+/* ======== PRODUCTS DATA ======== */
 const PRODUCTS = [
-  {
-    id:1, name:'Smart Drainage Cleaner',
-    desc:'Sistem pembersih saluran otomatis berbasis sensor berat dan motor penggerak IoT. Dilengkapi dengan deteksi sampah, alarm penyumbatan, dan koneksi WiFi untuk kontrol jarak jauh.',
-    img:'https://images.unsplash.com/photo-1581092919535-7146ff1a590d?q=80&w=800&auto=format&fit=crop',
-    price:12500000, tags:['ESP32','WiFi','Waterproof IP67','Motor DC 24V','App Control'],
-    category:'cleaner', label:'Best Seller', rating:4.9, reviews:87
-  },
-  {
-    id:2, name:'Water Flow Sensor YF-S201',
-    desc:'Sensor debit air presisi tinggi untuk monitoring drainase dan aliran air kota secara real-time. Compatible dengan Arduino dan ESP32, output digital dan analog.',
-    img:'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop',
-    price:1850000, tags:['Arduino','ESP32','Real-time','Output Digital','Tahan Korosi','IP65'],
-    category:'sensor', label:null, rating:4.7, reviews:142
-  },
-  {
-    id:3, name:'Ultrasonic Water Level Sensor',
-    desc:'Sensor ultrasonik waterproof untuk pengukuran ketinggian air secara real-time. Akurasi tinggi dengan rating IP68, cocok untuk instalasi dalam saluran drainase.',
-    img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop',
-    price:2350000, tags:['Ultrasonik','IP68','Akurasi ±1mm','Output 4-20mA','Jangkauan 5m'],
-    category:'sensor', label:'Baru', rating:4.8, reviews:56
-  },
-  {
-    id:4, name:'IoT Control Panel Pro',
-    desc:'Panel kontrol smart infrastructure dengan monitoring cloud dan dashboard AI. Kelola seluruh sensor dari satu antarmuka, dengan laporan otomatis dan alert real-time.',
-    img:'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop',
-    price:7250000, tags:['Cloud Dashboard','Multi-sensor','Alert Otomatis','Laporan PDF','Mobile App'],
-    category:'panel', label:null, rating:4.6, reviews:39
-  },
-  {
-    id:5, name:'Smart Flood Detector AI',
-    desc:'Sensor pendeteksi banjir otomatis dengan AI monitoring system. Mengirimkan notifikasi darurat ke petugas via SMS dan aplikasi secara instan.',
-    img:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop',
-    price:3450000, tags:['AI Sensor','IoT','SMS Alert','LoRa','IP67'],
-    category:'sensor', label:'HOT', rating:4.8, reviews:201
-  },
-  {
-    id:6, name:'IoT Hub Controller ESP32',
-    desc:'Kontrol seluruh sensor dan perangkat dalam satu dashboard pintar. Mendukung hingga 32 node sensor dengan koneksi WiFi, Bluetooth, dan LoRaWAN.',
-    img:'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=800&auto=format&fit=crop',
-    price:8750000, tags:['Cloud','Dashboard','LoRaWAN','32 Node','MQTT'],
-    category:'controller', label:'NEW', rating:4.7, reviews:64
-  },
-  {
-    id:7, name:'Turbidity Sensor Pro',
-    desc:'Sensor kekeruhan air untuk deteksi sedimentasi dan kualitas air drainase. Output analog 0–5V, tahan korosi, cocok untuk monitoring kualitas air sungai dan saluran irigasi.',
-    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
-    price:1450000, tags:['Kekeruhan Air','Analog','IP65','Arduino'],
-    category:'sensor', label:null, rating:4.5, reviews:33
-  },
-  {
-    id:8, name:'Smart Pump Controller',
-    desc:'Kontroler pompa otomatis berbasis IoT untuk sistem drainase aktif. Otomatis mengaktifkan pompa saat ketinggian air kritis, dengan monitoring via aplikasi.',
-    img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop',
-    price:4850000, tags:['Pompa Otomatis','App Control','WiFi','Relay 30A'],
-    category:'controller', label:'Best Seller', rating:4.9, reviews:115
-  },
-  {
-    id:9, name:'LoRa Gateway Node',
-    desc:'Gateway LoRaWAN untuk jaringan sensor jarak jauh hingga 15km. Ideal untuk proyek smart city dan monitoring infrastruktur drainase skala besar.',
-    img:'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=800&auto=format&fit=crop',
-    price:6200000, tags:['LoRaWAN','15km Range','TTN','Multi-channel'],
-    category:'panel', label:'Baru', rating:4.6, reviews:28
-  },
-  {
-    id:10, name:'Data Logger IoT SD Card',
-    desc:'Perekam data sensor dengan penyimpanan SD Card dan transmisi ke cloud. Mendukung berbagai jenis sensor dan interval pencatatan yang dapat dikonfigurasi.',
-    img:'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop',
-    price:2750000, tags:['SD Card','Cloud Sync','Multi-sensor','Real-time'],
-    category:'controller', label:null, rating:4.4, reviews:47
-  },
-  {
-    id:11, name:'Submersible Sewage Pump',
-    desc:'Pompa submersible untuk saluran limbah dan drainase bawah tanah. Dilengkapi sensor suhu motor dan proteksi overload otomatis.',
-    img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=800&auto=format&fit=crop',
-    price:9500000, tags:['Submersible','IP68','Motor 3HP','Overload Protection'],
-    category:'cleaner', label:null, rating:4.7, reviews:73
-  },
-  {
-    id:12, name:'Smart Manhole Sensor Kit',
-    desc:'Kit sensor lengkap untuk monitoring kondisi manhole: level air, gas berbahaya (H2S, CH4), suhu, dan kelembaban. Komunikasi via NB-IoT.',
-    img:'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop',
-    price:11200000, tags:['NB-IoT','Gas Sensor','IP68','Multi-parameter','Smart City'],
-    category:'sensor', label:'HOT', rating:5.0, reviews:19
-  }
+  {id:1,name:'Smart Drainage Cleaner Pro',desc:'Sistem pembersih saluran otomatis berbasis sensor berat dan motor penggerak IoT. Dilengkapi deteksi sampah, alarm penyumbatan, koneksi WiFi untuk kontrol jarak jauh, dan monitoring real-time melalui aplikasi mobile.',img:'https://images.unsplash.com/photo-1581092919535-7146ff1a590d?q=80&w=800&auto=format&fit=crop',price:12500000,origPrice:14000000,cat:'cleaner',badge:'Best Seller',rating:4.9,reviews:87,stock:15,
+  specs:[{k:'Mikrokontroler',v:'ESP32 Dual-Core'},{k:'Konektivitas',v:'WiFi 2.4GHz + BT'},{k:'Rating IP',v:'IP67 Waterproof'},{k:'Motor',v:'DC 24V 5A'},{k:'Sensor',v:'Load Cell + Ultrasonik'},{k:'Catu Daya',v:'12–24V DC'},{k:'Garansi',v:'12 Bulan'},{k:'Berat',v:'3.2 kg'}]},
+  {id:2,name:'Water Flow Sensor YF-S201',desc:'Sensor debit air presisi tinggi untuk monitoring drainase dan aliran air kota. Compatible dengan Arduino dan ESP32, output digital dan analog, tahan korosi untuk lingkungan basah dan outdoor.',img:'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop',price:1850000,origPrice:null,cat:'sensor',badge:null,rating:4.7,reviews:142,stock:50,
+  specs:[{k:'Platform',v:'Arduino / ESP32'},{k:'Output',v:'Digital + Analog'},{k:'Rating IP',v:'IP65'},{k:'Akurasi',v:'±2%'},{k:'Flow Range',v:'1–30 L/menit'},{k:'Material',v:'Nylon + SS304'},{k:'Garansi',v:'6 Bulan'},{k:'Tegangan',v:'5–24V DC'}]},
+  {id:3,name:'Ultrasonic Water Level Sensor',desc:'Sensor ultrasonik waterproof IP68 untuk pengukuran ketinggian air secara real-time dengan akurasi tinggi. Cocok untuk instalasi dalam saluran drainase bawah tanah dan reservoir.',img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop',price:2350000,origPrice:2700000,cat:'sensor',badge:'Baru',rating:4.8,reviews:56,stock:30,
+  specs:[{k:'Teknologi',v:'Ultrasonik 40kHz'},{k:'Rating IP',v:'IP68'},{k:'Akurasi',v:'±1mm'},{k:'Output',v:'4–20mA / 0–10V'},{k:'Jangkauan',v:'0.25–5m'},{k:'Suhu Kerja',v:'-20°C – 70°C'},{k:'Garansi',v:'12 Bulan'},{k:'Kabel',v:'5m (awp)'}]},
+  {id:4,name:'IoT Control Panel Pro',desc:'Panel kontrol smart infrastructure dengan monitoring cloud dan dashboard AI. Kelola seluruh sensor dari satu antarmuka, dengan laporan otomatis, alert real-time, dan ekspor data ke Excel/PDF.',img:'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop',price:7250000,origPrice:null,cat:'panel',badge:null,rating:4.6,reviews:39,stock:10,
+  specs:[{k:'Dashboard',v:'Web + Mobile App'},{k:'Kapasitas',v:'64 Sensor Node'},{k:'Protokol',v:'MQTT + REST API'},{k:'Cloud',v:'AWS / Google Cloud'},{k:'Notifikasi',v:'Email + Push + SMS'},{k:'Laporan',v:'PDF + Excel Otomatis'},{k:'Garansi',v:'12 Bulan'},{k:'Update',v:'OTA Seumur Hidup'}]},
+  {id:5,name:'Smart Flood Detector AI',desc:'Sensor pendeteksi banjir otomatis dengan AI monitoring system. Mengirimkan notifikasi darurat ke petugas via SMS, email, dan aplikasi secara instan. Akurasi deteksi 99.2%.',img:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop',price:3450000,origPrice:4000000,cat:'sensor',badge:'HOT',rating:4.8,reviews:201,stock:25,
+  specs:[{k:'AI Model',v:'Edge Inference'},{k:'Konektivitas',v:'LoRa + WiFi'},{k:'Rating IP',v:'IP67'},{k:'Notifikasi',v:'SMS + Email + App'},{k:'Akurasi',v:'99.2%'},{k:'Baterai',v:'Li-Ion 5000mAh'},{k:'Standby',v:'6 Bulan'},{k:'Garansi',v:'12 Bulan'}]},
+  {id:6,name:'IoT Hub Controller ESP32',desc:'Hub kontrol utama untuk jaringan sensor IoT berskala besar. Mendukung hingga 32 node sensor dengan koneksi WiFi, Bluetooth, dan LoRaWAN. Dashboard real-time via browser.',img:'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=800&auto=format&fit=crop',price:8750000,origPrice:null,cat:'controller',badge:'NEW',rating:4.7,reviews:64,stock:8,
+  specs:[{k:'Prosesor',v:'ESP32-S3 Dual-Core'},{k:'Node Maks',v:'32 Sensor'},{k:'Protokol',v:'MQTT + LoRaWAN'},{k:'Storage',v:'16GB eMMC'},{k:'Interface',v:'Web Dashboard'},{k:'Input',v:'12–48V DC'},{k:'Garansi',v:'12 Bulan'},{k:'Dimensi',v:'200×150×60mm'}]},
+  {id:7,name:'Turbidity Sensor Pro',desc:'Sensor kekeruhan air untuk deteksi sedimentasi dan kualitas drainase. Output analog 0–5V, tahan korosi, cocok untuk monitoring kualitas air sungai, saluran irigasi, dan IPAL.',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',price:1450000,origPrice:null,cat:'sensor',badge:null,rating:4.5,reviews:33,stock:40,
+  specs:[{k:'Output',v:'Analog 0–5V'},{k:'Rating IP',v:'IP65'},{k:'Platform',v:'Arduino/ESP32'},{k:'Range',v:'0–3000 NTU'},{k:'Tegangan',v:'5V DC'},{k:'Material',v:'ABS + Kaca Optik'},{k:'Garansi',v:'6 Bulan'},{k:'Kabel',v:'1m'}]},
+  {id:8,name:'Smart Pump Controller',desc:'Kontroler pompa otomatis berbasis IoT untuk sistem drainase aktif. Otomatis mengaktifkan pompa saat ketinggian air kritis, dengan monitoring via aplikasi dan notifikasi real-time.',img:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop',price:4850000,origPrice:5500000,cat:'controller',badge:'Best Seller',rating:4.9,reviews:115,stock:18,
+  specs:[{k:'Platform',v:'ESP32'},{k:'Relay',v:'4 Channel 30A'},{k:'Kontrol',v:'App + Manual'},{k:'Sensor',v:'Level + Tekanan'},{k:'Notifikasi',v:'Push App + WA'},{k:'Input Pompa',v:'220VAC / 380VAC'},{k:'Garansi',v:'12 Bulan'},{k:'Sertifikasi',v:'SNI'}]},
+  {id:9,name:'LoRa Gateway Node',desc:'Gateway LoRaWAN untuk jaringan sensor jarak jauh hingga 15km. Ideal untuk proyek smart city dan monitoring infrastruktur drainase skala kota. Mendukung 1000+ node.',img:'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=800&auto=format&fit=crop',price:6200000,origPrice:7000000,cat:'panel',badge:'Baru',rating:4.6,reviews:28,stock:6,
+  specs:[{k:'Jangkauan',v:'15km (LOS)'},{k:'Kapasitas',v:'1000+ Node'},{k:'Platform',v:'TTN / ChirpStack'},{k:'Band',v:'915MHz / 868MHz'},{k:'Koneksi',v:'Ethernet + 4G SIM'},{k:'Catu Daya',v:'PoE / 12V DC'},{k:'Garansi',v:'12 Bulan'},{k:'Rating IP',v:'IP67'}]},
+  {id:10,name:'Data Logger IoT',desc:'Perekam data sensor dengan penyimpanan SD Card dan sinkronisasi cloud otomatis. Mendukung berbagai jenis sensor dengan interval pencatatan yang dapat dikonfigurasi via web.',img:'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop',price:2750000,origPrice:null,cat:'controller',badge:null,rating:4.4,reviews:47,stock:22,
+  specs:[{k:'Storage',v:'SD Card hingga 128GB'},{k:'Cloud',v:'Auto-Sync'},{k:'Port Sensor',v:'8 Channel'},{k:'Interval',v:'1 detik – 24 jam'},{k:'Format Data',v:'CSV / JSON'},{k:'Baterai Backup',v:'8 Jam'},{k:'Garansi',v:'12 Bulan'},{k:'Interface',v:'Web Config'}]},
+  {id:11,name:'Submersible Sewage Pump',desc:'Pompa submersible untuk saluran limbah dan drainase bawah tanah. Dilengkapi sensor suhu motor dan proteksi overload otomatis. Cocok untuk instalasi permanen.',img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=800&auto=format&fit=crop',price:9500000,origPrice:11000000,cat:'cleaner',badge:null,rating:4.7,reviews:73,stock:12,
+  specs:[{k:'Rating IP',v:'IP68'},{k:'Daya Motor',v:'3HP (2200W)'},{k:'Kapasitas',v:'600 L/menit'},{k:'Proteksi',v:'Overload + Thermal'},{k:'Material',v:'Cast Iron + SS'},{k:'Tegangan',v:'220V/380V'},{k:'Garansi',v:'18 Bulan'},{k:'Berat',v:'18 kg'}]},
+  {id:12,name:'Smart Manhole Sensor Kit',desc:'Kit sensor lengkap untuk monitoring kondisi manhole: level air, gas berbahaya (H2S, CH4), suhu, dan kelembaban. Komunikasi NB-IoT untuk area tanpa WiFi.',img:'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop',price:11200000,origPrice:13000000,cat:'sensor',badge:'HOT',rating:5.0,reviews:19,stock:5,
+  specs:[{k:'Parameter',v:'Level+Gas+Suhu+RH'},{k:'Komunikasi',v:'NB-IoT'},{k:'Gas Deteksi',v:'H2S, CH4, CO'},{k:'Rating IP',v:'IP68'},{k:'Baterai',v:'Li-Ion 10000mAh'},{k:'Umur Baterai',v:'2 Tahun'},{k:'Garansi',v:'12 Bulan'},{k:'Sertifikasi',v:'ATEX Zone 1'}]}
 ];
 
-/* ════════════════ STATE ════════════════ */
-let cart = [];
-let wishlist = [];
-let currentFilter = 'semua';
-let selectedShip = {idx:0, cost:18000, name:'JNE REG (2-3 hari)'};
-let orderData = {};
+/* ======== STATE ======== */
+let cart = [], wishlist = [];
+let curFilter = 'all';
+let activeDetailId = null, detailQty = 1;
+let shipState = {idx:0, cost:18000, name:'JNE REG (2–3 hari)'};
+let payMethod = 'bank', ewallet = 'gopay';
+let lastReceipt = {};
 
-/* ════════════════ RENDER PRODUCTS ════════════════ */
-function renderProducts(list){
-  const grid = document.getElementById('productsGrid');
-  const noRes = document.getElementById('noResults');
-  if(!list.length){grid.innerHTML='';noRes.style.display='block';return;}
-  noRes.style.display='none';
-  grid.innerHTML = list.map(p=>`
-    <div class="product-card reveal" data-cat="${p.category}" data-id="${p.id}">
-      ${p.label?`<div class="product-label ${p.label==='Baru'||p.label==='NEW'?'new':p.label==='HOT'?'hot':''}">${p.label}</div>`:''}
-      <button class="wishlist-btn ${wishlist.find(w=>w.id===p.id)?'active':''}" onclick="toggleWishlist(${p.id})" title="Wishlist">♡</button>
-      <div class="product-img">
-        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=400&auto=format&fit=crop'">
+/* ======== HELPERS ======== */
+const $ = id => document.getElementById(id);
+const fmt = n => 'Rp ' + n.toLocaleString('id-ID');
+const stars = r => '★'.repeat(Math.floor(r)) + '☆'.repeat(5 - Math.floor(r));
+
+function showToast(msg, type='') {
+  const t = $('toast');
+  t.textContent = msg; t.className = 'toast ' + type;
+  void t.offsetWidth;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+function openModal(id) { $(id).classList.add('show'); }
+function closeModal(id) { $(id).classList.remove('show'); }
+function modalBGClick(e, id) { if (e.target === $(id)) closeModal(id); }
+
+function copyText(txt) {
+  navigator.clipboard.writeText(String(txt)).then(() => showToast('✓ Disalin!', 'ok')).catch(() => {
+    const ta = document.createElement('textarea'); ta.value = String(txt);
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    showToast('✓ Disalin!', 'ok');
+  });
+}
+
+/* ======== RENDER PRODUCTS ======== */
+function renderProducts(list) {
+  const grid = $('prodGrid'), noRes = $('noResults');
+  if (!list.length) { grid.innerHTML = ''; noRes.style.display = 'block'; return; }
+  noRes.style.display = 'none';
+
+  const badgeClass = b => ({ 'Best Seller':'badge-best','Baru':'badge-new','NEW':'badge-new','HOT':'badge-hot' }[b] || 'badge-hot');
+
+  grid.innerHTML = list.map(p => `
+    <div class="prod-card reveal" data-id="${p.id}">
+      ${p.badge ? `<span class="prod-badge ${badgeClass(p.badge)}">${p.badge}</span>` : ''}
+      <button class="wish-btn ${wishlist.find(w=>w.id===p.id)?'loved':''}" onclick="toggleWish(${p.id})" title="Wishlist">♡</button>
+      <div class="prod-img">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=400'">
       </div>
-      <div class="product-body">
-        <div class="rating">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))} <span>(${p.reviews} ulasan)</span></div>
+      <div class="prod-body">
+        <div class="prod-rating">${stars(p.rating)} <span>(${p.reviews} ulasan)</span></div>
         <h3>${p.name}</h3>
-        <p>${p.desc.substring(0,90)}...</p>
-        <div class="tags">${p.tags.slice(0,3).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-        <div class="price">${fmt(p.price)}</div>
-        <div class="p-actions">
-          <button class="add-cart" onclick="addToCart(${p.id})">+ Keranjang</button>
-          <button class="view-detail" onclick="openDetail(${p.id})">Detail</button>
+        <p class="prod-desc">${p.desc}</p>
+        <div class="prod-tags">${p.specs.slice(0,3).map(s=>`<span class="ptag">${s.v}</span>`).join('')}</div>
+        <div class="prod-price">${fmt(p.price)}${p.origPrice?`<span class="orig-price">${fmt(p.origPrice)}</span>`:''}</div>
+        <div class="prod-btns">
+          <button class="btn-cart" onclick="addToCart(${p.id})">+ Keranjang</button>
+          <button class="btn-detail" onclick="openDetail(${p.id})">📋 Detail</button>
         </div>
       </div>
     </div>
   `).join('');
-  observeReveal();
+  initReveal();
 }
 
-function setFilter(cat, btn){
-  currentFilter=cat;
-  document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
+function applyFilters() {
+  const q = $('searchInput').value.toLowerCase().trim();
+  const res = PRODUCTS.filter(p => {
+    const mc = curFilter === 'all' || p.cat === curFilter;
+    const mq = !q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.specs.some(s => s.v.toLowerCase().includes(q));
+    return mc && mq;
+  });
+  renderProducts(res);
+}
+
+function setFilter(f, btn) {
+  curFilter = f;
+  document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   applyFilters();
 }
-function filterProducts(){applyFilters();}
-function applyFilters(){
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const filtered = PRODUCTS.filter(p=>{
-    const matchCat = currentFilter==='semua'||p.category===currentFilter;
-    const matchQ = !q || p.name.toLowerCase().includes(q) || p.tags.some(t=>t.toLowerCase().includes(q));
-    return matchCat && matchQ;
-  });
-  renderProducts(filtered);
+
+/* ======== CART ======== */
+function addToCart(id, qty = 1) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const ex = cart.find(c => c.id === id);
+  if (ex) ex.qty = Math.min(ex.qty + qty, p.stock);
+  else cart.push({ ...p, qty: Math.min(qty, p.stock) });
+  updateBadges();
+  showToast('✓ ' + p.name + ' ditambah ke keranjang', 'ok');
 }
 
-/* ════════════════ CART ════════════════ */
-function addToCart(id){
-  const p = PRODUCTS.find(x=>x.id===id);
-  if(!p) return;
-  const ex = cart.find(c=>c.id===id);
-  if(ex) ex.qty++;
-  else cart.push({...p, qty:1});
-  updateCartUI();
-  showToast(`✓ ${p.name} ditambah ke keranjang`,'success');
-}
-function removeFromCart(id){
-  cart = cart.filter(c=>c.id!==id);
-  updateCartUI();
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  updateBadges();
   renderCartBody();
 }
-function changeQty(id, delta){
-  const item = cart.find(c=>c.id===id);
-  if(!item) return;
-  item.qty += delta;
-  if(item.qty<=0){removeFromCart(id);return;}
-  updateCartUI();
+
+function changeQty(id, delta) {
+  const item = cart.find(c => c.id === id);
+  if (!item) return;
+  item.qty = Math.max(1, Math.min(item.qty + delta, item.stock));
+  if (item.qty <= 0) { removeFromCart(id); return; }
+  updateBadges();
   renderCartBody();
 }
-function updateCartUI(){
-  document.getElementById('cartCount').textContent = cart.reduce((s,c)=>s+c.qty,0);
-  renderCartBody();
-}
-function renderCartBody(){
-  const body = document.getElementById('cartBody');
-  const foot = document.getElementById('cartFoot');
-  if(!cart.length){
-    body.innerHTML=`<div class="cart-empty-msg"><span>🛒</span>Keranjang masih kosong.<br><small>Tekan "+ Keranjang" pada produk.</small></div>`;
-    foot.style.display='none';
+
+function renderCartBody() {
+  const body = $('cartBody'), foot = $('cartFoot');
+  if (!cart.length) {
+    body.innerHTML = `<div class="empty-state"><div class="ei">🛒</div><p>Keranjang masih kosong.<br><small>Tekan "+ Keranjang" pada produk untuk mulai belanja.</small></p></div>`;
+    foot.style.display = 'none';
     return;
   }
-  body.innerHTML = cart.map(c=>`
+  foot.style.display = 'block';
+  body.innerHTML = cart.map(c => `
     <div class="cart-item">
-      <img class="cart-item-img" src="${c.img}" alt="${c.name}" onerror="this.style.display='none'">
-      <div class="cart-item-info">
-        <h4>${c.name}</h4>
-        <div class="item-price">${fmt(c.price)}</div>
-        <div class="qty-row">
+      <img class="ci-img" src="${c.img}" alt="" onerror="this.style.display='none'">
+      <div class="ci-info">
+        <div class="ci-name">${c.name}</div>
+        <div class="ci-price">${fmt(c.price * c.qty)}</div>
+        <div class="qty-ctrl">
           <button class="qty-btn" onclick="changeQty(${c.id},-1)">−</button>
-          <span class="qty-val">${c.qty}</span>
+          <span class="qty-num">${c.qty}</span>
           <button class="qty-btn" onclick="changeQty(${c.id},1)">+</button>
         </div>
       </div>
-      <button class="remove-item" onclick="removeFromCart(${c.id})">🗑</button>
+      <button class="ci-del" onclick="removeFromCart(${c.id})" title="Hapus">🗑</button>
     </div>
   `).join('');
-  foot.style.display='block';
-  updateTotals();
-}
-function updateTotals(){
-  const sub = cart.reduce((s,c)=>s+c.price*c.qty,0);
-  const total = sub + selectedShip.cost;
-  document.getElementById('subtotalVal').textContent = fmt(sub);
-  document.getElementById('shipCostVal').textContent = fmt(selectedShip.cost);
-  document.getElementById('totalVal').textContent = fmt(total);
-}
-function selectShip(idx, cost, name){
-  selectedShip={idx, cost, name};
-  for(let i=0;i<5;i++){
-    const el=document.getElementById('ship'+i);
-    el.classList.toggle('selected',i===idx);
-    el.querySelector('input').checked=(i===idx);
-  }
-  updateTotals();
-}
-function openCart(){
-  renderCartBody();
-  document.getElementById('cartSidebar').classList.add('open');
-  document.getElementById('overlay').classList.add('open');
-}
-function closeCart(){
-  document.getElementById('cartSidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('open');
+  refreshTotals();
 }
 
-/* ════════════════ WISHLIST ════════════════ */
-function toggleWishlist(id){
-  const p = PRODUCTS.find(x=>x.id===id);
-  if(!p) return;
-  const idx = wishlist.findIndex(w=>w.id===id);
-  if(idx>-1){
-    wishlist.splice(idx,1);
-    showToast(`Dihapus dari wishlist`,'');
-  } else {
-    wishlist.push(p);
-    showToast(`♡ ${p.name} ditambah ke wishlist`,'success');
+function refreshTotals() {
+  const sub = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  $('subVal').textContent = fmt(sub);
+  $('shipLbl').textContent = shipState.name.split(' ')[0];
+  $('shipVal').textContent = fmt(shipState.cost);
+  $('grandVal').textContent = fmt(sub + shipState.cost);
+}
+
+function pickShip(idx, cost, name) {
+  shipState = { idx, cost, name };
+  for (let i = 0; i < 5; i++) {
+    const o = $('sopt' + i);
+    o.classList.toggle('picked', i === idx);
+    o.querySelector('input').checked = (i === idx);
   }
-  document.getElementById('wishlistCount').textContent=wishlist.length;
-  // update button states in grid
-  document.querySelectorAll(`.product-card[data-id="${id}"] .wishlist-btn`).forEach(btn=>{
-    btn.classList.toggle('active', wishlist.find(w=>w.id===id));
-  });
+  refreshTotals();
+}
+
+function openCart() {
+  renderCartBody();
+  $('cartSB').classList.add('show');
+  $('overlay').classList.add('show');
+}
+function closeCart() {
+  $('cartSB').classList.remove('show');
+  $('overlay').classList.remove('show');
+}
+
+/* ======== WISHLIST ======== */
+function toggleWish(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const i = wishlist.findIndex(w => w.id === id);
+  if (i > -1) { wishlist.splice(i, 1); showToast('Dihapus dari wishlist'); }
+  else { wishlist.push(p); showToast('♡ Disimpan ke wishlist', 'ok'); }
+  updateBadges();
+  // Update wish buttons
+  document.querySelectorAll(`.prod-card[data-id="${id}"] .wish-btn`).forEach(b =>
+    b.classList.toggle('loved', !!wishlist.find(w => w.id === id))
+  );
+  // Update detail modal button if open
+  if (activeDetailId === id) {
+    const wb = $('dWishBtn');
+    if (wb) wb.textContent = wishlist.find(w => w.id === id) ? '❤ Hapus Wishlist' : '♡ Wishlist';
+  }
+}
+
+function toggleWishFromDetail() {
+  if (activeDetailId) toggleWish(activeDetailId);
+}
+
+function openWishlist() {
   renderWishBody();
+  $('wishSB').classList.add('show');
+  $('overlay').classList.add('show');
 }
-function openWishlist(){
-  renderWishBody();
-  document.getElementById('wishSidebar').classList.add('open');
-  document.getElementById('overlay').classList.add('open');
+function closeWishlist() {
+  $('wishSB').classList.remove('show');
+  $('overlay').classList.remove('show');
 }
-function closeWishlist(){
-  document.getElementById('wishSidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('open');
-}
-function renderWishBody(){
-  const body = document.getElementById('wishBody');
-  if(!wishlist.length){
-    body.innerHTML=`<div class="cart-empty-msg"><span>♡</span>Wishlist masih kosong.<br><small>Tekan ♡ pada produk untuk menyimpan.</small></div>`;
+
+function renderWishBody() {
+  const body = $('wishBody');
+  if (!wishlist.length) {
+    body.innerHTML = `<div class="empty-state"><div class="ei">♡</div><p>Wishlist kosong.<br><small>Tekan ♡ pada produk untuk menyimpan.</small></p></div>`;
     return;
   }
-  body.innerHTML = wishlist.map(p=>`
+  body.innerHTML = wishlist.map(p => `
     <div class="cart-item">
-      <img class="cart-item-img" src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">
-      <div class="cart-item-info">
-        <h4>${p.name}</h4>
-        <div class="item-price">${fmt(p.price)}</div>
-        <button class="btn btn-primary" style="margin-top:8px;padding:6px 14px;font-size:12px;" onclick="addToCart(${p.id});closeWishlist()">+ Keranjang</button>
+      <img class="ci-img" src="${p.img}" alt="" onerror="this.style.display='none'">
+      <div class="ci-info">
+        <div class="ci-name">${p.name}</div>
+        <div class="ci-price">${fmt(p.price)}</div>
+        <button class="btn btn-primary btn-sm" style="margin-top:8px" onclick="addToCart(${p.id});closeWishlist()">+ Keranjang</button>
       </div>
-      <button class="remove-item" onclick="toggleWishlist(${p.id})">✕</button>
+      <button class="ci-del" onclick="toggleWish(${p.id})" title="Hapus">✕</button>
     </div>
   `).join('');
 }
 
-/* ════════════════ DETAIL MODAL ════════════════ */
-function openDetail(id){
-  const p = PRODUCTS.find(x=>x.id===id);
-  if(!p) return;
-  document.getElementById('detailImg').src = p.img;
-  document.getElementById('detailName').textContent = p.name;
-  document.getElementById('detailPrice').textContent = fmt(p.price);
-  document.getElementById('detailDesc').textContent = p.desc;
-  document.getElementById('detailSpecs').innerHTML = p.tags.map(t=>`<span class="spec-chip">${t}</span>`).join('');
-  document.getElementById('detailRating').innerHTML = `${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))} <span style="margin-left:4px;">${p.rating} (${p.reviews} ulasan)</span>`;
-  document.getElementById('detailCartBtn').onclick = ()=>{addToCart(id);closeModal('detailModal');};
-  document.getElementById('detailBuyBtn').onclick = ()=>{
-    window.open(`https://wa.me/628813925995?text=Halo%20DrainioMart%2C%20saya%20ingin%20memesan%20*${encodeURIComponent(p.name)}*%20seharga%20${encodeURIComponent(fmt(p.price))}.%20Mohon%20info%20selanjutnya.`,'_blank');
-  };
+/* ======== PRODUCT DETAIL ======== */
+function openDetail(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  activeDetailId = id; detailQty = 1;
+
+  $('dImg').src = p.img;
+  $('dImg').onerror = () => $('dImg').style.display = 'none';
+  $('dName').textContent = p.name;
+  $('dStars').textContent = stars(p.rating);
+  $('dReviews').textContent = `${p.rating} (${p.reviews} ulasan)`;
+  $('dPrice').textContent = fmt(p.price);
+  $('dOrig').textContent = p.origPrice ? fmt(p.origPrice) : '';
+  $('dDesc').textContent = p.desc;
+  $('dSpecs').innerHTML = p.specs.map(s =>
+    `<div class="spec-item"><span class="spec-k">${s.k}</span><span class="spec-v">${s.v}</span></div>`
+  ).join('');
+  $('dQtyNum').textContent = '1';
+  $('dStock').textContent = `Stok: ${p.stock} unit`;
+  $('dWishBtn').textContent = wishlist.find(w => w.id === id) ? '❤ Hapus Wishlist' : '♡ Wishlist';
   openModal('detailModal');
 }
 
-/* ════════════════ PAYMENT FLOW ════════════════ */
-function openPaymentFlow(){
-  if(!cart.length){showToast('Keranjang kosong!','error');return;}
+function adjDetailQty(d) {
+  const p = PRODUCTS.find(x => x.id === activeDetailId);
+  if (!p) return;
+  detailQty = Math.max(1, Math.min(detailQty + d, p.stock));
+  $('dQtyNum').textContent = detailQty;
+}
+
+function addToCartFromDetail() {
+  addToCart(activeDetailId, detailQty);
+  closeModal('detailModal');
+}
+
+function buyNow() {
+  addToCart(activeDetailId, detailQty);
+  closeModal('detailModal');
+  openCart();
+}
+
+/* ======== CHECKOUT ======== */
+function startCheckout() {
+  if (!cart.length) { showToast('Keranjang masih kosong!', 'err'); return; }
   closeCart();
-  buildOrderSummary();
-  goPayStep(1);
-  openModal('payModal');
+  buildCkSummary();
+  goCkStep(1);
+  setPayMethod('bank');
+  openModal('ckModal');
 }
-function buildOrderSummary(){
-  const sub = cart.reduce((s,c)=>s+c.price*c.qty,0);
-  const total = sub + selectedShip.cost;
-  const rows = cart.map(c=>`
-    <div class="order-summary-row"><span>${c.name} ×${c.qty}</span><span>${fmt(c.price*c.qty)}</span></div>
-  `).join('');
-  const html = `${rows}
-    <div class="order-summary-row"><span>Ongkos Kirim (${selectedShip.name})</span><span>${fmt(selectedShip.cost)}</span></div>
-    <div class="order-summary-row total"><span>Total</span><span>${fmt(total)}</span></div>`;
-  document.getElementById('orderSummary').innerHTML = html;
-  document.getElementById('orderSummary2').innerHTML = html;
+
+function buildCkSummary() {
+  const sub = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  const total = sub + shipState.cost;
+  const rows = cart.map(c =>
+    `<div class="ck-sum-row"><span>${c.name} ×${c.qty}</span><span>${fmt(c.price * c.qty)}</span></div>`
+  ).join('');
+  const html = rows +
+    `<div class="ck-sum-row"><span>Ongkir (${shipState.name})</span><span>${fmt(shipState.cost)}</span></div>
+     <div class="ck-sum-total"><span>Total</span><strong>${fmt(total)}</strong></div>`;
+  $('ckSum1').innerHTML = html;
+  $('ckSum3').innerHTML = html;
+  $('mtAmt').textContent = fmt(total);
+  if ($('ewAmt')) $('ewAmt').textContent = fmt(total);
+  if ($('ewAmtCopyBtn')) $('ewAmtCopyBtn').onclick = () => copyText(String(total));
 }
-function goPayStep2(){
-  const name=document.getElementById('custName').value.trim();
-  const wa=document.getElementById('custWa').value.trim();
-  const addr=document.getElementById('custAddr').value.trim();
-  if(!name||!wa||!addr){showToast('Lengkapi data diri terlebih dahulu','error');return;}
-  orderData={name,wa,addr,method:document.getElementById('payMethod').value};
-  updateBankInfo();
-  goPayStep(2);
-}
-function goPayStep3(){goPayStep(3);}
-function goPayStep(n){
-  for(let i=1;i<=3;i++){
-    const s=document.getElementById('payStep'+i);
-    s.classList.toggle('active',i===n);
-    const ps=document.getElementById('ps'+i);
-    ps.classList.remove('active','done');
-    if(i<n) ps.classList.add('done');
-    if(i===n) ps.classList.add('active');
+
+function goCkStep(n) {
+  for (let i = 1; i <= 3; i++) {
+    $('ck' + i).classList.toggle('on', i === n);
+    const ps = $('prog' + i);
+    ps.classList.remove('act', 'done');
+    if (i < n) ps.classList.add('done');
+    if (i === n) ps.classList.add('act');
   }
 }
-function updateBankInfo(){
-  const method = document.getElementById('payMethod')?.value || orderData.method;
-  const sub = cart.reduce((s,c)=>s+c.price*c.qty,0);
-  const total = sub + selectedShip.cost;
-  const banks = {
-    bca:   {name:'Bank BCA',no:'123-456-7890',atas:'DrainioMart Indonesia'},
-    mandiri:{name:'Bank Mandiri',no:'098-765-4321',atas:'DrainioMart Indonesia'},
-    bri:   {name:'Bank BRI',no:'0123-0100-1234-567',atas:'DrainioMart Indonesia'},
-    bni:   {name:'Bank BNI',no:'0812-3456-78',atas:'DrainioMart Indonesia'},
-    qris:  {name:'QRIS',no:null,atas:null},
-    dana:  {name:'DANA',no:'0881-3925-995',atas:'DrainioMart'},
-    gopay: {name:'GoPay',no:'0881-3925-995',atas:'DrainioMart'}
-  };
-  const b = banks[method]||banks.bca;
-  let html=`<h4>📋 Informasi ${b.name}</h4>`;
-  if(b.no){
-    html+=`
-      <div class="bank-row"><span>Nama Rekening</span><strong>${b.atas}</strong></div>
-      <div class="bank-row"><span>Nomor Rekening / ${method==='dana'||method==='gopay'?'No. HP':'Akun'}</span>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <strong id="bankNum">${b.no}</strong>
-          <button class="copy-btn" onclick="copyText('${b.no}')">Salin</button>
-        </div>
-      </div>`;
-  } else {
-    html+=`<div style="text-align:center;padding:10px 0;color:var(--muted);font-size:13px;">Scan QR Code di aplikasi pembayaran Anda<br><br>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;font-size:32px;">⬛ QR CODE ⬛</div>
-    </div>`;
-  }
-  html+=`<div class="bank-row" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
-    <span>Jumlah Transfer</span>
-    <div style="display:flex;align-items:center;gap:6px;">
-      <strong style="color:var(--accent)" id="bankAmount">${fmt(total)}</strong>
-      <button class="copy-btn" onclick="copyText('${total}')">Salin</button>
+
+function goCkStep2() {
+  // Validate
+  const fields = [
+    {id:'fName', groupId:'fg-name'},
+    {id:'fWa', groupId:'fg-wa'},
+    {id:'fEmail', groupId:'fg-email'},
+    {id:'fAddr', groupId:'fg-addr'},
+    {id:'fCity', groupId:'fg-city'}
+  ];
+  let ok = true;
+  fields.forEach(f => {
+    const inp = $(f.id), grp = $(f.groupId);
+    if (!inp.value.trim()) { grp.classList.add('has-error'); ok = false; }
+    else grp.classList.remove('has-error');
+  });
+  if (!ok) { showToast('Lengkapi semua data yang wajib diisi', 'err'); return; }
+  renderBankDetail();
+  goCkStep(2);
+}
+
+function goCkStep3() { goCkStep(3); }
+
+/* ======== PAYMENT METHODS ======== */
+const BANKS = {
+  bca:     { name:'Bank Central Asia (BCA)',  no:'1234-5678-90',       atas:'PT DrainioMart Indonesia' },
+  mandiri: { name:'Bank Mandiri',             no:'1100-0987-6543',     atas:'PT DrainioMart Indonesia' },
+  bri:     { name:'Bank Rakyat Indonesia (BRI)', no:'0123-0100-1234-567', atas:'PT DrainioMart Indonesia' },
+  bni:     { name:'Bank Negara Indonesia (BNI)', no:'0812-3456-7890',  atas:'PT DrainioMart Indonesia' }
+};
+
+function setPayMethod(m) {
+  payMethod = m;
+  ['bank','qris','ew','cc'].forEach(k => {
+    const poId = 'po-' + k;
+    const pdId = 'pd-' + k;
+    const poEl = $(poId), pdEl = $(pdId);
+    // po keys: bank→po-bank, qris→po-qris, ewallet→po-ew, cc→po-cc
+    const selKey = { bank:'bank', qris:'qris', ewallet:'ew', cc:'cc' }[m];
+    if (poEl) poEl.classList.toggle('sel', k === selKey);
+    if (pdEl) pdEl.style.display = (k === selKey) ? 'block' : 'none';
+  });
+  if (m === 'bank') renderBankDetail();
+}
+
+function renderBankDetail() {
+  const b = BANKS[$('bankSel').value];
+  const total = cart.reduce((s, c) => s + c.price * c.qty, 0) + shipState.cost;
+  const berita = 'DM-' + Date.now().toString().slice(-8);
+  $('bankDetail').innerHTML = `
+    <div class="bank-box">
+      <h4>🏦 Instruksi Transfer ${b.name}</h4>
+      <div class="bank-row"><span class="bank-key">Nama Rekening</span><strong class="bank-val">${b.atas}</strong></div>
+      <div class="bank-row"><span class="bank-key">Nomor Rekening</span>
+        <div style="display:flex;align-items:center;gap:8px"><strong class="bank-val">${b.no}</strong><button class="copy-btn" onclick="copyText('${b.no}')">Salin</button></div>
+      </div>
+      <div class="bank-row"><span class="bank-key">Jumlah Transfer</span>
+        <div style="display:flex;align-items:center;gap:8px"><strong class="bank-val" style="color:var(--accent)">${fmt(total)}</strong><button class="copy-btn" onclick="copyText('${total}')">Salin</button></div>
+      </div>
+      <div class="bank-row"><span class="bank-key">Berita Transfer</span>
+        <div style="display:flex;align-items:center;gap:8px"><strong class="bank-val">${berita}</strong><button class="copy-btn" onclick="copyText('${berita}')">Salin</button></div>
+      </div>
+      <p style="font-size:11.5px;color:var(--text3);margin-top:9px">⚠️ Transfer tepat sesuai nominal. Pembayaran terverifikasi otomatis via Midtrans.</p>
     </div>
-  </div>`;
-  html+=`<p style="font-size:11.5px;color:var(--muted);margin-top:10px;">⚠️ Transfer tepat sesuai nominal termasuk sen untuk verifikasi otomatis.</p>`;
-  document.getElementById('bankInfo').innerHTML=html;
+  `;
 }
-function handleProofUpload(input){
-  const file = input.files[0];
-  if(!file) return;
+
+function setEwallet(ew) {
+  ewallet = ew;
+  ['gopay','ovo','dana','spay'].forEach(k => $('ew-' + k).classList.toggle('sel', k === ew));
+}
+
+function fmtCard(inp) {
+  inp.value = inp.value.replace(/\D/g,'').replace(/(\d{4})/g,'$1 ').trim().slice(0,19);
+}
+function fmtExp(inp) {
+  let v = inp.value.replace(/\D/g,'');
+  if (v.length >= 2) v = v.slice(0,2) + '/' + v.slice(2,4);
+  inp.value = v;
+}
+
+function handleProofUpload(inp) {
+  const f = inp.files[0];
+  if (!f) return;
   const reader = new FileReader();
-  reader.onload = e=>{
-    document.getElementById('proofImg').src = e.target.result;
-    document.getElementById('proofPreview').style.display='block';
+  reader.onload = e => {
+    $('proofImg').src = e.target.result;
+    $('proofPreview').style.display = 'block';
+    showToast('Bukti pembayaran berhasil diunggah', 'ok');
   };
-  reader.readAsDataURL(file);
-}
-function confirmPayment(){
-  closeModal('payModal');
-  buildReceipt();
-  openModal('receiptModal');
-  cart=[];
-  updateCartUI();
-  showToast('🎉 Pembayaran berhasil dikonfirmasi!','success');
+  reader.readAsDataURL(f);
 }
 
-/* ════════════════ RECEIPT ════════════════ */
-let lastReceipt={};
-function buildReceipt(){
-  const sub = lastReceipt.sub||cart.reduce((s,c)=>s+c.price*c.qty,0);
-  // store snapshot before clearing cart
-  const items = cart.length ? [...cart] : (lastReceipt.items||[]);
-  const total = sub + selectedShip.cost;
-  const no = 'DM-'+Date.now().toString().slice(-8);
+function finishOrder() {
+  const inv = 'INV-DM-' + Date.now().toString().slice(-8);
   const now = new Date();
-  const dateStr = now.toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  const methodMap={bca:'Transfer BCA',mandiri:'Transfer Mandiri',bri:'Transfer BRI',bni:'Transfer BNI',qris:'QRIS',dana:'DANA',gopay:'GoPay'};
+  const dateStr = now.toLocaleDateString('id-ID', { day:'2-digit', month:'long', year:'numeric' })
+    + ' ' + now.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+  const sub = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  const total = sub + shipState.cost;
+  const methodNames = {
+    bank: `Transfer ${BANKS[$('bankSel').value].name}`,
+    qris: 'QRIS', ewallet: ewallet.toUpperCase(), cc: 'Kartu Kredit/Debit'
+  };
 
-  lastReceipt={items,sub,total,no,dateStr,name:orderData.name,method:methodMap[orderData.method]||'Transfer Bank',ship:selectedShip.name,shipCost:selectedShip.cost};
+  lastReceipt = {
+    inv, date: dateStr,
+    name: $('fName').value, email: $('fEmail').value, wa: $('fWa').value,
+    addr: $('fAddr').value + ', ' + $('fCity').value,
+    note: $('fNote').value,
+    method: methodNames[payMethod],
+    ship: shipState.name, shipCost: shipState.cost,
+    items: [...cart], sub, total
+  };
 
-  document.getElementById('receiptNo').textContent=no;
-  document.getElementById('receiptItems').innerHTML=items.map(c=>`
-    <tr><td>${c.name}</td><td style="text-align:center">${c.qty}</td><td>${fmt(c.price*c.qty)}</td></tr>
-  `).join('');
-  document.getElementById('rcptSubtotal').textContent=fmt(sub);
-  document.getElementById('rcptShipName').textContent=selectedShip.name;
-  document.getElementById('rcptShipCost').textContent=fmt(selectedShip.cost);
-  document.getElementById('rcptTotal').textContent=fmt(total);
-  document.getElementById('rcptName').textContent=orderData.name||'-';
-  document.getElementById('rcptMethod').textContent=methodMap[orderData.method]||'-';
-  document.getElementById('rcptShip').textContent=selectedShip.name;
-  document.getElementById('rcptDate').textContent=dateStr;
+  // Fill receipt
+  $('rcInv').textContent = inv;
+  $('rcDate').textContent = dateStr;
+  $('rcName').textContent = lastReceipt.name;
+  $('rcEmail').textContent = lastReceipt.email;
+  $('rcWa').textContent = lastReceipt.wa;
+  $('rcMethod').textContent = lastReceipt.method;
+  $('rcShip').textContent = lastReceipt.ship;
+  $('rcAddr').textContent = lastReceipt.addr;
+  $('rcItems').innerHTML = cart.map(c =>
+    `<tr><td>${c.name}</td><td style="text-align:center">${c.qty}</td><td style="text-align:right">${fmt(c.price * c.qty)}</td></tr>`
+  ).join('');
+  $('rcSub').textContent = fmt(sub);
+  $('rcShipName').textContent = shipState.name;
+  $('rcShipCost').textContent = fmt(shipState.cost);
+  $('rcTotal').textContent = fmt(total);
+
+  closeModal('ckModal');
+  openModal('receiptModal');
+
+  // Clear cart
+  cart = [];
+  updateBadges();
+  $('proofPreview').style.display = 'none';
+  $('proofImg').src = '';
+  showToast('🎉 Pesanan berhasil! Invoice siap diunduh.', 'ok');
 }
 
-function downloadReceipt(){
-  const {jsPDF} = window.jspdf;
-  const doc = new jsPDF({unit:'mm',format:'a5'});
-  const w=148, m=14;
-  let y=16;
+/* ======== INVOICE PDF ======== */
+function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'mm', format:'a4' });
+  const W = 210, M = 18;
+  let y = 0;
 
   // Header
-  doc.setFillColor(0,100,200);
-  doc.rect(0,0,w,32,'F');
-  doc.setTextColor(255,255,255);
-  doc.setFontSize(18);doc.setFont('helvetica','bold');
-  doc.text('DrainioMart',m,12);
-  doc.setFontSize(10);doc.setFont('helvetica','normal');
-  doc.text('Smart IoT Civil Engineering Marketplace',m,18);
-  doc.setFontSize(9);
-  doc.text('STRUK PEMBAYARAN LUNAS',m,26);
-  y=42;
+  doc.setFillColor(0, 50, 100);
+  doc.rect(0, 0, W, 44, 'F');
+  doc.setFillColor(0, 80, 160);
+  doc.rect(0, 0, W, 40, 'F');
 
-  // Order info
-  doc.setTextColor(30,30,30);
-  doc.setFontSize(9);doc.setFont('helvetica','bold');
-  doc.text('No. Pesanan:',m,y);
-  doc.setFont('helvetica','normal');
-  doc.text(lastReceipt.no,m+28,y);
-  y+=6;
-  doc.setFont('helvetica','bold');doc.text('Tanggal:',m,y);
-  doc.setFont('helvetica','normal');doc.text(lastReceipt.dateStr,m+28,y);
-  y+=6;
-  doc.setFont('helvetica','bold');doc.text('Nama:',m,y);
-  doc.setFont('helvetica','normal');doc.text(lastReceipt.name||'-',m+28,y);
-  y+=6;
-  doc.setFont('helvetica','bold');doc.text('Metode:',m,y);
-  doc.setFont('helvetica','normal');doc.text(lastReceipt.method||'-',m+28,y);
-  y+=6;
-  doc.setFont('helvetica','bold');doc.text('Ekspedisi:',m,y);
-  doc.setFont('helvetica','normal');doc.text(lastReceipt.ship||'-',m+28,y);
-  y+=10;
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(24); doc.setFont('helvetica','bold');
+  doc.text('DrainioMart', M, 17);
+  doc.setFontSize(8.5); doc.setFont('helvetica','normal');
+  doc.setTextColor(140,200,255);
+  doc.text('Smart IoT Civil Engineering Marketplace', M, 25);
+  doc.text('www.drainiomart.id  |  info@drainiomart.id  |  WA: 0881-3925-995', M, 31);
+
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(18); doc.setFont('helvetica','bold');
+  doc.text('INVOICE', W - M, 17, { align:'right' });
+  doc.setFontSize(8.5); doc.setFont('helvetica','normal');
+  doc.setTextColor(140,200,255);
+  doc.text(lastReceipt.inv, W - M, 25, { align:'right' });
+  doc.text('Status: LUNAS', W - M, 31, { align:'right' });
+
+  y = 52;
 
   // Divider
-  doc.setDrawColor(200,200,200);doc.line(m,y,w-m,y);y+=8;
+  doc.setDrawColor(0,80,160); doc.setLineWidth(0.4);
+  doc.line(M, y, W - M, y); y += 8;
 
-  // Items header
-  doc.setFontSize(8.5);doc.setFont('helvetica','bold');
-  doc.text('Produk',m,y);doc.text('Qty',m+80,y);doc.text('Harga',m+95,y);
-  y+=5;doc.line(m,y,w-m,y);y+=5;
+  // Info columns
+  const c1 = [
+    ['Kepada Yth.', lastReceipt.name],
+    ['Email', lastReceipt.email],
+    ['WhatsApp', lastReceipt.wa],
+    ['Alamat', lastReceipt.addr]
+  ];
+  const c2 = [
+    ['Tanggal Invoice', lastReceipt.date],
+    ['Metode Bayar', lastReceipt.method],
+    ['Ekspedisi', lastReceipt.ship],
+    ['Catatan', lastReceipt.note || '-']
+  ];
 
-  doc.setFont('helvetica','normal');
-  lastReceipt.items.forEach(c=>{
-    const name = doc.splitTextToSize(c.name,72);
-    doc.text(name,m,y);
-    doc.text(String(c.qty),m+80,y);
-    doc.text(fmt(c.price*c.qty).replace('Rp ','Rp'),m+95,y);
-    y+=name.length*5+2;
-    if(y>195){doc.addPage();y=20;}
+  c1.forEach((r, i) => {
+    doc.setFont('helvetica','bold'); doc.setFontSize(8.5); doc.setTextColor(100,100,100);
+    doc.text(r[0], M, y + i * 7);
+    doc.setFont('helvetica','normal'); doc.setTextColor(30,30,30);
+    const lines = doc.splitTextToSize(r[1], 70);
+    doc.text(lines, M + 36, y + i * 7);
+  });
+  c2.forEach((r, i) => {
+    doc.setFont('helvetica','bold'); doc.setFontSize(8.5); doc.setTextColor(100,100,100);
+    doc.text(r[0], W/2 + 4, y + i * 7);
+    doc.setFont('helvetica','normal'); doc.setTextColor(30,30,30);
+    doc.text(r[1], W/2 + 44, y + i * 7);
   });
 
-  y+=2;doc.line(m,y,w-m,y);y+=7;
-  doc.setFontSize(9);
-  doc.text('Subtotal:',m,y);doc.text(fmt(lastReceipt.sub),m+95,y);y+=6;
-  doc.text(`Ongkos Kirim (${lastReceipt.ship}):`,m,y);doc.text(fmt(lastReceipt.shipCost),m+95,y);y+=8;
+  y += c1.length * 7 + 12;
 
-  doc.setFillColor(0,100,200);doc.rect(m-2,y-5,w-2*m+4,10,'F');
-  doc.setTextColor(255,255,255);doc.setFontSize(10);doc.setFont('helvetica','bold');
-  doc.text('TOTAL DIBAYAR:',m,y+2);doc.text(fmt(lastReceipt.total),m+95,y+2);
-  y+=16;
+  // Table header
+  doc.setFillColor(0,80,160);
+  doc.rect(M, y, W - 2*M, 9, 'F');
+  doc.setTextColor(255,255,255); doc.setFontSize(8.5); doc.setFont('helvetica','bold');
+  doc.text('No.', M + 2, y + 6);
+  doc.text('Produk', M + 12, y + 6);
+  doc.text('Qty', W - M - 44, y + 6, { align:'right' });
+  doc.text('Harga Satuan', W - M - 28, y + 6, { align:'right' });
+  doc.text('Subtotal', W - M, y + 6, { align:'right' });
+  y += 11;
+
+  // Table rows
+  doc.setTextColor(30,30,30); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+  lastReceipt.items.forEach((c, i) => {
+    if (i % 2 === 0) { doc.setFillColor(235,245,255); doc.rect(M, y - 1, W - 2*M, 8, 'F'); }
+    const nm = doc.splitTextToSize(c.name, 82);
+    doc.text(String(i + 1) + '.', M + 2, y + 5);
+    doc.text(nm, M + 12, y + 5);
+    doc.text(String(c.qty), W - M - 44, y + 5, { align:'right' });
+    doc.text(fmt(c.price), W - M - 28, y + 5, { align:'right' });
+    doc.setFont('helvetica','bold');
+    doc.text(fmt(c.price * c.qty), W - M, y + 5, { align:'right' });
+    doc.setFont('helvetica','normal');
+    y += nm.length > 1 ? nm.length * 5 + 4 : 9;
+    if (y > 260) { doc.addPage(); y = 20; }
+  });
+
+  y += 4;
+  doc.setDrawColor(180,180,180); doc.line(M, y, W - M, y); y += 7;
+
+  // Totals
+  doc.setFontSize(9);
+  [['Subtotal', fmt(lastReceipt.sub)], [`Ongkos Kirim (${lastReceipt.ship})`, fmt(lastReceipt.shipCost)]].forEach(r => {
+    doc.setFont('helvetica','normal'); doc.setTextColor(80,80,80);
+    doc.text(r[0], W - M - 60, y);
+    doc.text(r[1], W - M, y, { align:'right' });
+    y += 7;
+  });
+
+  // Grand total box
+  doc.setFillColor(0,80,160); doc.rect(W - M - 80, y - 2, 80, 11, 'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(9.5);
+  doc.text('TOTAL DIBAYAR', W - M - 60, y + 6);
+  doc.text(fmt(lastReceipt.total), W - M, y + 6, { align:'right' });
+  y += 20;
 
   // LUNAS stamp
-  doc.setTextColor(0,160,80);doc.setFontSize(20);doc.setFont('helvetica','bold');
-  doc.text('★ LUNAS ★',w/2,y,{align:'center'});
-  y+=10;
+  doc.setTextColor(0,160,90); doc.setFontSize(28); doc.setFont('helvetica','bold');
+  doc.text('✓ LUNAS', M + 18, y);
 
-  doc.setTextColor(150,150,150);doc.setFontSize(7.5);doc.setFont('helvetica','normal');
-  doc.text('Terima kasih telah berbelanja di DrainioMart!',w/2,y,{align:'center'});y+=5;
-  doc.text('Simpan struk ini sebagai bukti pembayaran resmi.',w/2,y,{align:'center'});y+=5;
-  doc.text('Pertanyaan: wa.me/628813925995 | info@drainiomart.id',w/2,y,{align:'center'});
+  y += 14;
+  doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.setTextColor(130,130,130);
+  doc.text('Invoice ini diterbitkan secara elektronik oleh sistem DrainioMart dan sah tanpa tanda tangan basah.', M, y); y += 5;
+  doc.text('Hubungi kami di wa.me/628813925995 untuk pertanyaan seputar pesanan Anda.', M, y); y += 5;
+  doc.text('Jl. Teknik Sipil No.1, Jawa Tengah, Indonesia | © 2026 DrainioMart', M, y);
 
-  doc.save(`Struk-DrainioMart-${lastReceipt.no}.pdf`);
-  showToast('📄 Struk PDF berhasil diunduh!','success');
-}
+  // Footer stripe
+  doc.setFillColor(0,80,160); doc.rect(0, 290, W, 7, 'F');
+  doc.setTextColor(255,255,255); doc.setFontSize(8);
+  doc.text('DrainioMart — Smart IoT Civil Engineering Marketplace  |  © 2026', W/2, 294.5, { align:'center' });
 
-function shareWA(){
-  const sub = lastReceipt.sub||0;
-  const total = lastReceipt.total||0;
-  const items = lastReceipt.items||[];
-  let msg=`*KONFIRMASI PEMBAYARAN DrainioMart*\n\nNo. Pesanan: ${lastReceipt.no}\nNama: ${lastReceipt.name}\nTanggal: ${lastReceipt.dateStr}\n\n*Pesanan:*\n`;
-  items.forEach(c=>{msg+=`- ${c.name} ×${c.qty}: ${fmt(c.price*c.qty)}\n`;});
-  msg+=`\nSubtotal: ${fmt(sub)}\nOngkos Kirim: ${fmt(lastReceipt.shipCost)}\n*Total: ${fmt(total)}*\nMetode: ${lastReceipt.method}\n\n✅ LUNAS`;
-  window.open(`https://wa.me/628813925995?text=${encodeURIComponent(msg)}`,'_blank');
+  doc.save(`Invoice-${lastReceipt.inv}-DrainioMart.pdf`);
+  showToast('📄 Invoice PDF berhasil diunduh!', 'ok');
 }
 
-/* ════════════════ UTILS ════════════════ */
-function fmt(n){return'Rp '+n.toLocaleString('id-ID');}
-function copyText(t){
-  navigator.clipboard.writeText(String(t)).then(()=>showToast('Disalin!','success'));
-}
-function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.modal-overlay').forEach(m=>{
-  m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');});
-});
-function closeAll(){
-  closeCart();closeWishlist();
-}
-function showToast(msg,type=''){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.className='toast '+(type?type:'');
-  t.classList.add('show');
-  clearTimeout(t._t);
-  t._t=setTimeout(()=>t.classList.remove('show'),2800);
-}
-function toggleFaq(btn){
-  const item=btn.closest('.faq-item');
-  item.classList.toggle('open');
-}
-function toggleMenu(){
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-
-/* ════════════════ SCROLL REVEAL ════════════════ */
-function observeReveal(){
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
-  },{threshold:.12});
-  document.querySelectorAll('.reveal:not(.visible)').forEach(el=>io.observe(el));
-}
-
-/* ════════════════ NAVBAR SCROLL ════════════════ */
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled',scrollY>50);
-});
-
-/* ════════════════ INIT ════════════════ */
-document.addEventListener('DOMContentLoaded',()=>{
-  renderProducts(PRODUCTS);
-  observeReveal();
-});
-</script>
-</body>
-</html>
+/* ======== WA CONFIRMATION ======== */
+function sendWAConfirmation() {
+  let msg = `*KONFIRMASI PESANAN DrainioMart*\n\n`;
+  msg += `No. Invoice: ${lastReceipt.inv}\nTanggal: ${lastReceipt.date}\nNama: ${lastReceipt.name}\nWA: ${lastReceipt.wa}\nEmail: ${lastReceipt.email}\n\n`;
+  msg += `*Detail Produk:*\n`;
+  lastReceipt.items.forEach(c => { msg += `- ${c.name} ×${c.qty}: ${fmt(c.price * c.qty)}\n`; });
+  msg += `\nSubtotal: ${fmt(lastReceipt.sub)}\nOngkir (${lastReceipt.ship}): ${fmt(lastReceipt.shipCost)}\n`;
+  msg += `*TOTAL: ${fmt(lastReceipt.total)}*\n\nMetode Bayar: ${lastReceipt.method}\n`;
+  msg += `Alamat Kirim: ${lastReceipt.addr}\n\n✅ Pembayaran telah dilakukan. Mohon konfirmasi & kirimkan nomor resi. Terima kasih!`;
+  window
