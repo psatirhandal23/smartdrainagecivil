@@ -1,728 +1,717 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DrainioMart – Smart IoT Civil Engineering Marketplace</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-
-  <style>
-
-    :root{
-      --bg:#07111f;
-      --card:#0f1d31;
-      --text:#e9f2ff;
-      --muted:#9db4cf;
-      --primary:#4da3ff;
-      --line:rgba(255,255,255,.08);
-      --radius:22px;
-    }
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    body{
-      font-family:'Poppins',sans-serif;
-      background:linear-gradient(180deg,#07111f,#050b14);
-      color:var(--text);
-      overflow-x:hidden;
-    }
-
-    img{
-      max-width:100%;
-      display:block;
-    }
-
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
-
-    .container{
-      width:min(1200px,92%);
-      margin:auto;
-    }
-
-    .navbar{
-      position:sticky;
-      top:0;
-      z-index:999;
-      backdrop-filter:blur(12px);
-      background:rgba(7,17,31,.85);
-      border-bottom:1px solid var(--line);
-    }
-
-    .nav-container{
-      min-height:74px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    .logo{
-      font-family:'Syne',sans-serif;
-      font-size:1.6rem;
-      font-weight:800;
-    }
-
-    .logo span{
-      color:var(--primary);
-    }
-
-    .nav-links{
-      display:flex;
-      gap:22px;
-    }
-
-    .nav-links a{
-      color:var(--muted);
-      transition:.2s;
-    }
-
-    .nav-links a:hover{
-      color:white;
-    }
-
-    .nav-right{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-
-    .search-box{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      background:rgba(255,255,255,.05);
-      border:1px solid var(--line);
-      padding:10px 14px;
-      border-radius:999px;
-    }
-
-    .search-box input{
-      background:transparent;
-      border:none;
-      outline:none;
-      color:white;
-      width:180px;
-    }
-
-    .icon-btn{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      cursor:pointer;
-      color:white;
-    }
-
-    .hero{
-      padding:90px 0;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:40px;
-      align-items:center;
-    }
-
-    .hero h1{
-      font-family:'Syne',sans-serif;
-      font-size:4rem;
-      line-height:1;
-      margin-bottom:20px;
-    }
-
-    .hero h1 span{
-      color:var(--primary);
-    }
-
-    .hero p{
-      color:var(--muted);
-      line-height:1.8;
-      margin-bottom:30px;
-    }
-
-    .btn{
-      padding:14px 22px;
-      border-radius:14px;
-      border:none;
-      cursor:pointer;
-      font-weight:600;
-    }
-
-    .btn-primary{
-      background:linear-gradient(135deg,#4da3ff,#6fc3ff);
-      color:white;
-    }
-
-    .btn-outline{
-      background:transparent;
-      border:1px solid var(--line);
-      color:white;
-    }
-
-    .hero-buttons{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .hero-image{
-      border-radius:28px;
-      overflow:hidden;
-      border:1px solid var(--line);
-    }
-
-    .section{
-      padding:80px 0;
-    }
-
-    .section-title{
-      text-align:center;
-      margin-bottom:50px;
-    }
-
-    .section-title h2{
-      font-family:'Syne',sans-serif;
-      font-size:2.5rem;
-      margin-bottom:10px;
-    }
-
-    .section-title p{
-      color:var(--muted);
-    }
-
-    .products-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:22px;
-    }
-
-    .product-card{
-      background:var(--card);
-      border-radius:24px;
-      overflow:hidden;
-      border:1px solid var(--line);
-      display:flex;
-      flex-direction:column;
-    }
-
-    .product-image{
-      height:240px;
-      overflow:hidden;
-      position:relative;
-    }
-
-    .product-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .product-content{
-      padding:20px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      flex:1;
-    }
-
-    .product-content p{
-      color:var(--muted);
-      line-height:1.7;
-      font-size:.95rem;
-    }
-
-    .product-tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-
-    .tag{
-      padding:7px 10px;
-      border-radius:999px;
-      background:rgba(77,163,255,.1);
-      font-size:.8rem;
-    }
-
-    .price{
-      font-size:1.4rem;
-      font-weight:700;
-      color:#7cc4ff;
-    }
-
-    .product-actions{
-      display:flex;
-      gap:10px;
-      margin-top:auto;
-    }
-
-    .product-actions button{
-      flex:1;
-    }
-
-    .payment-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:18px;
-      margin-top:30px;
-    }
-
-    .payment-card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:20px;
-      text-align:center;
-      font-weight:700;
-    }
-
-    .payment-steps{
-      margin-top:40px;
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:18px;
-    }
-
-    .step{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:20px;
-    }
-
-    .step h4{
-      margin-bottom:10px;
-    }
-
-    .step p{
-      color:var(--muted);
-      line-height:1.7;
-      font-size:.92rem;
-    }
-
-    footer{
-      padding:60px 0 30px;
-      border-top:1px solid var(--line);
-    }
-
-    .footer-grid{
-      display:grid;
-      grid-template-columns:1.2fr .8fr .8fr;
-      gap:24px;
-      margin-bottom:30px;
-    }
-
-    .footer-grid p,
-    .footer-grid a{
-      color:var(--muted);
-      line-height:1.8;
-    }
-
-    .footer-bottom{
-      border-top:1px solid var(--line);
-      padding-top:20px;
-      text-align:center;
-      color:var(--muted);
-    }
-
-    .cart-sidebar{
-      position:fixed;
-      top:0;
-      right:-420px;
-      width:400px;
-      max-width:100%;
-      height:100vh;
-      background:#09111d;
-      z-index:9999;
-      transition:.3s;
-      display:flex;
-      flex-direction:column;
-      border-left:1px solid var(--line);
-    }
-
-    .cart-sidebar.active{
-      right:0;
-    }
-
-    .cart-header{
-      padding:20px;
-      border-bottom:1px solid var(--line);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-
-    .cart-items{
-      flex:1;
-      overflow:auto;
-      padding:20px;
-    }
-
-    .cart-item{
-      display:flex;
-      gap:12px;
-      margin-bottom:18px;
-      border-bottom:1px solid var(--line);
-      padding-bottom:18px;
-    }
-
-    .cart-item img{
-      width:70px;
-      height:70px;
-      object-fit:cover;
-      border-radius:14px;
-    }
-
-    .cart-footer{
-      padding:20px;
-      border-top:1px solid var(--line);
-    }
-
-    .shipping-box{
-      margin:18px 0;
-      padding:16px;
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-    }
-
-    .shipping-option{
-      display:flex;
-      justify-content:space-between;
-      margin-bottom:10px;
-      font-size:.92rem;
-    }
-
-    .wa-float{
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      width:60px;
-      height:60px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:#22c55e;
-      color:white;
-      font-size:1.5rem;
-      z-index:999;
-    }
-
-    .wishlist-btn{
-      position:absolute;
-      top:12px;
-      right:12px;
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      background:rgba(0,0,0,.55);
-      border:none;
-      color:white;
-      cursor:pointer;
-      font-size:1rem;
-    }
-
-    .wishlist-btn.active{
-      background:#ef4444;
-    }
-
-    @media(max-width:992px){
-
-      .hero-grid{
-        grid-template-columns:1fr;
-      }
-
-      .products-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .payment-grid,
-      .payment-steps,
-      .footer-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-    }
-
-    @media(max-width:768px){
-
-      .nav-links{
-        display:none;
-      }
-
-      .search-box{
-        display:none;
-      }
-
-      .hero h1{
-        font-size:2.8rem;
-      }
-
-      .products-grid,
-      .payment-grid,
-      .payment-steps,
-      .footer-grid{
-        grid-template-columns:1fr;
-      }
-
-      .cart-sidebar{
-        width:100%;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DrainioMart – Smart IoT Civil Engineering Marketplace</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+:root{
+--primary:#4da3ff;
+--bg:#07111f;
+--card:#0f1a2b;
+--text:#ffffff;
+--muted:#9eb3cd;
+--line:rgba(255,255,255,.08);
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(to bottom,#07111f,#050c15);
+color:var(--text);
+overflow-x:hidden;
+}
+
+img{
+max-width:100%;
+display:block;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+.section{
+padding:90px 7%;
+}
+
+.navbar{
+position:sticky;
+top:0;
+z-index:999;
+background:rgba(7,17,31,.92);
+backdrop-filter:blur(12px);
+border-bottom:1px solid var(--line);
+}
+
+.nav-container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 7%;
+gap:20px;
+}
+
+.logo{
+font-family:'Syne',sans-serif;
+font-size:1.8rem;
+font-weight:800;
+}
+
+.logo span{
+color:var(--primary);
+}
+
+.nav-links{
+display:flex;
+gap:24px;
+}
+
+.nav-links a{
+color:var(--muted);
+transition:.3s;
+}
+
+.nav-links a:hover{
+color:white;
+}
+
+.nav-right{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.search-box{
+display:flex;
+align-items:center;
+gap:10px;
+padding:11px 16px;
+border-radius:999px;
+background:rgba(255,255,255,.05);
+border:1px solid var(--line);
+}
+
+.search-box input{
+background:transparent;
+border:none;
+outline:none;
+color:white;
+width:170px;
+}
+
+.icon-btn{
+width:48px;
+height:48px;
+border-radius:50%;
+border:none;
+background:rgba(255,255,255,.08);
+color:white;
+cursor:pointer;
+font-size:1rem;
+}
+
+.hero{
+padding:80px 7%;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+}
+
+.hero h1{
+font-size:4.5rem;
+line-height:1;
+font-family:'Syne',sans-serif;
+margin-bottom:20px;
+}
+
+.hero h1 span{
+color:var(--primary);
+}
+
+.hero p{
+color:var(--muted);
+line-height:1.9;
+margin-bottom:28px;
+}
+
+.hero-buttons{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:14px 24px;
+border-radius:14px;
+border:none;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn-primary{
+background:linear-gradient(135deg,#4da3ff,#70beff);
+color:white;
+}
+
+.btn-outline{
+background:transparent;
+border:1px solid var(--line);
+color:white;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+}
+
+.hero-image img{
+width:100%;
+height:540px;
+object-fit:cover;
+border-radius:28px;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:50px;
+}
+
+.section-title h2{
+font-family:'Syne',sans-serif;
+font-size:2.7rem;
+margin-bottom:10px;
+}
+
+.section-title p{
+color:var(--muted);
+}
+
+.products-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:24px;
+}
+
+.product-card{
+background:var(--card);
+border-radius:24px;
+overflow:hidden;
+border:1px solid var(--line);
+display:flex;
+flex-direction:column;
+transition:.3s;
+}
+
+.product-card:hover{
+transform:translateY(-6px);
+}
+
+.product-image{
+height:230px;
+position:relative;
+overflow:hidden;
+}
+
+.product-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.wishlist-btn{
+position:absolute;
+top:12px;
+right:12px;
+width:42px;
+height:42px;
+border-radius:50%;
+border:none;
+background:rgba(0,0,0,.5);
+color:white;
+font-size:1rem;
+cursor:pointer;
+}
+
+.product-content{
+padding:20px;
+display:flex;
+flex-direction:column;
+flex:1;
+}
+
+.product-content h3{
+margin-bottom:10px;
+}
+
+.product-content p{
+color:var(--muted);
+line-height:1.7;
+font-size:.92rem;
+margin-bottom:18px;
+}
+
+.product-tags{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:18px;
+}
+
+.tag{
+padding:7px 10px;
+border-radius:999px;
+background:rgba(77,163,255,.12);
+font-size:.78rem;
+}
+
+.price{
+font-size:1.4rem;
+font-weight:700;
+color:#78c0ff;
+margin-bottom:18px;
+}
+
+.product-actions{
+display:flex;
+gap:10px;
+margin-top:auto;
+}
+
+.product-actions button{
+flex:1;
+}
+
+.payment-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-top:30px;
+}
+
+.payment-card{
+background:var(--card);
+padding:22px;
+border-radius:18px;
+text-align:center;
+border:1px solid var(--line);
+font-weight:700;
+}
+
+.payment-steps{
+margin-top:40px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+
+.step{
+background:var(--card);
+padding:22px;
+border-radius:20px;
+border:1px solid var(--line);
+}
+
+.step h4{
+margin-bottom:10px;
+}
+
+.step p{
+color:var(--muted);
+line-height:1.8;
+font-size:.92rem;
+}
+
+.cart-sidebar{
+position:fixed;
+top:0;
+right:-420px;
+width:400px;
+max-width:100%;
+height:100vh;
+background:#09111d;
+z-index:9999;
+transition:.3s;
+display:flex;
+flex-direction:column;
+border-left:1px solid var(--line);
+}
+
+.cart-sidebar.active{
+right:0;
+}
+
+.cart-header{
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid var(--line);
+}
+
+.cart-items{
+flex:1;
+overflow:auto;
+padding:20px;
+}
+
+.cart-item{
+display:flex;
+gap:14px;
+margin-bottom:18px;
+padding-bottom:18px;
+border-bottom:1px solid var(--line);
+}
+
+.cart-item img{
+width:70px;
+height:70px;
+object-fit:cover;
+border-radius:12px;
+}
+
+.cart-footer{
+padding:20px;
+border-top:1px solid var(--line);
+}
+
+.shipping-box{
+padding:16px;
+border-radius:18px;
+background:rgba(255,255,255,.04);
+margin:18px 0;
+border:1px solid var(--line);
+}
+
+.shipping-option{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:14px;
+font-size:.92rem;
+}
+
+.footer{
+padding:70px 7% 30px;
+border-top:1px solid var(--line);
+}
+
+.footer-grid{
+display:grid;
+grid-template-columns:1.3fr 1fr 1fr;
+gap:24px;
+margin-bottom:40px;
+}
+
+.footer p,
+.footer a{
+color:var(--muted);
+line-height:1.9;
+}
+
+.footer-bottom{
+padding-top:20px;
+border-top:1px solid var(--line);
+text-align:center;
+color:var(--muted);
+}
+
+.wa-float{
+position:fixed;
+bottom:20px;
+right:20px;
+width:60px;
+height:60px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:#22c55e;
+font-size:1.6rem;
+z-index:999;
+}
+
+@media(max-width:1200px){
+
+.products-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+@media(max-width:992px){
+
+.hero{
+grid-template-columns:1fr;
+}
+
+.products-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.payment-grid,
+.payment-steps,
+.footer-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:768px){
+
+.nav-links{
+display:none;
+}
+
+.search-box{
+display:none;
+}
+
+.hero h1{
+font-size:3rem;
+}
+
+.products-grid,
+.payment-grid,
+.payment-steps,
+.footer-grid{
+grid-template-columns:1fr;
+}
+
+.product-actions{
+flex-direction:column;
+}
+
+.cart-sidebar{
+width:100%;
+}
+
+.hero-image img{
+height:360px;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-
 <nav class="navbar">
-  <div class="container nav-container">
-
-    <div class="logo">
-      Drainio<span>Mart</span>
-    </div>
-
-    <div class="nav-links">
-      <a href="#">Beranda</a>
-      <a href="#">Tentang</a>
-      <a href="#">Produk</a>
-      <a href="#">Teknologi</a>
-      <a href="#">Pembayaran</a>
-      <a href="#">Kontak</a>
-    </div>
-
-    <div class="nav-right">
-
-      <div class="search-box">
-        🔍
-        <input type="text" id="searchInput" placeholder="Cari produk..." onkeyup="searchProducts()">
-      </div>
-
-      <button class="icon-btn" onclick="toggleWishlist()">
-        ♡ <span id="wishlistCount">0</span>
-      </button>
-
-      <button class="icon-btn" onclick="toggleCart()">
-        🛒 <span id="cartCount">0</span>
-      </button>
-
-    </div>
-
-  </div>
-</nav>
-
-<!-- HERO -->
-
-<section class="hero">
-
-  <div class="container hero-grid">
-
-    <div>
-
-      <h1>
-        Smart <span>Drainage</span><br>
-        IoT Marketplace
-      </h1>
-
-      <p>
-        Marketplace perangkat IoT teknik sipil modern untuk monitoring drainase, pendeteksian banjir, smart water management, dan infrastruktur cerdas.
-      </p>
-
-      <div class="hero-buttons">
-        <button class="btn btn-primary">Lihat Produk</button>
-        <button class="btn btn-outline">Pelajari Teknologi</button>
-      </div>
-
-    </div>
-
-    <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop">
-    </div>
-
-  </div>
-
-</section>
-
-<!-- PRODUCTS -->
-
-<section class="section">
-
-  <div class="container">
-
-    <div class="section-title">
-      <h2>Produk Unggulan</h2>
-      <p>10 produk IoT modern untuk smart drainage system.</p>
-    </div>
-
-    <div class="products-grid" id="productsGrid"></div>
-
-  </div>
-
-</section>
-
-<!-- PAYMENT -->
-
-<section class="section">
-
-  <div class="container">
-
-    <div class="section-title">
-      <h2>Tata Cara Pembayaran</h2>
-      <p>Pembayaran aman dan fleksibel.</p>
-    </div>
-
-    <div class="payment-grid">
-
-      <div class="payment-card">BCA</div>
-      <div class="payment-card">Mandiri</div>
-      <div class="payment-card">BRI</div>
-      <div class="payment-card">BNI</div>
-      <div class="payment-card">QRIS</div>
-      <div class="payment-card">OVO</div>
-      <div class="payment-card">Dana</div>
-      <div class="payment-card">GoPay</div>
-
-    </div>
-
-    <div class="payment-steps">
-
-      <div class="step">
-        <h4>1. Pilih Produk</h4>
-        <p>Tambahkan produk ke keranjang atau wishlist.</p>
-      </div>
-
-      <div class="step">
-        <h4>2. Pilih Ekspedisi</h4>
-        <p>Pilih pengiriman sesuai kebutuhan dan lokasi.</p>
-      </div>
-
-      <div class="step">
-        <h4>3. Transfer Pembayaran</h4>
-        <p>Lakukan pembayaran via transfer bank atau QRIS.</p>
-      </div>
-
-      <div class="step">
-        <h4>4. Konfirmasi</h4>
-        <p>Kirim bukti pembayaran via WhatsApp.</p>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-
-  <div class="container">
-
-    <div class="footer-grid">
-
-      <div>
-        <h2 style="margin-bottom:14px;">DrainioMart</h2>
-        <p>
-          Marketplace perangkat IoT teknik sipil dan smart drainage modern.
-        </p>
-      </div>
-
-      <div>
-        <h3 style="margin-bottom:12px;">Menu</h3>
-        <a href="#">Beranda</a><br>
-        <a href="#">Produk</a><br>
-        <a href="#">Teknologi</a><br>
-      </div>
-
-      <div>
-        <h3 style="margin-bottom:12px;">Kontak</h3>
-        <a href="#">WhatsApp</a><br>
-        <a href="#">Email</a><br>
-        <a href="#">LinkedIn</a><br>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      © 2026 DrainioMart
-    </div>
-
-  </div>
-
-</footer>
-
-<!-- CART -->
-
-<div class="cart-sidebar" id="cartSidebar">
-
-  <div class="cart-header">
-    <h3>Keranjang</h3>
-    <button class="icon-btn" onclick="toggleCart()">✕</button>
-  </div>
-
-  <div class="cart-items" id="cartItems"></div>
-
-  <div class="cart-footer">
-
-    <div id="cartTotal">
-      Total: Rp 0
-    </div>
-
-    <div class="shipping-box">
-
-      <h4 style="margin-bottom:12px;">Pilih Ekspedisi</h4>
-
-      <div class="shipping-option">
-        <span>JNE REG</span>
-        <strong>Rp 18.000</strong>
-      </div>
-
-      <div class="shipping-option">
-        <span>SiCepat BEST</span>
-        <strong>Rp 25.000</strong>
-      </div>
-
-      <div class="shipping-option">
-        <span>GoSend Instant</span>
-        <strong>Rp 45.000</strong>
-      </div>
-
-    </div>
-
-    <button class="btn btn-primary" style="width:100%;margin-bottom:10px;" onclick="downloadReceipt()">
-      Download Struk PDF
-    </button>
-
-    <button class="btn btn-outline" style="width:100%;">
-      Checkout WhatsApp
-    </button>
-
-  </div>
+<div class="nav-container">
+
+<div class="logo">
+Drainio<span>Mart</span>
+</div>
+
+<div class="nav-links">
+<a href="#">Beranda</a>
+<a href="#">Tentang</a>
+<a href="#">Produk</a>
+<a href="#">Teknologi</a>
+<a href="#">Pembayaran</a>
+<a href="#">Kontak</a>
+</div>
+
+<div class="nav-right">
+
+<div class="search-box">
+🔍
+<input type="text" id="searchInput" placeholder="Cari produk..." onkeyup="searchProducts()">
+</div>
+
+<button class="icon-btn" onclick="toggleWishlist()">
+❤
+</button>
+
+<button class="icon-btn" onclick="toggleCart()">
+🛒
+</button>
 
 </div>
 
-<!-- WA -->
+</div>
+</nav>
 
-<a class="wa-float" href="#">
-  💬
+<section class="hero">
+
+<div>
+
+<h1>
+Smart <span>Drainage</span><br>
+IoT Marketplace
+</h1>
+
+<p>
+Platform penjualan perangkat IoT teknik sipil modern untuk monitoring drainase, pengendalian banjir, smart water management, dan infrastruktur cerdas.
+</p>
+
+<div class="hero-buttons">
+<button class="btn btn-primary">Lihat Produk</button>
+<button class="btn btn-outline">Pelajari Teknologi</button>
+</div>
+
+</div>
+
+<div class="hero-image">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop">
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="section-title">
+<h2>Produk Unggulan</h2>
+<p>10 produk IoT modern dengan sistem smart drainage.</p>
+</div>
+
+<div class="products-grid" id="productsGrid"></div>
+
+</section>
+
+<section class="section">
+
+<div class="section-title">
+<h2>Metode Pembayaran</h2>
+<p>Pembayaran aman dan responsif di seluruh perangkat.</p>
+</div>
+
+<div class="payment-grid">
+
+<div class="payment-card">BCA</div>
+<div class="payment-card">Mandiri</div>
+<div class="payment-card">BRI</div>
+<div class="payment-card">BNI</div>
+<div class="payment-card">QRIS</div>
+<div class="payment-card">OVO</div>
+<div class="payment-card">Dana</div>
+<div class="payment-card">GoPay</div>
+
+</div>
+
+<div class="payment-steps">
+
+<div class="step">
+<h4>1. Pilih Produk</h4>
+<p>Tambahkan produk ke keranjang belanja.</p>
+</div>
+
+<div class="step">
+<h4>2. Pilih Ekspedisi</h4>
+<p>Pilih pengiriman sesuai lokasi dan kebutuhan.</p>
+</div>
+
+<div class="step">
+<h4>3. Lakukan Pembayaran</h4>
+<p>Transfer bank atau scan QRIS.</p>
+</div>
+
+<div class="step">
+<h4>4. Download Struk</h4>
+<p>Unduh bukti pembayaran dalam format PDF.</p>
+</div>
+
+</div>
+
+</section>
+
+<footer class="footer">
+
+<div class="footer-grid">
+
+<div>
+<h2 style="margin-bottom:12px;">DrainioMart</h2>
+<p>
+Marketplace perangkat IoT teknik sipil dan smart drainage modern.
+</p>
+</div>
+
+<div>
+<h3 style="margin-bottom:12px;">Menu</h3>
+<a href="#">Beranda</a><br>
+<a href="#">Produk</a><br>
+<a href="#">Tentang</a><br>
+<a href="#">FAQ</a>
+</div>
+
+<div>
+<h3 style="margin-bottom:12px;">Kontak</h3>
+<a href="#">WhatsApp</a><br>
+<a href="#">Email</a><br>
+<a href="#">LinkedIn</a>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+© 2026 DrainioMart — Smart Civil Engineering Marketplace
+</div>
+
+</footer>
+
+<div class="cart-sidebar" id="cartSidebar">
+
+<div class="cart-header">
+<h3>Keranjang Belanja</h3>
+<button class="btn btn-outline" onclick="toggleCart()">Tutup</button>
+</div>
+
+<div class="cart-items" id="cartItems"></div>
+
+<div class="cart-footer">
+
+<h3 id="cartTotal">Total: Rp 0</h3>
+
+<div class="shipping-box">
+
+<div class="shipping-option">
+<span>JNE REG</span>
+<strong>Rp 18.000</strong>
+</div>
+
+<div class="shipping-option">
+<span>SiCepat BEST</span>
+<strong>Rp 25.000</strong>
+</div>
+
+<div class="shipping-option">
+<span>GoSend Instant</span>
+<strong>Rp 45.000</strong>
+</div>
+
+</div>
+
+<button class="btn btn-primary" style="width:100%;margin-bottom:10px;" onclick="downloadReceipt()">
+Download Struk PDF
+</button>
+
+<button class="btn btn-outline" style="width:100%;" onclick="checkoutWA()">
+Checkout WhatsApp
+</button>
+
+</div>
+
+</div>
+
+<a href="#" class="wa-float">
+💬
 </a>
 
 <script>
@@ -730,106 +719,107 @@
 const products = [
 
 {
-name:"Smart Drainage Cleaner",
+name:'Smart Drainage Cleaner',
 price:12500000,
-image:"https://images.unsplash.com/photo-1549921296-3a4a4f6f0f1a?q=80&w=1200&auto=format&fit=crop",
-tags:["ESP32","WiFi","IoT"]
+image:'https://images.unsplash.com/photo-1581092919535-7146ff1a590d?q=80&w=1200&auto=format&fit=crop',
+tags:['ESP32','IoT','Waterproof']
 },
 
 {
-name:"Water Flow Sensor",
+name:'Water Flow Sensor',
 price:1850000,
-image:"https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop",
-tags:["Sensor","Flow","Realtime"]
+image:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop',
+tags:['Sensor','Realtime','Arduino']
 },
 
 {
-name:"Ultrasonic Water Sensor",
+name:'Ultrasonic Water Sensor',
 price:2350000,
-image:"https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop",
-tags:["Ultrasonic","IP68","IoT"]
+image:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop',
+tags:['Ultrasonic','IP68','Water']
 },
 
 {
-name:"IoT Control Panel",
+name:'IoT Control Panel',
 price:7250000,
-image:"https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
-tags:["Cloud","Dashboard","AI"]
+image:'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop',
+tags:['Cloud','Dashboard','AI']
 },
 
 {
-name:"Smart Flood Sensor",
+name:'Smart Flood Sensor',
 price:3450000,
-image:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
-tags:["Flood","AI","Warning"]
+image:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop',
+tags:['Flood','AI','Alert']
 },
 
 {
-name:"IoT Hub Controller",
+name:'IoT Hub Controller',
 price:8750000,
-image:"https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1200&auto=format&fit=crop",
-tags:["Hub","Cloud","Control"]
+image:'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1200&auto=format&fit=crop',
+tags:['Hub','Cloud','Control']
 },
 
 {
-name:"Water Level Radar",
-price:4950000,
-image:"https://images.unsplash.com/photo-1516908205727-40afad9449d6?q=80&w=1200&auto=format&fit=crop",
-tags:["Radar","Water","Industrial"]
-},
-
-{
-name:"Rain Gauge IoT",
+name:'Rain Gauge IoT',
 price:1650000,
-image:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop",
-tags:["Rain","Weather","IoT"]
+image:'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop',
+tags:['Rain','Weather','IoT']
 },
 
 {
-name:"Gate Valve Actuator",
+name:'Water Level Radar',
+price:4950000,
+image:'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?q=80&w=1200&auto=format&fit=crop',
+tags:['Radar','Industrial','Water']
+},
+
+{
+name:'Gate Valve Actuator',
 price:6850000,
-image:"https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=1200&auto=format&fit=crop",
-tags:["Valve","Automation","Motor"]
+image:'https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=1200&auto=format&fit=crop',
+tags:['Valve','Motor','Automation']
 },
 
 {
-name:"Smart Maintenance Kit",
+name:'Smart Maintenance Kit',
 price:3150000,
-image:"https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop",
-tags:["Bundle","Maintenance","Sensor"]
+image:'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop',
+tags:['Maintenance','Kit','Sensor']
 }
 
 ];
 
 let cart = [];
-let wishlist = [];
-
-const productsGrid = document.getElementById("productsGrid");
 
 function formatRupiah(num){
-return new Intl.NumberFormat("id-ID",{
-style:"currency",
-currency:"IDR",
+
+return new Intl.NumberFormat('id-ID',{
+style:'currency',
+currency:'IDR',
 maximumFractionDigits:0
 }).format(num);
+
 }
 
 function renderProducts(){
 
-productsGrid.innerHTML = "";
+const container = document.getElementById('productsGrid');
+
+container.innerHTML = '';
 
 products.forEach((product,index)=>{
 
-productsGrid.innerHTML += `
+container.innerHTML += `
 
 <div class="product-card">
 
 <div class="product-image">
 
-<img src="${product.image}">
+<img src="${product.image}" alt="${product.name}">
 
-<button class="wishlist-btn" onclick="addWishlist(${index})">
-♡
+<button class="wishlist-btn" onclick="addWishlist('${product.name}')">
+❤
 </button>
 
 </div>
@@ -839,11 +829,15 @@ productsGrid.innerHTML += `
 <h3>${product.name}</h3>
 
 <p>
-Produk IoT modern untuk monitoring infrastruktur dan smart drainage.
+Produk IoT modern untuk monitoring smart drainage dan infrastruktur cerdas.
 </p>
 
 <div class="product-tags">
-${product.tags.map(tag=>`<span class="tag">${tag}</span>`).join("")}
+
+${product.tags.map(tag=>`
+<span class="tag">${tag}</span>
+`).join('')}
+
 </div>
 
 <div class="price">
@@ -852,12 +846,12 @@ ${formatRupiah(product.price)}
 
 <div class="product-actions">
 
-<button class="btn btn-primary" onclick="addCart(${index})">
+<button class="btn btn-primary" onclick="addToCart(${index})">
 + Keranjang
 </button>
 
-<button class="btn btn-outline">
-Detail
+<button class="btn btn-outline" onclick="buyNow('${product.name}')">
+Beli
 </button>
 
 </div>
@@ -874,23 +868,23 @@ Detail
 
 renderProducts();
 
-function addCart(index){
+function addToCart(index){
 
 cart.push(products[index]);
 
-document.getElementById("cartCount").innerText = cart.length;
-
 renderCart();
+
+alert(products[index].name + ' berhasil ditambahkan ke keranjang');
 
 }
 
 function renderCart(){
 
-const cartItems = document.getElementById("cartItems");
-
-cartItems.innerHTML = "";
+const cartItems = document.getElementById('cartItems');
 
 let total = 0;
+
+cartItems.innerHTML = '';
 
 cart.forEach(item=>{
 
@@ -903,11 +897,8 @@ cartItems.innerHTML += `
 <img src="${item.image}">
 
 <div>
-
 <h4>${item.name}</h4>
-
 <p>${formatRupiah(item.price)}</p>
-
 </div>
 
 </div>
@@ -916,49 +907,60 @@ cartItems.innerHTML += `
 
 });
 
-document.getElementById("cartTotal").innerHTML =
-`<strong>Total: ${formatRupiah(total)}</strong>`;
+document.getElementById('cartTotal').innerText =
+'Total: ' + formatRupiah(total);
 
 }
 
 function toggleCart(){
 
-document.getElementById("cartSidebar")
-.classList.toggle("active");
-
-}
-
-function addWishlist(index){
-
-wishlist.push(products[index]);
-
-document.getElementById("wishlistCount")
-.innerText = wishlist.length;
-
-}
-
-function toggleWishlist(){
-
-alert("Wishlist tersimpan: " + wishlist.length + " produk");
+document.getElementById('cartSidebar')
+.classList.toggle('active');
 
 }
 
 function searchProducts(){
 
-const value = document.getElementById("searchInput")
-.value.toLowerCase();
+const input =
+document.getElementById('searchInput').value.toLowerCase();
 
-const cards = document.querySelectorAll(".product-card");
+const cards =
+document.querySelectorAll('.product-card');
 
 cards.forEach(card=>{
 
 const text = card.innerText.toLowerCase();
 
-card.style.display = text.includes(value)
-? "flex"
-: "none";
+card.style.display =
+text.includes(input)
+? 'flex'
+: 'none';
 
 });
+
+}
+
+function addWishlist(name){
+
+alert(name + ' ditambahkan ke wishlist');
+
+}
+
+function buyNow(product){
+
+window.open(
+'https://wa.me/628813925995?text=Saya%20ingin%20membeli%20' + encodeURIComponent(product),
+'_blank'
+);
+
+}
+
+function checkoutWA(){
+
+window.open(
+'https://wa.me/628813925995?text=Saya%20ingin%20checkout%20produk%20DrainioMart',
+'_blank'
+);
 
 }
 
@@ -969,18 +971,15 @@ const { jsPDF } = window.jspdf;
 const doc = new jsPDF();
 
 doc.setFontSize(20);
-doc.text("DrainioMart Receipt",20,20);
-
-doc.setFontSize(12);
+doc.text('DrainioMart Receipt',20,20);
 
 let y = 40;
-
 let total = 0;
 
 cart.forEach((item,index)=>{
 
 doc.text(
-`${index+1}. ${item.name} - ${formatRupiah(item.price)}`,
+(index+1)+'. '+item.name+' - '+formatRupiah(item.price),
 20,
 y
 );
@@ -991,9 +990,9 @@ total += item.price;
 
 });
 
-doc.text(`Total: ${formatRupiah(total)}`,20,y+10);
+doc.text('Total: '+formatRupiah(total),20,y+10);
 
-doc.save("receipt-drainiomart.pdf");
+doc.save('receipt-drainiomart.pdf');
 
 }
 
